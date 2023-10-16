@@ -1,7 +1,39 @@
-p {
-  color: red;
+#creambackground {
+  background-color: #ffcb8a;
 }
 
-div {
-  color: blue;
+#orangebackground {
+  background-color: #ff8949;
+}
+
+#yellowbackground {
+  background-color: #fff3ad;
+}
+
+#whitebackground {
+  background-color: #fffcef;
+}
+
+#tanbrownbackground {
+  background-color: #907167;
+}
+
+#creamtext {
+  color: #ffcb8a;
+}
+
+#orangetext {
+  color: #ff8949;
+}
+
+#yellowtext {
+  color: #fff3ad;
+}
+
+#whitetext {
+  color: #fffcef;
+}
+
+#tanbrowntext {
+  color: #907167;
 }
