@@ -1,6 +1,6 @@
 // doucument query function
 function query(id) {
-  document.querySelector(`#${id}`);
+  return document.querySelector(`#${id}`);
 }
 
 // ------------------------------------------------------------
@@ -18,19 +18,22 @@ function hidemodal(modal) {
 
 // sign up and sign in modals
 // sign up modal
-query("signuplink").addEventListener("click", showmodal(query("signupmodal")));
 
-query("signupmodalbg").addEventListener(
-  "click",
-  hidemodal(query("signupmodal"))
-);
+query("signuplink").addEventListener("click", () => {
+  showmodal(query("signupmodal"));
+});
+
+query("signupmodalbg").addEventListener("click", () => {
+  hidemodal(query("signupmodal"));
+});
 
 // sign in modal
-query("signinlink").addEventListener("click", showmodal(query("signinmodal")));
+query("signinlink").addEventListener("click", () => {
+  showmodal(query("signinmodal"));
+});
 
-query("signinmodalbg").addEventListener(
-  "click",
-  hidemodal(query("signinmodal"))
-);
+query("signinmodalbg").addEventListener("click", () => {
+  hidemodal(query("signinmodal"));
+});
 
 // ------------------------------------------------------------
