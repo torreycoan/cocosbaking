@@ -37,3 +37,18 @@
 #tanbrowntext {
   color: #907167;
 }
+
+.navbar {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.navbar-menu {
+  flex-grow: initial !important;
+  flex-shrink: initial !important;
+}
+
+a {
+  color: black;
+}
