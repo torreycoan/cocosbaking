@@ -1,29 +1,39 @@
-// sign up environment
-let signuplink = document.querySelector("#signuplink");
-let signupmodalbg = document.querySelector("#signupmodalbg");
-let signupmodal = document.querySelector("#signupmodal");
-function showsignupmodal() {
-  signupmodal.classList.add("is-active");
-}
-function hidesignupmodal() {
-  signupmodal.classList.remove("is-active");
+// doucument query function
+function query(id) {
+  return document.querySelector(`#${id}`);
 }
 
-signuplink.addEventListener("click", showsignupmodal);
+// ------------------------------------------------------------
 
-signupmodalbg.addEventListener("click", hidesignupmodal);
-
-// sign in environment
-let signinlink = document.querySelector("#signinlink");
-let signinmodalbg = document.querySelector("#signinmodalbg");
-let signinmodal = document.querySelector("#signinmodal");
-function showsigninmodal() {
-  signinmodal.classList.add("is-active");
-}
-function hidesigninmodal() {
-  signinmodal.classList.remove("is-active");
+// modal functions
+function showmodal(modal) {
+  modal.classList.add("is-active");
 }
 
-signinlink.addEventListener("click", showsigninmodal);
+function hidemodal(modal) {
+  modal.classList.remove("is-active");
+}
 
-signinmodalbg.addEventListener("click", hidesigninmodal);
+// ------------------------------------------------------------
+
+// sign up and sign in modals
+// sign up modal
+
+query("signuplink").addEventListener("click", () => {
+  showmodal(query("signupmodal"));
+});
+
+query("signupmodalbg").addEventListener("click", () => {
+  hidemodal(query("signupmodal"));
+});
+
+// sign in modal
+query("signinlink").addEventListener("click", () => {
+  showmodal(query("signinmodal"));
+});
+
+query("signinmodalbg").addEventListener("click", () => {
+  hidemodal(query("signinmodal"));
+});
+
+// ------------------------------------------------------------
