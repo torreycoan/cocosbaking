@@ -37,3 +37,38 @@ query("signinmodalbg").addEventListener("click", () => {
 });
 
 // ------------------------------------------------------------
+
+// showing and hiding parts of main (home, products, order now)
+
+query("home").addEventListener("click", () => {
+  query("homapage").remove("is-hidden");
+  query("homapage").add("is-active");
+
+  query("productpage").remove("is-active");
+  query("productpage").add("is-hidden");
+
+  query("orderpage").remove("is-active");
+  query("orderpage").add("is-hidden");
+});
+
+query("products").addEventListener("click", () => {
+  query("productpage").remove("is-hidden");
+  query("productpage").add("is-active");
+
+  query("homepage").remove("is-active");
+  query("homepage").add("is-hidden");
+
+  query("orderpage").remove("is-active");
+  query("orderpage").add("is-hidden");
+});
+
+query("orders").addEventListener("click", () => {
+  query("orderpage").add("is-active");
+  query("orderpage").remove("is-hidden");
+
+  query("homepage").remove("is-active");
+  query("homepage").add("is-hidden");
+
+  query("productpage").remove("is-active");
+  query("productpage").add("is-hidden");
+});
