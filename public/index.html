@@ -24,9 +24,12 @@
   </head>
   <body>
     <!-- sign up modal  -->
-    <div id="signupmodal" class="modal">
+    <div class="modal" id="signupmodal">
       <div class="modal-background" id="signupmodalbg"></div>
-      <div class="modal-content has-background-grey-light p-5" id="signupmodal">
+      <div
+        class="modal-content has-background-grey-light p-5"
+        id="signupmodalcontent"
+      >
         <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
           WELCOME TO COCO'S BAKING!
         </h2>
@@ -36,14 +39,14 @@
           <div class="field">
             <label class="label">Name</label>
             <div class="control">
-              <input class="input" type="text" id="email" />
+              <input class="input" type="text" />
             </div>
           </div>
           <!-- email -->
           <div class="field">
             <label class="label">Email</label>
             <div class="control">
-              <input class="input" type="text" id="email" />
+              <input class="input" type="text" id="signupemail" />
             </div>
           </div>
 
@@ -51,21 +54,25 @@
           <div class="field">
             <label class="label">Password</label>
             <div class="control">
-              <input type="password" class="input" id="password" />
+              <input type="password" class="input" id="signuppassword" />
             </div>
           </div>
           <div class="has-text-centered">
             <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
-            <button class="button has-text-danger mt-5" id="resetfields">
+            <button class="button has-text-danger mt-5" id="resetsignupfields">
               Reset Fields
             </button>
           </div>
         </form>
       </div>
     </div>
+    <div
+      id="signupmessage"
+      class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"
+    ></div>
 
     <!-- sign in modal -->
-    <div id="signinmodal" class="modal">
+    <div class="modal">
       <div class="modal-background" id="signinmodalbg"></div>
       <div class="modal-content has-background-grey-light p-5" id="signinmodal">
         <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
@@ -90,13 +97,17 @@
           </div>
           <div class="has-text-centered">
             <button class="button mt-5 mr-3" id="signinbtn">Sign In</button>
-            <button class="button has-text-danger mt-5" id="resetfields">
+            <button class="button has-text-danger mt-5" id="resetsigninfields">
               Reset Fields
             </button>
           </div>
         </form>
       </div>
     </div>
+    <div
+      id="signinmessage"
+      class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"
+    ></div>
 
     <!-- navbar setup -->
     <nav>
@@ -211,8 +222,8 @@
           <!-- images from the prototype go here -->
         </div>
       </div>
-      <div id="productpage" class="is-hidden"></div>
-      <div id="orderpage" class="is-hidden"></div>
+      <div id="productpage" class="is-hidden">products</div>
+      <div id="orderpage" class="is-hidden">orders</div>
     </main>
 
     <!-- footer -->
