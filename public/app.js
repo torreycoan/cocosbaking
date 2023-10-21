@@ -17,6 +17,16 @@ function hidemodal(modal) {
 // ------------------------------------------------------------
 
 // messages
+function message_bar(msg) {
+  query("message").innerHTML = msg;
+
+  query("message").classList.remove("is-hidden");
+
+  setTimeout(() => {
+    query("message").classList.add("is-hidden");
+    query("message").innerHTML = "";
+  }, 3000);
+}
 
 // ------------------------------------------------------------
 
@@ -96,65 +106,18 @@ query("resetsigninfields").addEventListener("click", (e) => {
 // create a user
 
 query("signupbtn").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  // email and password
+
+  let email = query("signupemail").value;
+  let password = query("signuppassword").value;
+
   alert("hello");
-  // e.preventDefault();
 
-  // // email and password
-
-  // let email = query("signupemail").value;
-  // let password = query("signuppassword").value;
-
-  // auth.createUserWithEmailAndPassword(email, password).then((user) => {
-  //   query("signup").reset();
-  //   query("signupmodalcontent").classList.add("is-hidden");
-
-  //   query(
-  //     "signupmessage"
-  //   ).innerHTML = `You (${user.email}) have succussfully signed up!`;
-
-  //   query("signupmessage").classList.remove("is-hidden");
-
-  //   setTimeout(() => {
-  //     query("signupmessage").classList.add("is-hidden");
-  //     query("signupmessage").innerHTML = ``;
-  //     query(
-  //       "signupmodalcontent"
-  //     ).innerHTML = `<h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
-  //     WELCOME TO COCO'S BAKING!
-  //   </h2>
-  //   <!-- sign up form -->
-  //   <form id="signup">
-  //     <!-- Name -->
-  //     <div class="field">
-  //       <label class="label">Name</label>
-  //       <div class="control">
-  //         <input class="input" type="text" id="email" />
-  //       </div>
-  //     </div>
-  //     <!-- email -->
-  //     <div class="field">
-  //       <label class="label">Email</label>
-  //       <div class="control">
-  //         <input class="input" type="text" id="email" />
-  //       </div>
-  //     </div>
-
-  //     <!-- password -->
-  //     <div class="field">
-  //       <label class="label">Password</label>
-  //       <div class="control">
-  //         <input type="password" class="input" id="password" />
-  //       </div>
-  //     </div>
-  //     <div class="has-text-centered">
-  //       <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
-  //       <button class="button has-text-danger mt-5" id="resetsignupfields">
-  //         Reset Fields
-  //       </button>
-  //     </div>
-  //   </form>`;
-  //     query("signupmodalcontent").classList.remove("is-hidden");
-  //     query("signupmodalcontent").classList.add("is-active");
-  //   }, 3000);
-  // });
+  auth.createUserWithEmailAndPassword(email, password).then((user) => {
+    query("signup").reset();
+    query("signupmodal").classList.add("is-hidden");
+    message_bar(`You (${user.email}) have succussfully signed up!`);
+  });
 });
