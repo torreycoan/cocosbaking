@@ -244,5 +244,24 @@
       </div>
     </footer>
     <script src="app.js"></script>
+
+    <script>
+      // firebase config
+      const firebaseConfig = {
+        apiKey: "AIzaSyAmJtgnSy2tEpvGg4hazeobVdXX7cYupHo",
+        authDomain: "links-search.firebaseapp.com",
+        projectId: "links-search",
+        storageBucket: "links-search.appspot.com",
+        messagingSenderId: "165545027201",
+        appId: "1:165545027201:web:434f46e54ee683096f0f80",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
+    </script>
   </body>
 </html>
