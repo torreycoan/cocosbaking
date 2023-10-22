@@ -113,8 +113,6 @@ query("signupbtn").addEventListener("click", (e) => {
   let email = query("signupemail").value;
   let password = query("signuppassword").value;
 
-  alert("hello");
-
   auth.createUserWithEmailAndPassword(email, password).then((user) => {
     query("signup").reset();
     query("signupmodal").classList.add("is-hidden");
