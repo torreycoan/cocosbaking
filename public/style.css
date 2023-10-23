@@ -53,8 +53,25 @@ a {
   color: black;
 }
 
-#navlist {
+ul.nav {
   list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: right;
+}
+
+ul.nav li {
   display: inline;
+}
+
+ul.nav li a {
+  display: block;
   text-align: center;
+  padding: 14px 16px;
+}
+
+ul.nav li a:hover {
+  background-color: #907167;
 }
