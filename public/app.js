@@ -56,6 +56,9 @@ query("signuplink").addEventListener("click", () => {
 
 query("signupmodalbg").addEventListener("click", () => {
   hidemodal(query("signupmodal"));
+  document.getElementById("signupname").value = "";
+  document.getElementById("signupemail").value = "";
+  document.getElementById("signuppassword").value = "";
 });
 
 // sign in modal
@@ -65,6 +68,8 @@ query("signinlink").addEventListener("click", () => {
 
 query("signinmodalbg").addEventListener("click", () => {
   hidemodal(query("signinmodal"));
+  document.getElementById("signinemail").value = "";
+  document.getElementById("signinpassword").value = "";
 });
 
 // ------------------------------------------------------------
