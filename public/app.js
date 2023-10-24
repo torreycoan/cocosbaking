@@ -15,6 +15,8 @@ let auth = firebase.auth();
 let db = firebase.firestore();
 let ref = firebase.storage().ref();
 
+// ------------------------------------------------------------
+
 // doucument query function
 function query(id) {
   return document.querySelector(`#${id}`);
