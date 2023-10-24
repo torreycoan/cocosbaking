@@ -47,6 +47,17 @@ function message_bar(msg) {
 
 // ------------------------------------------------------------
 
+// SIGNIN CHECK
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in.
+    query("currentuser").innerHTML = auth.currentUser.email;
+    document.getElementById("signinlink").classList.add("is-hidden");
+    document.getElementById("signuplink").classList.add("is-hidden");
+    document.getElementById("signoutlink").classList.remove("is-hidden");
+  }
+});
+
 // sign up and sign in modals
 // sign up modal
 
