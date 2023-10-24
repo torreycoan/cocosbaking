@@ -1,3 +1,20 @@
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDsNA9i2J-BFY5FuhmOpFAltzKS9JFdpVg",
+  authDomain: "cocosbaking-b6361.firebaseapp.com",
+  projectId: "cocosbaking-b6361",
+  storageBucket: "cocosbaking-b6361.appspot.com",
+  messagingSenderId: "972049300413",
+  appId: "1:972049300413:web:38bc284a6eba75a4aaf0d4",
+  measurementId: "G-0TH0WTPSGB",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// define authentication variable
+let auth = firebase.auth();
+let db = firebase.firestore();
+let ref = firebase.storage().ref();
+
 // doucument query function
 function query(id) {
   return document.querySelector(`#${id}`);
@@ -48,6 +65,24 @@ query("signinlink").addEventListener("click", () => {
 
 query("signinmodalbg").addEventListener("click", () => {
   hidemodal(query("signinmodal"));
+});
+
+// ------------------------------------------------------------
+
+// Sign Out
+query("signoutlink").addEventListener("click", () => {
+  auth
+    .signOut()
+    .then(() => {
+      query("currentuser").innerHTML = "";
+      document.getElementById("signinlink").classList.remove("is-hidden");
+      document.getElementById("signuplink").classList.remove("is-hidden");
+      document.getElementById("signoutlink").classList.add("is-hidden");
+      alert("You have successfully signed out!");
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
 });
 
 // ------------------------------------------------------------
@@ -103,19 +138,71 @@ query("resetsigninfields").addEventListener("click", (e) => {
 
 // ------------------------------------------------------------
 
-// create a user
+// Sign Up - create a user
 
 query("signupbtn").addEventListener("click", (e) => {
   e.preventDefault();
 
-  // email and password
+  // name, email and password from the form
+  const name = query("signupname").value;
+  const email = query("signupemail").value;
+  const password = query("signuppassword").value;
 
-  let email = query("signupemail").value;
-  let password = query("signuppassword").value;
+  let data = {
+    name: name,
+    email: email,
+  };
 
-  auth.createUserWithEmailAndPassword(email, password).then((user) => {
-    query("signup").reset();
-    query("signupmodal").classList.add("is-hidden");
-    message_bar(`You (${user.email}) have succussfully signed up!`);
-  });
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((user) => {
+      query("signup").reset();
+      query("signupmodal").classList.remove("is-active");
+
+      query("currentuser").innerHTML = name;
+      document.getElementById("signinlink").classList.add("is-hidden");
+      document.getElementById("signuplink").classList.add("is-hidden");
+      document.getElementById("signoutlink").classList.remove("is-hidden");
+      db.collection("users").doc(email).set(data);
+      message_bar(`${name} have succussfully signed up!`);
+    })
+    .catch(() => {
+      alert("The email address is already in use by another account.");
+    });
 });
+
+// ------------------------------------------------------------
+
+// Sign In
+
+const signInForm = query("signin");
+// Add an event listener for form submission
+signInForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  // Get user info
+  const email = signInForm.querySelector("input[type=email]").value;
+  const password = signInForm.querySelector("input[type=password]").value;
+  // Sign in with Firebase authentication APIs
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      //Clear the form
+      signInForm.reset();
+      //Close the modal
+      query("signinmodal").classList.remove("is-active");
+      // Show the user profile removing sign in and sign up buttons
+      // After firestore is set up, we will show the user's name here
+      query("currentuser").innerHTML = auth.currentUser.email;
+      document.getElementById("signinlink").classList.add("is-hidden");
+      document.getElementById("signuplink").classList.add("is-hidden");
+      document.getElementById("signoutlink").classList.remove("is-hidden");
+      //Show a success message
+      alert("User signed in successfully!");
+    })
+    .catch((error) => {
+      message_bar(error.message);
+    });
+});
+
+// ------------------------------------------------------------
