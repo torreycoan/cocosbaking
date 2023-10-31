@@ -251,7 +251,7 @@
         </header>
         <section>
           <div class="container">
-            <form class="mt-6">
+            <form class="mt-6" id="orderform">
               <!-- First Name Field -->
               <div class="columns">
                 <div class="field column is-one-quarter has-text-centered">
@@ -354,7 +354,7 @@
               </div>
 
               <!-- Additional Notes Field -->
-              <div class="columns">
+              <div class="columns mb-5">
                 <div class="field column is-one-quarter has-text-centered">
                   <label class="label is-size-4">Additional Notes</label>
                 </div>
@@ -366,14 +366,31 @@
                   />
                 </div>
               </div>
+
+              <!-- horizontal line -->
+              <hr />
+
               <!-- Subtotal -->
-              <div class="columns">
+              <div class="columns mb-5 mt-5">
                 <div class="field column is-half has-text-centered">
                   <label class="label is-size-4">Subtotal</label>
                 </div>
                 <div class="control column">
                   <p id="subtotalprice" class="is-size-5">price will go here</p>
                 </div>
+              </div>
+
+              <!-- horizontal line -->
+              <hr />
+
+              <!-- order buttons -->
+              <div class="mt-6 has-text-centered">
+                <button class="button is-primary mr-4" id="orderbutton">
+                  Place Order
+                </button>
+                <button class="button is-danger" id="resetorderbutton">
+                  Reset Selections
+                </button>
               </div>
             </form>
           </div>

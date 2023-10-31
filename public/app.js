@@ -60,6 +60,8 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
+// ------------------------------------------------------------
+
 // sign up and sign in modals
 // sign up modal
 
@@ -224,5 +226,11 @@ signInForm.addEventListener("submit", (event) => {
 });
 
 // ------------------------------------------------------------
+
+// reset order button
+query("resetorderbutton").addEventListener("click", (e) => {
+  e.preventDefault();
+  query("orderform").reset();
+});
 
 // ------------------------------------------------------------
