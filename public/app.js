@@ -44,7 +44,7 @@ function message_bar(msg) {
   setTimeout(() => {
     query("message").classList.add("is-hidden");
     query("message").innerHTML = "";
-  }, 3000);
+  }, 5000);
 }
 
 // ------------------------------------------------------------
@@ -234,3 +234,33 @@ query("resetorderbutton").addEventListener("click", (e) => {
 });
 
 // ------------------------------------------------------------
+
+// taking orders (field values)
+query("orderbutton").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  let firstname = query("firstname");
+  let lastname = query("lastname");
+  let productselection = query("productselection");
+  let quantity = query("quantity");
+  let deliverymethod = query("deliverymethod");
+  let formalevent = query("formalevent");
+  let completiondate = query("completiondate");
+
+  let neworder = {
+    first_name: firstname,
+    last_name: lastname,
+    product_type: productselection,
+    quantity: quantity,
+    delivery_method: deliverymethod,
+    formal_event: formalevent,
+    completion_date: completiondate,
+  };
+
+  db.collection("orders")
+    .add(neworder)
+    .then(() => {
+      query("orderform").reset();
+      message_bar("Order Placed!");
+    });
+});
