@@ -118,6 +118,9 @@ query("home").addEventListener("click", () => {
 
   query("orderpage").classList.remove("is-active");
   query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
 });
 
 query("products").addEventListener("click", () => {
@@ -129,6 +132,9 @@ query("products").addEventListener("click", () => {
 
   query("orderpage").classList.remove("is-active");
   query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
 });
 
 query("orders").addEventListener("click", () => {
@@ -140,6 +146,23 @@ query("orders").addEventListener("click", () => {
 
   query("homepage").classList.remove("is-active");
   query("homepage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
+});
+
+query("myorders").addEventListener("click", () => {
+  query("myorderspage").classList.remove("is-hidden");
+  query("myorderspage").classList.add("is-active");
+
+  query("homepage").classList.remove("is-active");
+  query("homepage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("productpage").classList.remove("is-active");
+  query("productpage").classList.add("is-hidden");
 });
 
 // ------------------------------------------------------------
@@ -238,29 +261,23 @@ query("resetorderbutton").addEventListener("click", (e) => {
 // taking orders (field values)
 query("orderbutton").addEventListener("click", (e) => {
   e.preventDefault();
-
-  let firstname = query("firstname");
-  let lastname = query("lastname");
-  let productselection = query("productselection");
-  let quantity = query("quantity");
-  let deliverymethod = query("deliverymethod");
-  let formalevent = query("formalevent");
-  let completiondate = query("completiondate");
-
   let neworder = {
-    first_name: firstname,
-    last_name: lastname,
-    product_type: productselection,
-    quantity: quantity,
-    delivery_method: deliverymethod,
-    formal_event: formalevent,
-    completion_date: completiondate,
+    first_name: query("firstname").value,
+    last_name: query("lastname").value,
+    product_type: query("productselection").value,
+    quantity: query("quantity").value,
+    delivery_method: query("deliverymethod").value,
+    formal_event: query("formalevent").value,
+    completion_date: query("completiondate").value,
   };
 
-  db.collection("orders")
-    .add(neworder)
-    .then(() => {
-      query("orderform").reset();
-      message_bar("Order Placed!");
-    });
+  query("orderform").reset();
+  message_bar("Order Placed!");
+  // db.collection("orders")
+  //   .add(neworder)
+  //   .then(() => {
+  //     alert("hello");
+  //     query("orderform").reset();
+  //     message_bar("Order Placed!");
+  //   });
 });

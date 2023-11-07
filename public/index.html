@@ -124,8 +124,11 @@
           <li class="pl-5 pr-5 mt-5">
             <a id="products" class="has-text-weight-bold">Products</a>
           </li>
-          <li class="pl-5 mt-5">
+          <li class="pl-5 pr-5 mt-5">
             <a id="orders" class="has-text-weight-bold">Order Now</a>
+          </li>
+          <li class="pl-5 mt-5">
+            <a id="myorders" class="has-text-weight-bold">My Orders</a>
           </li>
         </ul>
 
@@ -249,6 +252,7 @@
             </div>
           </div>
         </header>
+
         <section>
           <div class="container">
             <form class="mt-6" id="orderform">
@@ -406,6 +410,17 @@
             </form>
           </div>
         </section>
+      </div>
+      <div id="myorderspage" class="is-hidden">
+        <div class="p-5 m-5" id="myordersplaced">
+          <div class="card has-background-grey-lighter p-5">
+            <div class="is-pulled-left">hello</div>
+            <div class="is-pulled-right">
+              <button class="button is-danger" id="deleteorder">DELETE</button>
+              <button class="button is-warning" id="updateorder">UPDATE</button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 
