@@ -98,7 +98,7 @@ query("signoutlink").addEventListener("click", () => {
       document.getElementById("signinlink").classList.remove("is-hidden");
       document.getElementById("signuplink").classList.remove("is-hidden");
       document.getElementById("signoutlink").classList.add("is-hidden");
-      alert("You have successfully signed out!");
+      message_bar("You have successfully signed out!");
     })
     .catch((error) => {
       alert(error.message);
@@ -207,7 +207,7 @@ query("signupbtn").addEventListener("click", (e) => {
       document.getElementById("signuplink").classList.add("is-hidden");
       document.getElementById("signoutlink").classList.remove("is-hidden");
       db.collection("users").doc(email).set(data);
-      message_bar(`${name} have succussfully signed up!`);
+      message_bar(`You (${name}) have succussfully signed up!`);
     })
     .catch(() => {
       alert("The email address is already in use by another account.");
@@ -241,11 +241,26 @@ signInForm.addEventListener("submit", (event) => {
       document.getElementById("signuplink").classList.add("is-hidden");
       document.getElementById("signoutlink").classList.remove("is-hidden");
       //Show a success message
-      alert("User signed in successfully!");
+      message_bar("User signed in successfully!");
     })
     .catch((error) => {
       message_bar(error.message);
     });
+});
+
+// ------------------------------------------------------------
+
+// status of user on the site
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    query("myorders").classList.remove("is-hidden");
+    query("signedoutordernow").classList.add("is-hidden");
+    query("signedinordernow").classList.remove("is-hidden");
+  } else {
+    query("myorders").classList.add("is-hidden");
+    query("signedoutordernow").classList.remove("is-hidden");
+    query("signedinordernow").classList.add("is-hidden");
+  }
 });
 
 // ------------------------------------------------------------
@@ -271,13 +286,13 @@ query("orderbutton").addEventListener("click", (e) => {
     completion_date: query("completiondate").value,
   };
 
-  query("orderform").reset();
-  message_bar("Order Placed!");
-  // db.collection("orders")
-  //   .add(neworder)
-  //   .then(() => {
-  //     alert("hello");
-  //     query("orderform").reset();
-  //     message_bar("Order Placed!");
-  //   });
+  //query("orderform").reset();
+  //message_bar("Order Placed!");
+  db.collection("orders")
+    .add(neworder)
+    .then(() => {
+      alert("hello");
+      //     query("orderform").reset();
+      message_bar("Order Placed!");
+    });
 });
