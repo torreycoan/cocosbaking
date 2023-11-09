@@ -286,7 +286,7 @@ query("orderbutton").addEventListener("click", (e) => {
     quantity: query("quantity").value,
     delivery_method: query("deliverymethod").value,
     formal_event: query("formalevent").value,
-    completion_date: query("completiondate").value
+    completion_date: query("completiondate").value,
     //TODO: add order total - if not here, to the webpage. "refresh subtotal" button?
   };
 
