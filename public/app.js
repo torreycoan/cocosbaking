@@ -274,17 +274,20 @@ query("resetorderbutton").addEventListener("click", (e) => {
 
 // ------------------------------------------------------------
 
-// taking orders (field values)
+// taking orders (field values) - Submit Order
 query("orderbutton").addEventListener("click", (e) => {
   e.preventDefault();
   let neworder = {
     first_name: query("firstname").value,
     last_name: query("lastname").value,
+    //TODO: remove fname and lname OR get it from their signup/profile
+    customer_email: auth.currentUser.email, // TODO: check if this works
     product_type: query("productselection").value,
     quantity: query("quantity").value,
     delivery_method: query("deliverymethod").value,
     formal_event: query("formalevent").value,
-    completion_date: query("completiondate").value,
+    completion_date: query("completiondate").value
+    //TODO: add order total - if not here, to the webpage. "refresh subtotal" button?
   };
 
   //query("orderform").reset();
