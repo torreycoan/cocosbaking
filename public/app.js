@@ -241,10 +241,10 @@ signInForm.addEventListener("submit", (event) => {
       document.getElementById("signuplink").classList.add("is-hidden");
       document.getElementById("signoutlink").classList.remove("is-hidden");
       //Show a success message
-      message_bar("User signed in successfully!");
+      message_bar("You signed in successfully!");
     })
     .catch((error) => {
-      message_bar(error.message);
+      query("incorrectpassword").classList.remove("is-hidden");
     });
 });
 
@@ -260,6 +260,7 @@ auth.onAuthStateChanged((user) => {
     query("myorders").classList.add("is-hidden");
     query("signedoutordernow").classList.remove("is-hidden");
     query("signedinordernow").classList.add("is-hidden");
+    query("incorrectpassword").classList.add("is-hidden");
   }
 });
 
