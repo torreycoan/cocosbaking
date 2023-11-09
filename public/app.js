@@ -287,13 +287,11 @@ query("orderbutton").addEventListener("click", (e) => {
     completion_date: query("completiondate").value,
   };
 
-  //query("orderform").reset();
-  //message_bar("Order Placed!");
   db.collection("orders")
     .add(neworder)
     .then(() => {
-      alert("hello");
-      //     query("orderform").reset();
+      query("orderform").reset();
       message_bar("Order Placed!");
+      document.body.scrollTop = 0;
     });
 });
