@@ -288,6 +288,9 @@ query("orderbutton").addEventListener("click", (e) => {
     formal_event: query("formalevent").value,
     completion_date: query("completiondate").value,
     //TODO: add order total - if not here, to the webpage. "refresh subtotal" button?
+    order_total: "TODO - calculate this",
+    order_status: "Pending acceptance/rejection",
+    payment_status: "Not paid"
   };
 
   db.collection("orders")
@@ -298,3 +301,33 @@ query("orderbutton").addEventListener("click", (e) => {
       document.body.scrollTop = 0;
     });
 });
+// -------------------------------------------------------
+
+// My Orders - Customer side - display all orders
+query("myorders").addEventListener("click", (allorders) => {
+  db.collection("orders").get().then((data) => {
+    let docs = data.docs //array to loop thru
+    let html = ``;
+
+    docs.forEach(doc => {
+      // if the current user's email is the one in the order, display it. 
+      let order = doc.data()
+      //console.log("curr: ", auth.currentUser.email)
+      //console.log("order email: ", order.customer_email)
+      //console.log(auth.currentUser.email == order.customer_email)
+
+      if (auth.currentUser.email == order.customer_email) {
+        console.log(doc.data().customer_email)
+        html += `<p id = ${doc.id} class ="box">${order.product_type}, ${order.customer_email} `
+      }
+
+
+    });
+    //console.log(html)
+
+    //add content to an existing div - use innerHTML property
+    document.querySelector('#myordersplaced').innerHTML += html;
+
+  })
+  // todo: change it so if its joey, it brings up the other html. 
+})
