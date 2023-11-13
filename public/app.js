@@ -307,7 +307,18 @@ query("orderbutton").addEventListener("click", (e) => {
 query("myorders").addEventListener("click", (allorders) => {
   db.collection("orders").get().then((data) => {
     let docs = data.docs //array to loop thru
+    let tablehtml = ``;
     let html = ``;
+
+
+    if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+      //TODO:if owner, add additional buttons & cols to the My Orders page
+      // buttons: one to see pending orders, one to see accepted orders, one to see completed orders
+      // maybe limit the number of orders that can be added on a page? or have another button for archived orders that she's not interested in seeing anymore?
+
+      console.log('admin')
+      html += "Admin view"
+    }
 
     docs.forEach(doc => {
       // if the current user's email is the one in the order, display it. 
@@ -320,7 +331,7 @@ query("myorders").addEventListener("click", (allorders) => {
         console.log(doc.data().customer_email)
         //row: name, email, product, Q, deliv method, form event, comp date, 
         // order total, order status, pmt status
-        html += `<tr id = ${doc.id}>
+        tablehtml += `<tr id = ${doc.id}>
         <td>${order.first_name} ${order.last_name} </td>
         <td>${order.customer_email}</td>
         <td>${order.product_type}</td>
@@ -336,12 +347,13 @@ query("myorders").addEventListener("click", (allorders) => {
       }
 
 
+
     });
     //console.log(html)
-
     //add content to an existing div - use innerHTML property
-    document.querySelector('#myorderstablebody').innerHTML += html;
-
+    document.querySelector('#myorderstablebody').innerHTML += tablehtml;
+    document.querySelector('#myordersplaced').innerHTML += html
   })
+
   // todo: change it so if its joey, it brings up the other html. 
 })
