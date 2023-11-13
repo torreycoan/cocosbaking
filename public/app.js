@@ -303,7 +303,7 @@ query("orderbutton").addEventListener("click", (e) => {
 });
 // -------------------------------------------------------
 
-// My Orders - Customer side - display all orders
+// My Orders - Customer side - display all of the user's orders
 query("myorders").addEventListener("click", (allorders) => {
   db.collection("orders").get().then((data) => {
     let docs = data.docs //array to loop thru
@@ -318,7 +318,21 @@ query("myorders").addEventListener("click", (allorders) => {
 
       if (auth.currentUser.email == order.customer_email) {
         console.log(doc.data().customer_email)
-        html += `<p id = ${doc.id} class ="box">${order.product_type}, ${order.customer_email} `
+        //row: name, email, product, Q, deliv method, form event, comp date, 
+        // order total, order status, pmt status
+        html += `<tr id = ${doc.id}>
+        <td>${order.first_name} ${order.last_name} </td>
+        <td>${order.customer_email}</td>
+        <td>${order.product_type}</td>
+        <td>${order.quantity}</td>
+        <td>${order.delivery_method}</td>
+        <td>${order.formal_event}</td>
+        <td>${order.completion_date}</td>
+        <td>${order.order_total}</td>
+        <td>${order.order_status}</td>
+        <td>${order.payment_status}</td>
+        </tr>
+        `
       }
 
 
@@ -326,7 +340,7 @@ query("myorders").addEventListener("click", (allorders) => {
     //console.log(html)
 
     //add content to an existing div - use innerHTML property
-    document.querySelector('#myordersplaced').innerHTML += html;
+    document.querySelector('#myorderstablebody').innerHTML += html;
 
   })
   // todo: change it so if its joey, it brings up the other html. 
