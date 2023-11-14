@@ -316,19 +316,40 @@ query("myorders").addEventListener("click", (allorders) => {
       // buttons: one to see pending orders, one to see accepted orders, one to see completed orders
       // maybe limit the number of orders that can be added on a page? or have another button for archived orders that she's not interested in seeing anymore?
 
-      console.log('admin')
-      html += "Admin view"
+      // console.log('admin')
+      // html += "Admin view"
+
+      //if owner/admin, 
+      //TODO: add additional columns for update/delete buttons 
+      document.querySelector('#myorderstableheaders').innerHTML += `<th>Update</th>
+      <th>Delete</th>`
+      //see all orders - and have hidden inputs so that we can later use them to update orders
+      docs.forEach(doc => {
+        let order = doc.data()
+        tablehtml += `<tr id = ${doc.id}>
+        <td>${order.first_name} ${order.last_name} <input type = "text" value = "${order.first_name} ${order.last_name}"/></td>
+        <td>${order.customer_email}</td>
+        <td>${order.product_type}</td>
+        <td>${order.quantity}</td>
+        <td>${order.delivery_method}</td>
+        <td>${order.formal_event}</td>
+        <td>${order.completion_date}</td>
+        <td>${order.order_total}</td>
+        <td>${order.order_status}</td>
+        <td>${order.payment_status}</td>
+        <td><button class="button" onclick="update_doc(this, '${doc.id}')">Update</button></td>
+        <td><button class="button is-danger" onclick="delete_doc(this, '${doc.id}')">Delete</button></td>
+        </tr>
+        `
+      })
     }
 
     docs.forEach(doc => {
       // if the current user's email is the one in the order, display it. 
       let order = doc.data()
-      //console.log("curr: ", auth.currentUser.email)
-      //console.log("order email: ", order.customer_email)
-      //console.log(auth.currentUser.email == order.customer_email)
 
       if (auth.currentUser.email == order.customer_email) {
-        console.log(doc.data().customer_email)
+        //console.log(doc.data().customer_email)
         //row: name, email, product, Q, deliv method, form event, comp date, 
         // order total, order status, pmt status
         tablehtml += `<tr id = ${doc.id}>
@@ -356,4 +377,6 @@ query("myorders").addEventListener("click", (allorders) => {
   })
 
   // todo: change it so if its joey, it brings up the other html. 
+
+  //todo: before the html addition, sort it by required completion date
 })
