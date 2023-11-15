@@ -287,6 +287,7 @@ query("orderbutton").addEventListener("click", (e) => {
     delivery_method: query("deliverymethod").value,
     formal_event: query("formalevent").value,
     completion_date: query("completiondate").value,
+    additional_notes: query("additionalnotes").value,
     //TODO: add order total - if not here, to the webpage. "refresh subtotal" button?
     order_total: "TODO - calculate this",
     order_status: "Pending acceptance/rejection",
@@ -334,6 +335,7 @@ query("myorders").addEventListener("click", (allorders) => {
         <td>${order.delivery_method}</td>
         <td>${order.formal_event}</td>
         <td>${order.completion_date}</td>
+        <td>${order.additional_notes}</td>
         <td>${order.order_total}</td>
         <td>${order.order_status}</td>
         <td>${order.payment_status}</td>
@@ -360,6 +362,7 @@ query("myorders").addEventListener("click", (allorders) => {
         <td>${order.delivery_method}</td>
         <td>${order.formal_event}</td>
         <td>${order.completion_date}</td>
+        <td>${order.additional_notes}</td>
         <td>${order.order_total}</td>
         <td>${order.order_status}</td>
         <td>${order.payment_status}</td>
