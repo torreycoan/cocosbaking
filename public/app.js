@@ -108,6 +108,19 @@ query("signoutlink").addEventListener("click", () => {
 // ------------------------------------------------------------
 
 // showing and hiding parts of main (home, products, order now)
+query("logohome").addEventListener("click", () => {
+  query("homepage").classList.remove("is-hidden");
+  query("homepage").classList.add("is-active");
+
+  query("productpage").classList.remove("is-active");
+  query("productpage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
+});
 
 query("home").addEventListener("click", () => {
   query("homepage").classList.remove("is-hidden");
@@ -382,4 +395,33 @@ query("myorders").addEventListener("click", (allorders) => {
   // todo: change it so if its joey, it brings up the other html.
 
   //todo: before the html addition, sort it by required completion date
+});
+
+// nav burger
+
+let burger_nav = document.querySelector("#burger_nav");
+let menu_nav = document.querySelector("#menu_nav");
+
+function burger_open() {
+  burger_nav.classList.add("is-active");
+  menu_nav.classList.add("is-active");
+}
+
+function burger_close() {
+  burger_nav.classList.remove("is-active");
+  menu_nav.classList.remove("is-active");
+}
+document.addEventListener("click", function (event) {
+  if (
+    !event.target.closest("#burger_nav") &&
+    burger_nav.classList.contains("is-active")
+  ) {
+    burger_close();
+  }
+});
+burger_nav.removeEventListener("mouseover", burger_open);
+burger_nav.addEventListener("click", function (event) {
+  event.stopPropagation();
+  burger_nav.classList.toggle("is-active");
+  menu_nav.classList.toggle("is-active");
 });

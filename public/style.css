@@ -38,42 +38,8 @@
   color: #907167;
 }
 
-.navbar {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-
-.navbar-menu {
-  flex-grow: initial !important;
-  flex-shrink: initial !important;
-}
-
 a {
   color: black;
-}
-
-ul.nav {
-  list-style-type: none;
-  margin: 0 auto;
-  padding: 0;
-  overflow: hidden;
-  display: flex;
-  justify-content: right;
-}
-
-ul.nav li {
-  display: inline;
-}
-
-ul.nav li a {
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
-}
-
-ul.nav li a:hover {
-  background-color: lightgrey;
 }
 
 img.header {
@@ -93,4 +59,8 @@ hr {
   /* Set the hr color */
   color: #333; /* old IE */
   background-color: #333; /* Modern Browsers */
+}
+
+#navbar-logo {
+  width: 11rem;
 }
