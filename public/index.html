@@ -2,417 +2,549 @@
 <!-- Firebase connected. Make sure edited files are also deployed at firebase -->
 <!-- Firebase Hosting URL: https://cocosbaking-b6361.web.app -->
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coco's Baking</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coco's Baking</title>
+    <!-- Bulma stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
 
-  <!-- Bulma stylesheet -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <!-- Font Awesome if it's needed -->
+    <script
+      src="https://kit.fontawesome.com/150c7aa5e0.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Font Awesome if it's needed -->
-  <script src="https://kit.fontawesome.com/150c7aa5e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <!-- sign up modal  -->
-  <div class="modal" id="signupmodal">
-    <div class="modal-background" id="signupmodalbg"></div>
-    <div class="modal-content has-background-grey-light p-5" id="signupmodalcontent">
-      <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
-        WELCOME TO COCO'S BAKING!
-      </h2>
-      <!-- sign up form -->
-      <form id="signup">
-        <!-- Name -->
-        <div class="field">
-          <label class="label">Name</label>
-          <div class="control">
-            <input class="input" id="signupname" type="text" />
-          </div>
-        </div>
-        <!-- email -->
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input" type="email" id="signupemail" />
-          </div>
-        </div>
-
-        <!-- password -->
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input type="password" class="input" id="signuppassword" />
-          </div>
-        </div>
-        <div class="has-text-centered">
-          <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
-          <button class="button has-text-danger mt-5" id="resetsignupfields">
-            Reset Fields
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- sign in modal -->
-  <div class="modal" id="signinmodal">
-    <div class="modal-background" id="signinmodalbg"></div>
-    <div class="modal-content has-background-grey-light p-5">
-      <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
-        WELCOME BACK!
-      </h2>
-      <!-- sign in form -->
-      <form action="" id="signin">
-        <!-- email -->
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input" type="email" id="signinemail" />
-          </div>
-        </div>
-
-        <!-- password -->
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input type="password" class="input" id="signinpassword" />
-          </div>
-        </div>
-        <div id="incorrectpassword" class="is-hidden has-text-weight-bold has-text-danger">
-          *Incorrect password or email provided, try again
-        </div>
-        <div class="has-text-centered">
-          <button class="button mt-5 mr-3" id="signinbtn">Sign In</button>
-          <button class="button has-text-danger mt-5" id="resetsigninfields">
-            Reset Fields
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div id="signinmessage" class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"></div>
-
-  <!-- navbar setup -->
-  <nav>
-    <div class="navbar" id="whitebackground">
-      <div class="navbar-start">
-        <img src="images/cocosbakinglogo.png" alt="cocosbakinglogo" class="navbar-item" />
-      </div>
-
-      <ul class="nav">
-        <li class="pr-5 mt-5">
-          <a id="home" class="has-text-weight-bold">Home</a>
-        </li>
-        <li class="pl-5 pr-5 mt-5">
-          <a id="products" class="has-text-weight-bold">Products</a>
-        </li>
-        <li class="pl-5 pr-5 mt-5">
-          <a id="orders" class="has-text-weight-bold">Order Now</a>
-        </li>
-        <li class="pl-5 mt-5">
-          <a id="myorders" class="has-text-weight-bold is-hidden">My Orders</a>
-        </li>
-      </ul>
-
-      <div class="navbar-end">
-        <div class="navbar-item"><span id="currentuser"></span></div>
-        <div class="navbar-item">
-          <button class="button is-normal is-outlined has-text-weight-bold" id="signinlink">
-            Sign In
-          </button>
-        </div>
-        <div class="navbar-item">
-          <button class="button is-normal is-outlined has-text-weight-bold" id="signuplink">
-            Sign Up
-          </button>
-        </div>
-        <div class="navbar-item">
-          <button id="signoutlink" class="is-hidden button is-normal is-outlined">
-            Sign Out
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- message bar -->
-  <div class="has-background-danger has-text-centered p-2 is-hidden" id="message"></div>
-
-  <!-- main  -->
-  <main>
-    <div id="homepage" class="is-active">
-      <header class="header">
-        <div class="has-text-centered">
-          <div class="card">
-            <div class="card-image">
-              <img src="images/cocosbanner.jpg" alt="banner" />
+  <body>
+    <!-- sign up modal  -->
+    <div class="modal" id="signupmodal">
+      <div class="modal-background" id="signupmodalbg"></div>
+      <div
+        class="modal-content has-background-grey-light p-5"
+        id="signupmodalcontent"
+      >
+        <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
+          WELCOME TO COCO'S BAKING!
+        </h2>
+        <!-- sign up form -->
+        <form id="signup">
+          <!-- Name -->
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" id="signupname" type="text" />
             </div>
           </div>
-        </div>
-      </header>
-      <div class="columns mt-6">
-        <div class="column is-one-fifth"></div>
-        <div class="column is-one-fifth pr-2">
-          <img src="images/freshfruitcake.jpg" alt="fruit cake" />
-          <h3 class="is-size-4 has-text-centered has-text-weight-semibold pb-2">
-            Made in Madison
-          </h3>
-          <p class="pt-3 has-text-centered">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
-            voluptas unde doloribus, fugiat a praesentium libero accusamus
-            reprehenderit, vel ea mollitia debitis nulla eum quia!
-          </p>
-        </div>
-        <div class="column is-one-fifth">
-          <img src="images/blueberrycheesecake.jpg" alt="blueberry cheesecake" />
-          <h3 class="is-size-4 has-text-centered has-text-weight-semibold pb-2">
-            Easy Ordering
-          </h3>
-          <p class="pt-3 has-text-centered pl-3 pr-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Recusandae voluptas minus nisi! Consequuntur obcaecati quam magni
-            ratione debitis. Dignissimos tenetur excepturi culpa distinctio
-            unde illum aliquam vero sequi deserunt? Molestias molestiae odit
-            fugit enim voluptate.
-          </p>
-        </div>
-        <div class="column is-one-fifth pl-2">
-          <img src="images/pretzelpbcake.jpg" alt="pretzel peanut butter cake" />
-          <h3 class="is-size-4 has-text-centered has-text-weight-semibold pb-2">
-            Baked with Care
-          </h3>
-          <p class="pt-3 has-text-centered">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut vitae
-            ipsum nihil, natus fugit beatae veniam molestiae, ducimus quos,
-            assumenda quidem itaque est reprehenderit id.
-          </p>
-        </div>
-        <div class="column is-one-fifth"></div>
-      </div>
-      <div class="has-text-centered mb-5">
-        <h2 class="is-size-2 has-text-weight-bold">Browse Our Selection</h2>
-        <!-- images from the prototype go here -->
+          <!-- email -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" type="email" id="signupemail" />
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input type="password" class="input" id="signuppassword" />
+            </div>
+          </div>
+          <div class="has-text-centered">
+            <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
+            <button class="button has-text-danger mt-5" id="resetsignupfields">
+              Reset Fields
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-    <div id="productpage" class="is-hidden">
-      <header class="header">
-        <img src="images/products.png" class="image" />
-      </header>
+
+    <!-- sign in modal -->
+    <div class="modal" id="signinmodal">
+      <div class="modal-background" id="signinmodalbg"></div>
+      <div class="modal-content has-background-grey-light p-5">
+        <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
+          WELCOME BACK!
+        </h2>
+        <!-- sign in form -->
+        <form action="" id="signin">
+          <!-- email -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" type="email" id="signinemail" />
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input type="password" class="input" id="signinpassword" />
+            </div>
+          </div>
+          <div
+            id="incorrectpassword"
+            class="is-hidden has-text-weight-bold has-text-danger"
+          >
+            *Incorrect password or email provided, try again
+          </div>
+          <div class="has-text-centered">
+            <button class="button mt-5 mr-3" id="signinbtn">Sign In</button>
+            <button class="button has-text-danger mt-5" id="resetsigninfields">
+              Reset Fields
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+    <div
+      id="signinmessage"
+      class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"
+    ></div>
 
-    <div id="orderpage" class="is-hidden">
-      <header class="header">
-        <img src="images/ordernow.png" class="image" />
-      </header>
-      <section>
-        <div id="signedoutordernow" class="has-text-centered has-text-danger mt-5">
-          <p>Please sign in or sign up to place an order</p>
+    <!-- navbar setup -->
+    <nav>
+      <div class="navbar" id="whitebackground">
+        <div class="navbar-start">
+          <img
+            src="images/cocosbakinglogo.png"
+            alt="cocosbakinglogo"
+            class="navbar-item"
+          />
         </div>
-        <div id="signedinordernow" class="is-hidden">
-          <div class="container">
-            <form class="mt-6" id="orderform">
-              <!-- First Name Field -->
-              <div class="columns">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">First Name</label>
-                </div>
-                <div class="control column">
-                  <input class="input" type="text" placeholder="John" id="firstname" />
-                </div>
-              </div>
-              <!-- Last Name Field -->
-              <div class="columns">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">Last Name</label>
-                </div>
-                <div class="control column">
-                  <input class="input" type="text" placeholder="Smith" id="lastname" />
-                </div>
-              </div>
-              <!-- Choose Product Field -->
-              <div class="columns">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">Choose Product</label>
-                </div>
-                <div class="control column">
-                  <div class="select">
-                    <select id="productselection">
-                      <option>A Very Good Cake</option>
-                      <option>A Very Good Cake</option>
-                      <option>A Very Good Cake</option>
-                      <!-- Additional product options can be added here -->
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- Choose Quantity Field -->
-              <div class="columns">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">Quantity</label>
-                </div>
-                <div class="control column">
-                  <div class="select">
-                    <select id="quantity">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option>10+ (Contact Please)</option>
-                      <!-- Additional product options can be added here -->
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- Method of Delivery Field -->
-              <div class="columns">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">Method of Delivery</label>
-                </div>
-                <div class="control column">
-                  <div class="select">
-                    <select id="deliverymethod">
-                      <option>Pick Up</option>
-                      <option>Delivery</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- Order is for formal event Field -->
-              <div class="columns">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">Order is for formal event</label>
-                </div>
-                <div class="control column">
-                  <div class="select">
-                    <select id="formalevent">
-                      <option>No</option>
-                      <option>Yes</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <!-- Required order completion date Field -->
-              <div class="columns">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">Required order completion date</label>
-                </div>
-                <div class="control column">
-                  <div class="date">
-                    <input type="date" id="completiondate" />
-                  </div>
-                </div>
-              </div>
 
-              <!-- Additional Notes Field -->
-              <div class="columns mb-5">
-                <div class="field column is-one-quarter has-text-centered">
-                  <label class="label is-size-4">Additional Notes</label>
-                </div>
-                <div class="control column">
-                  <input class="input" type="text" placeholder="Add Sprinkles!" id="additionalnotes" />
-                </div>
-              </div>
+        <ul class="nav">
+          <li class="pr-5 mt-5">
+            <a id="home" class="has-text-weight-bold">Home</a>
+          </li>
+          <li class="pl-5 pr-5 mt-5">
+            <a id="products" class="has-text-weight-bold">Products</a>
+          </li>
+          <li class="pl-5 pr-5 mt-5">
+            <a id="orders" class="has-text-weight-bold">Order Now</a>
+          </li>
+          <li class="pl-5 mt-5">
+            <a id="myorders" class="has-text-weight-bold is-hidden"
+              >My Orders</a
+            >
+          </li>
+        </ul>
 
-              <!-- horizontal line -->
-              <hr />
-
-              <!-- Subtotal -->
-              <div class="columns mb-5 mt-5">
-                <div class="field column is-half has-text-centered">
-                  <label class="label is-size-4">Subtotal</label>
-                </div>
-                <div class="control column">
-                  <p id="subtotalprice" class="is-size-5">
-                    price will go here
-                  </p>
-                </div>
-              </div>
-
-              <!-- horizontal line -->
-              <hr />
-
-              <!-- order buttons -->
-              <div class="mt-6 has-text-centered">
-                <button class="button is-primary mr-4" id="orderbutton">
-                  Place Order
-                </button>
-                <button class="button is-danger" id="resetorderbutton">
-                  Reset Selections
-                </button>
-              </div>
-            </form>
+        <div class="navbar-end">
+          <div class="navbar-item"><span id="currentuser"></span></div>
+          <div class="navbar-item">
+            <button
+              class="button is-normal is-outlined has-text-weight-bold"
+              id="signinlink"
+            >
+              Sign In
+            </button>
+          </div>
+          <div class="navbar-item">
+            <button
+              class="button is-normal is-outlined has-text-weight-bold"
+              id="signuplink"
+            >
+              Sign Up
+            </button>
+          </div>
+          <div class="navbar-item">
+            <button
+              id="signoutlink"
+              class="is-hidden button is-normal is-outlined"
+            >
+              Sign Out
+            </button>
           </div>
         </div>
-      </section>
-    </div>
-    <div id="myorderspage" class="is-hidden">
-      <header class="header">
-        <img src="images/myorders.png" class="image" />
-      </header>
-      <div class="p-5 m-5" id="myordersplaced">
-        <button class="button" id="seeallorders" style="background-color: rgb(255,203,138);">
-          All orders
-        </button>
-        <button class="button" id="seependingordersbutton">
-          Accept/reject orders
-        </button>
-        <button class="button is-warning" id="unfinishedordersbutton">
-          Unfinished orders
-        </button>
-        <table class="table is-striped is-narrow">
-          <thead>
-            <tr id="myorderstableheaders">
-              <th><abbr title="Customer name">Customer name</abbr></th>
-              <th><abbr title="Customer Email">Customer email</abbr></th>
-              <th>Product</th>
-              <th><abbr title="Quantity">Quantity</abbr></th>
-              <th><abbr title="Delivery method">Delivery method</abbr></th>
-              <th><abbr title="Formal event">Formal event</abbr></th>
-              <th><abbr title="Date">Required completion date</abbr></th>
-              <th><abbr title="Additional Notes">Additional Notes</abbr></th>
-              <th><abbr title="Order total">Order total</abbr></th>
-              <th><abbr title="Order status">Order status</abbr></th>
-              <th><abbr title="Payment status">Payment status</abbr></th>
-            </tr>
-          </thead>
-          <tbody id="myorderstablebody">
-            <!-- rows of order data will go here -->
-          </tbody>
-        </table>
       </div>
-    </div>
-  </main>
+    </nav>
 
-  <!-- footer -->
-  <footer class="footer mt-5">
-    <div class="content has-text-centered">
-      <p>INFO SYS 424 Project By Group 4</p>
-    </div>
-  </footer>
-</body>
-<!-- firebase app -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <!-- message bar -->
+    <div
+      class="has-background-danger has-text-centered p-2 is-hidden"
+      id="message"
+    ></div>
 
-<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+    <!-- main  -->
+    <main>
+      <div id="homepage" class="is-active">
+        <header class="header">
+          <div class="has-text-centered">
+            <div class="card">
+              <div class="card-image">
+                <img src="images/cocosbanner.jpg" alt="banner" />
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="columns mt-6">
+          <div class="column is-one-fifth"></div>
+          <div class="column is-one-fifth pr-2">
+            <img src="images/freshfruitcake.jpg" alt="fruit cake" />
+            <h3
+              class="is-size-4 has-text-centered has-text-weight-semibold pb-2"
+            >
+              Made in Madison
+            </h3>
+            <p class="pt-3 has-text-centered">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+              voluptas unde doloribus, fugiat a praesentium libero accusamus
+              reprehenderit, vel ea mollitia debitis nulla eum quia!
+            </p>
+          </div>
+          <div class="column is-one-fifth">
+            <img
+              src="images/blueberrycheesecake.jpg"
+              alt="blueberry cheesecake"
+            />
+            <h3
+              class="is-size-4 has-text-centered has-text-weight-semibold pb-2"
+            >
+              Easy Ordering
+            </h3>
+            <p class="pt-3 has-text-centered pl-3 pr-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Recusandae voluptas minus nisi! Consequuntur obcaecati quam magni
+              ratione debitis. Dignissimos tenetur excepturi culpa distinctio
+              unde illum aliquam vero sequi deserunt? Molestias molestiae odit
+              fugit enim voluptate.
+            </p>
+          </div>
+          <div class="column is-one-fifth pl-2">
+            <img
+              src="images/pretzelpbcake.jpg"
+              alt="pretzel peanut butter cake"
+            />
+            <h3
+              class="is-size-4 has-text-centered has-text-weight-semibold pb-2"
+            >
+              Baked with Care
+            </h3>
+            <p class="pt-3 has-text-centered">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut vitae
+              ipsum nihil, natus fugit beatae veniam molestiae, ducimus quos,
+              assumenda quidem itaque est reprehenderit id.
+            </p>
+          </div>
+          <div class="column is-one-fifth"></div>
+        </div>
+        <div class="has-text-centered mb-5">
+          <h2 class="is-size-2 has-text-weight-bold">Browse Our Selection</h2>
+          <!-- images from the prototype go here -->
+        </div>
+      </div>
+      <div id="productpage" class="is-hidden">
+        <header class="header">
+          <img src="images/products.png" class="image" />
+        </header>
+        <section class="section">
+          <div class="container">
+            <div class="columns">
+              <div class="column">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-2by1">
+                      <img
+                        src="images/freshfruitcake.jpg"
+                        alt="A Very Delicious Cake"
+                      />
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <p class="title is-4">Example 1</p>
+                    <p class="content">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Nunc varius, dolor sit amet consectetur adipiscing elit.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-2by1">
+                      <img
+                        src="images/freshfruitcake.jpg"
+                        alt="An Even More Delicious Cake"
+                      />
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <p class="title is-4">Example 2</p>
+                    <p class="content">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Nunc varius, dolor sit amet consectetur adipiscing elit.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-2by1">
+                      <img
+                        src="images/freshfruitcake.jpg"
+                        alt="The Most Delicious Cake"
+                      />
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <p class="title is-4">Example 3</p>
+                    <p class="content">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Nunc varius, dolor sit amet consectetur adipiscing elit.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
 
-<!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+      <div id="orderpage" class="is-hidden">
+        <header class="header">
+          <img src="images/ordernow.png" class="image" />
+        </header>
+        <section>
+          <div
+            id="signedoutordernow"
+            class="has-text-centered has-text-danger mt-5"
+          >
+            <p>Please sign in or sign up to place an order</p>
+          </div>
+          <div id="signedinordernow" class="is-hidden">
+            <div class="container">
+              <form class="mt-6" id="orderform">
+                <!-- First Name Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">First Name</label>
+                  </div>
+                  <div class="control column">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="John"
+                      id="firstname"
+                    />
+                  </div>
+                </div>
+                <!-- Last Name Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Last Name</label>
+                  </div>
+                  <div class="control column">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Smith"
+                      id="lastname"
+                    />
+                  </div>
+                </div>
+                <!-- Choose Product Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Choose Product</label>
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="productselection">
+                        <option>A Very Good Cake</option>
+                        <option>A Very Good Cake</option>
+                        <option>A Very Good Cake</option>
+                        <!-- Additional product options can be added here -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Choose Quantity Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Quantity</label>
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="quantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10+ (Contact Please)</option>
+                        <!-- Additional product options can be added here -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Method of Delivery Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Method of Delivery</label>
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="deliverymethod">
+                        <option>Pick Up</option>
+                        <option>Delivery</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Order is for formal event Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4"
+                      >Order is for formal event</label
+                    >
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="formalevent">
+                        <option>No</option>
+                        <option>Yes</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Required order completion date Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4"
+                      >Required order completion date</label
+                    >
+                  </div>
+                  <div class="control column">
+                    <div class="date">
+                      <input type="date" id="completiondate" />
+                    </div>
+                  </div>
+                </div>
 
-<!-- Connect with app.js file -->
-<script src="app.js"></script>
+                <!-- Additional Notes Field -->
+                <div class="columns mb-5">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Additional Notes</label>
+                  </div>
+                  <div class="control column">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Add Sprinkles!"
+                      id="additionalnotes"
+                    />
+                  </div>
+                </div>
 
+                <!-- horizontal line -->
+                <hr />
+
+                <!-- Subtotal -->
+                <div class="columns mb-5 mt-5">
+                  <div class="field column is-half has-text-centered">
+                    <label class="label is-size-4">Subtotal</label>
+                  </div>
+                  <div class="control column">
+                    <p id="subtotalprice" class="is-size-5">
+                      price will go here
+                    </p>
+                  </div>
+                </div>
+
+                <!-- horizontal line -->
+                <hr />
+
+                <!-- order buttons -->
+                <div class="mt-6 has-text-centered">
+                  <button class="button is-primary mr-4" id="orderbutton">
+                    Place Order
+                  </button>
+                  <button class="button is-danger" id="resetorderbutton">
+                    Reset Selections
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div id="myorderspage" class="is-hidden">
+        <header class="header">
+          <img src="images/myorders.png" class="image" />
+        </header>
+        <div class="p-5 m-5" id="myordersplaced">
+          <button
+            class="button"
+            id="seeallorders"
+            style="background-color: rgb(255, 203, 138)"
+          >
+            All orders
+          </button>
+          <button class="button" id="seependingordersbutton">
+            Accept/reject orders
+          </button>
+          <button class="button is-warning" id="unfinishedordersbutton">
+            Unfinished orders
+          </button>
+          <table class="table is-striped is-narrow">
+            <thead>
+              <tr id="myorderstableheaders">
+                <th><abbr title="Customer name">Customer name</abbr></th>
+                <th><abbr title="Customer Email">Customer email</abbr></th>
+                <th>Product</th>
+                <th><abbr title="Quantity">Quantity</abbr></th>
+                <th><abbr title="Delivery method">Delivery method</abbr></th>
+                <th><abbr title="Formal event">Formal event</abbr></th>
+                <th><abbr title="Date">Required completion date</abbr></th>
+                <th><abbr title="Additional Notes">Additional Notes</abbr></th>
+                <th><abbr title="Order total">Order total</abbr></th>
+                <th><abbr title="Order status">Order status</abbr></th>
+                <th><abbr title="Payment status">Payment status</abbr></th>
+              </tr>
+            </thead>
+            <tbody id="myorderstablebody">
+              <!-- rows of order data will go here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer mt-5">
+      <div class="content has-text-centered">
+        <p>INFO SYS 424 Project By Group 4</p>
+      </div>
+    </footer>
+  </body>
+  <!-- firebase app -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+  <!-- Connect with app.js file -->
+  <script src="app.js"></script>
 </html>
