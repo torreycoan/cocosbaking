@@ -114,75 +114,71 @@
 
     <!-- navbar setup -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container">
-        <div class="navbar-brand">
-          <a id="logohome"
-            ><img
-              src="images/cocosbakinglogo.png"
-              alt="cocosbakinglogo"
-              class="navbar-item"
-              id="navbar-logo"
-          /></a>
-          <a
-            role="button"
-            class="navbar-burger"
-            id="burger_nav"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
+      <div class="navbar-brand">
+        <a id="logohome"
+          ><img
+            src="images/cocosbakinglogo.png"
+            alt="cocosbakinglogo"
+            class="navbar-item"
+            id="navbar-logo"
+        /></a>
+        <a
+          role="button"
+          class="navbar-burger"
+          id="burger_nav"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="menu_nav">
+        <div class="navbar-start" id="nav-item">
+          <a class="navbar-item has-text-black has-text-weight-bold" id="home"
+            >Home</a
           >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+          <a
+            class="navbar-item has-text-black has-text-weight-bold"
+            id="products"
+            >Products</a
+          >
+          <a class="navbar-item has-text-black has-text-weight-bold" id="orders"
+            >Order Now</a
+          >
+          <a
+            class="navbar-item has-text-black has-text-weight-bold is-hidden"
+            id="myorders"
+            >My orders</a
+          >
         </div>
-        <div class="navbar-menu" id="menu_nav">
-          <div class="navbar-start" id="nav-item">
-            <a class="navbar-item has-text-black has-text-weight-bold" id="home"
-              >Home</a
+        <div class="navbar-end ml-0">
+          <div class="navbar-item"><span id="currentuser"></span></div>
+          <div class="navbar-item">
+            <button
+              class="button is-normal is-outlined has-text-weight-bold"
+              id="signinlink"
             >
-            <a
-              class="navbar-item has-text-black has-text-weight-bold"
-              id="products"
-              >Products</a
-            >
-            <a
-              class="navbar-item has-text-black has-text-weight-bold"
-              id="orders"
-              >Order Now</a
-            >
-            <a
-              class="navbar-item has-text-black has-text-weight-bold is-hidden"
-              id="myorders"
-              >My orders</a
-            >
+              Sign In
+            </button>
           </div>
-          <div class="navbar-end ml-0">
-            <div class="navbar-item"><span id="currentuser"></span></div>
-            <div class="navbar-item">
-              <button
-                class="button is-normal is-outlined has-text-weight-bold"
-                id="signinlink"
-              >
-                Sign In
-              </button>
-            </div>
-            <div class="navbar-item">
-              <button
-                class="button is-normal is-outlined has-text-weight-bold"
-                id="signuplink"
-              >
-                Sign Up
-              </button>
-            </div>
-            <div class="navbar-item">
-              <button
-                id="signoutlink"
-                class="is-hidden button is-normal is-outlined"
-              >
-                Sign Out
-              </button>
-            </div>
+          <div class="navbar-item">
+            <button
+              class="button is-normal is-outlined has-text-weight-bold"
+              id="signuplink"
+            >
+              Sign Up
+            </button>
+          </div>
+          <div class="navbar-item">
+            <button
+              id="signoutlink"
+              class="is-hidden button is-normal is-outlined"
+            >
+              Sign Out
+            </button>
           </div>
         </div>
       </div>
