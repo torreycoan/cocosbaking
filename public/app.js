@@ -446,85 +446,63 @@ let productsperrow = 3;
 
 // this will be added to the sign up/ sign in stuff that's executed
 // todo: have a refresh button that calls this (for joey's sake)
-// db.collection('products').get().then((data) => {
-//   let docs = data.docs; //array to loop thru
-// })
 query("loadproductsbtn").addEventListener('click', () => {
   db.collection('products').get().then((data) => {
     let docs = data.docs
     //console.log(docs)
-    numproducts = docs.length
+    let numprod = docs.length
+    let numrows = "!"
+    let allproductshtml = ``
+    //let arr = Array.from(Array(numprod).keys())
+
+    //todo; delete these 2 ifs. not needed. 
+    if (numprod % productsperrow == 0) {
+      numrows = numprod / productsperrow
+    }
+    if (numprod % productsperrow != 0) {
+      numrows = numprod / productsperrow - (numprod % productsperrow) / productsperrow + 1
+    }
+
+    let idx = 0
     docs.forEach((doc) => {
       //console.log(numproducts)
       let prod = doc.data()
-      console.log(prod)
+      let prodhtml = ``
+      // if the remainder ==0 then i want to start a new columns class div (start a new row)
+      if (idx % productsperrow == 0) {
+        prodhtml += `<div class="columns">`
+      }
+      //then, for all, i want to add a column class div
+      prodhtml += `
+            <div class="column">
+              <div class="card product-card is-one-third">
+                <div class="card-image">
+                  <figure class="image is-1by1">
+                    <img src=${prod.image} alt=${prod.name} />
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <p class="title is-4">${prod.name}</p>
+                  <p class="content">
+                    ${prod.desc}
+                  </p>
+                  <p class="content">Sizes:${prod.sizes}</p>
+                  <p class="content">Serves:${prod.serves}</p>
+                  <p class="content">Price:${prod.price}</p>
+                </div>
+              </div>
+            </div>`
+      //if the remainder for idx+1 ==0, close the columns class div
+      if ((idx + 1) % productsperrow == 0) {
+        prodhtml += `</div>`
+      }
+      // increment idx
+      idx += 1
     })
+
+
+    // TODO: if its not a perfect ending to the row, add invisible cards. 
+    //  - # of invisible cards = ppr-remainder
+    //  - close the columns class div
   })
 })
-
-
-// db.collection("orders")
-//     .add(neworder)
-//     .then(() => {
-//       query("orderform").reset();
-//       message_bar("Order Placed!");
-//       document.body.scrollTop = 0;
-//     });
-products = [{
-    image: "images/mixedfruitcake.jpg",
-    name: "Mixed fruit cake",
-    desc: `Vanilla cake base
-    Almond frosting
-    Mixed fruits (strawberries, blueberries, kiwis, blackberries, raspberries)
-    `,
-    sizes: ['10"'],
-    serves: "6-8 people",
-    price: "xx"
-  },
-  {
-    image: "images/bananameringuepie.jpg",
-    name: "Banana meringue pie",
-    desc: `Graham cookie base
-    Banana cream filling with fresh bananas
-    Vanilla meringue
-    `,
-    sizes: ['9"', '12"'],
-    serves: "8-12",
-    price: "xx"
-  },
-  {
-    image: "images/blueberrymeringuepie.jpg",
-    name: "Blueberry meringue pie",
-    desc: `Graham cracker crust
-    Toni’s babushka’s blueberry filling family recipe
-    Lemon meringue 
-    `,
-    sizes: ['9"', '12"'],
-    serves: "8-12",
-    price: "xx"
-  },
-  {
-    image: "images/blueberryswirlcheesecake.jpg",
-    name: "Blueberry swirl cheesecake",
-    desc: `Cinnamon pecan graham cookie base
-    Classic cheesecake with homemade vanilla compote swirl
-    `,
-    sizes: ['9"', '12"'],
-    serves: "8-12",
-    price: "xx"
-  },
-  {
-    image: "images/customcheesecake.jpg",
-    name: "Custom cheesecake",
-    desc: `Pictured:
-    Chocolate cookie crust
-    Peanut butter cheesecake base
-    Chocolate ganache top
-    Peanut butter chocolate frosting
-    Reeses and pretzel topping
-    `,
-    sizes: ['9"', '12"'],
-    serves: "12-14",
-    price: "xx"
-  },
-]
