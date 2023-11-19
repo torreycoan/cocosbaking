@@ -452,6 +452,79 @@ let productsperrow = 3;
 query("loadproductsbtn").addEventListener('click', () => {
   db.collection('products').get().then((data) => {
     let docs = data.docs
-    console.log(docs)
+    //console.log(docs)
+    numproducts = docs.length
+    docs.forEach((doc) => {
+      //console.log(numproducts)
+      let prod = doc.data()
+      console.log(prod)
+    })
   })
 })
+
+
+// db.collection("orders")
+//     .add(neworder)
+//     .then(() => {
+//       query("orderform").reset();
+//       message_bar("Order Placed!");
+//       document.body.scrollTop = 0;
+//     });
+products = [{
+    image: "images/mixedfruitcake.jpg",
+    name: "Mixed fruit cake",
+    desc: `Vanilla cake base
+    Almond frosting
+    Mixed fruits (strawberries, blueberries, kiwis, blackberries, raspberries)
+    `,
+    sizes: ['10"'],
+    serves: "6-8 people",
+    price: "xx"
+  },
+  {
+    image: "images/bananameringuepie.jpg",
+    name: "Banana meringue pie",
+    desc: `Graham cookie base
+    Banana cream filling with fresh bananas
+    Vanilla meringue
+    `,
+    sizes: ['9"', '12"'],
+    serves: "8-12",
+    price: "xx"
+  },
+  {
+    image: "images/blueberrymeringuepie.jpg",
+    name: "Blueberry meringue pie",
+    desc: `Graham cracker crust
+    Toni’s babushka’s blueberry filling family recipe
+    Lemon meringue 
+    `,
+    sizes: ['9"', '12"'],
+    serves: "8-12",
+    price: "xx"
+  },
+  {
+    image: "images/blueberryswirlcheesecake.jpg",
+    name: "Blueberry swirl cheesecake",
+    desc: `Cinnamon pecan graham cookie base
+    Classic cheesecake with homemade vanilla compote swirl
+    `,
+    sizes: ['9"', '12"'],
+    serves: "8-12",
+    price: "xx"
+  },
+  {
+    image: "images/customcheesecake.jpg",
+    name: "Custom cheesecake",
+    desc: `Pictured:
+    Chocolate cookie crust
+    Peanut butter cheesecake base
+    Chocolate ganache top
+    Peanut butter chocolate frosting
+    Reeses and pretzel topping
+    `,
+    sizes: ['9"', '12"'],
+    serves: "12-14",
+    price: "xx"
+  },
+]
