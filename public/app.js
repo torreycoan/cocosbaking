@@ -469,7 +469,7 @@ query("products").addEventListener("click", () => {
               <div class="card product-card is-one-third">
                 <div class="card-image">
                   <figure class="image is-1by1">
-                    <img src=${prod.image} alt=${prod.name} />
+                    <img src="images/${prod.name}.jpg" alt=${prod.name} />
                   </figure>
                 </div>
                 <div class="card-content">
