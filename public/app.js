@@ -443,6 +443,15 @@ burger_nav.addEventListener("click", function (event) {
 let productsperrow = 3;
 // each row will be inside the container div with id "productscontainer"
 
-function load_products() {
 
-}
+// this will be added to the sign up/ sign in stuff that's executed
+// todo: have a refresh button that calls this (for joey's sake)
+// db.collection('products').get().then((data) => {
+//   let docs = data.docs; //array to loop thru
+// })
+query("loadproductsbtn").addEventListener('click', () => {
+  db.collection('products').get().then((data) => {
+    let docs = data.docs
+    console.log(docs)
+  })
+})
