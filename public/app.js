@@ -434,7 +434,8 @@ let productsperrow = 3;
 
 // todo: added to the sign up/ sign in stuff that's executed
 // todo: have a refresh button that calls this (for joey's sake)
-query("loadproductsbtn").addEventListener('click', () => {
+query("products").addEventListener('click', () => {
+  query("productscontainer").innerHTML = ``; // this may be useful later
   db.collection('products').get().then((data) => {
     let docs = data.docs
     //console.log(docs)
