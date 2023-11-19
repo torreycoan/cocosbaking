@@ -2,214 +2,275 @@
 <!-- Firebase connected. Make sure edited files are also deployed at firebase -->
 <!-- Firebase Hosting URL: https://cocosbaking-b6361.web.app -->
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coco's Baking</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coco's Baking</title>
+    <!-- Bulma stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
 
-  <!-- Bulma stylesheet -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <!-- Font Awesome if it's needed -->
+    <script
+      src="https://kit.fontawesome.com/150c7aa5e0.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Font Awesome if it's needed -->
-  <script src="https://kit.fontawesome.com/150c7aa5e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <!-- sign up modal  -->
-  <div class="modal" id="signupmodal">
-    <div class="modal-background" id="signupmodalbg"></div>
-    <div class="modal-content has-background-grey-light p-5" id="signupmodalcontent">
-      <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
-        WELCOME TO COCO'S BAKING!
-      </h2>
-      <!-- sign up form -->
-      <form id="signup">
-        <!-- Name -->
-        <div class="field">
-          <label class="label">Name</label>
-          <div class="control">
-            <input class="input" id="signupname" type="text" />
-          </div>
-        </div>
-        <!-- email -->
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input" type="email" id="signupemail" />
-          </div>
-        </div>
-
-        <!-- password -->
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input type="password" class="input" id="signuppassword" />
-          </div>
-        </div>
-        <div class="has-text-centered">
-          <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
-          <button class="button has-text-danger mt-5" id="resetsignupfields">
-            Reset Fields
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- sign in modal -->
-  <div class="modal" id="signinmodal">
-    <div class="modal-background" id="signinmodalbg"></div>
-    <div class="modal-content has-background-grey-light p-5">
-      <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
-        WELCOME BACK!
-      </h2>
-      <!-- sign in form -->
-      <form action="" id="signin">
-        <!-- email -->
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
-            <input class="input" type="email" id="signinemail" />
-          </div>
-        </div>
-
-        <!-- password -->
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
-            <input type="password" class="input" id="signinpassword" />
-          </div>
-        </div>
-        <div id="incorrectpassword" class="is-hidden has-text-weight-bold has-text-danger">
-          *Incorrect password or email provided, try again
-        </div>
-        <div class="has-text-centered">
-          <button class="button mt-5 mr-3" id="signinbtn">Sign In</button>
-          <button class="button has-text-danger mt-5" id="resetsigninfields">
-            Reset Fields
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div id="signinmessage" class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"></div>
-
-  <!-- navbar setup -->
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a id="logohome"><img src="images/cocosbakinglogo.png" alt="cocosbakinglogo" class="navbar-item"
-          id="navbar-logo" /></a>
-      <a role="button" class="navbar-burger" id="burger_nav" aria-label="menu" aria-expanded="false"
-        data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div class="navbar-menu" id="menu_nav">
-      <div class="navbar-start" id="nav-item">
-        <a class="navbar-item has-text-black has-text-weight-bold" id="home">Home</a>
-        <a class="navbar-item has-text-black has-text-weight-bold" id="products">Products</a>
-        <a class="navbar-item has-text-black has-text-weight-bold" id="orders">Order Now</a>
-        <a class="navbar-item has-text-black has-text-weight-bold is-hidden" id="myorders">My orders</a>
-      </div>
-      <div class="navbar-end ml-0">
-        <div class="navbar-item">
-          <span id="currentuser"></span>
-        </div>
-        <div class="navbar-item pr-0 pl-0">
-          <button class="button is-normal is-outlined has-text-weight-bold" id="signinlink">
-            Sign In
-          </button>
-        </div>
-        <div class="navbar-item pr-0 pl-0">
-          <button class="button is-normal is-outlined has-text-weight-bold" id="signuplink">
-            Sign Up
-          </button>
-        </div>
-        <div class="navbar-item">
-          <button id="signoutlink" class="is-hidden button is-normal is-outlined">
-            Sign Out
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- message bar -->
-  <div class="has-background-danger has-text-centered p-2 is-hidden" id="message"></div>
-
-  <!-- main  -->
-  <main>
-    <div id="homepage" class="is-active">
-      <header class="header">
-        <div class="has-text-centered">
-          <div class="card">
-            <div class="card-image">
-              <img src="images/cocosbanner.jpg" alt="banner" />
+  <body>
+    <!-- sign up modal  -->
+    <div class="modal" id="signupmodal">
+      <div class="modal-background" id="signupmodalbg"></div>
+      <div
+        class="modal-content has-background-grey-light p-5"
+        id="signupmodalcontent"
+      >
+        <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
+          WELCOME TO COCO'S BAKING!
+        </h2>
+        <!-- sign up form -->
+        <form id="signup">
+          <!-- Name -->
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" id="signupname" type="text" />
             </div>
           </div>
-        </div>
-      </header>
-      <div class="columns mt-6">
-        <div class="column is-one-fifth"></div>
-        <div class="column is-one-fifth pr-2">
-          <img src="images/Mixed Fruit Cake.jpg" alt="fruit cake" />
-          <h3 class="is-size-4 has-text-centered has-text-weight-semibold pb-2">
-            Made in Madison
-          </h3>
-          <p class="pt-3 has-text-centered">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
-            voluptas unde doloribus, fugiat a praesentium libero accusamus
-            reprehenderit, vel ea mollitia debitis nulla eum quia!
-          </p>
-        </div>
-        <div class="column is-one-fifth">
-          <img src="images/Blueberry Swirl Cheesecake.jpg" alt="blueberry cheesecake" />
-          <h3 class="is-size-4 has-text-centered has-text-weight-semibold pb-2">
-            Easy Ordering
-          </h3>
-          <p class="pt-3 has-text-centered pl-3 pr-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Recusandae voluptas minus nisi! Consequuntur obcaecati quam magni
-            ratione debitis. Dignissimos tenetur excepturi culpa distinctio
-            unde illum aliquam vero sequi deserunt? Molestias molestiae odit
-            fugit enim voluptate.
-          </p>
-        </div>
-        <div class="column is-one-fifth pl-2">
-          <img src="images/Custom Cheesecake.jpg" alt="pretzel peanut butter cake" />
-          <h3 class="is-size-4 has-text-centered has-text-weight-semibold pb-2">
-            Baked with Care
-          </h3>
-          <p class="pt-3 has-text-centered">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut vitae
-            ipsum nihil, natus fugit beatae veniam molestiae, ducimus quos,
-            assumenda quidem itaque est reprehenderit id.
-          </p>
-        </div>
-        <div class="column is-one-fifth"></div>
-      </div>
-      <div class="has-text-centered mb-5">
-        <h2 class="is-size-2 has-text-weight-bold">Browse Our Selection</h2>
-        <!-- images from the prototype go here -->
+          <!-- email -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" type="email" id="signupemail" />
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input type="password" class="input" id="signuppassword" />
+            </div>
+          </div>
+          <div class="has-text-centered">
+            <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
+            <button class="button has-text-danger mt-5" id="resetsignupfields">
+              Reset Fields
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-    <div id="productpage" class="is-hidden">
-      <header class="header">
-        <img src="images/products.png" class="image" />
-      </header>
-      <section class="section">
-        <!-- <button id='loadproductsbtn'>temp button to load producs</button> -->
-        <div class="container" id="productscontainer">
-          <!-- html for products will be added here -->
-        </div>
-      </section>
+
+    <!-- sign in modal -->
+    <div class="modal" id="signinmodal">
+      <div class="modal-background" id="signinmodalbg"></div>
+      <div class="modal-content has-background-grey-light p-5">
+        <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
+          WELCOME BACK!
+        </h2>
+        <!-- sign in form -->
+        <form action="" id="signin">
+          <!-- email -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" type="email" id="signinemail" />
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input type="password" class="input" id="signinpassword" />
+            </div>
+          </div>
+          <div
+            id="incorrectpassword"
+            class="is-hidden has-text-weight-bold has-text-danger"
+          >
+            *Incorrect password or email provided, try again
+          </div>
+          <div class="has-text-centered">
+            <button class="button mt-5 mr-3" id="signinbtn">Sign In</button>
+            <button class="button has-text-danger mt-5" id="resetsigninfields">
+              Reset Fields
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+    <div
+      id="signinmessage"
+      class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"
+    ></div>
+
+    <!-- navbar setup -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a id="logohome"
+          ><img
+            src="images/cocosbakinglogo.png"
+            alt="cocosbakinglogo"
+            class="navbar-item"
+            id="navbar-logo"
+        /></a>
+        <a
+          role="button"
+          class="navbar-burger"
+          id="burger_nav"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="menu_nav">
+        <div class="navbar-start" id="nav-item">
+          <a class="navbar-item has-text-black has-text-weight-bold" id="home"
+            >Home</a
+          >
+          <a
+            class="navbar-item has-text-black has-text-weight-bold"
+            id="products"
+            >Products</a
+          >
+          <a class="navbar-item has-text-black has-text-weight-bold" id="orders"
+            >Order Now</a
+          >
+          <a
+            class="navbar-item has-text-black has-text-weight-bold is-hidden"
+            id="myorders"
+            >My orders</a
+          >
+        </div>
+        <div class="navbar-end ml-0">
+          <div class="navbar-item">
+            <span id="currentuser"></span>
+          </div>
+          <div class="navbar-item pr-0 pl-0">
+            <button
+              class="button is-normal is-outlined has-text-weight-bold"
+              id="signinlink"
+            >
+              Sign In
+            </button>
+          </div>
+          <div class="navbar-item pr-0 pl-0">
+            <button
+              class="button is-normal is-outlined has-text-weight-bold"
+              id="signuplink"
+            >
+              Sign Up
+            </button>
+          </div>
+          <div class="navbar-item">
+            <button
+              id="signoutlink"
+              class="is-hidden button is-normal is-outlined"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- message bar -->
+    <div
+      class="has-background-danger has-text-centered p-2 is-hidden"
+      id="message"
+    ></div>
+
+    <!-- main  -->
+    <main>
+      <div id="homepage" class="is-active">
+        <header class="header">
+          <div class="has-text-centered">
+            <div class="card">
+              <div class="card-image">
+                <img src="images/cocosbanner.jpg" alt="banner" />
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="columns mt-6">
+          <div class="column is-one-fifth"></div>
+          <div class="column is-one-fifth pr-2">
+            <img src="images/Mixed Fruit Cake.jpg" alt="fruit cake" />
+            <h3
+              class="is-size-4 has-text-centered has-text-weight-semibold pb-2"
+            >
+              Made in Madison
+            </h3>
+            <p class="pt-3 has-text-centered">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
+              voluptas unde doloribus, fugiat a praesentium libero accusamus
+              reprehenderit, vel ea mollitia debitis nulla eum quia!
+            </p>
+          </div>
+          <div class="column is-one-fifth">
+            <img
+              src="images/Blueberry Swirl Cheesecake.jpg"
+              alt="blueberry cheesecake"
+            />
+            <h3
+              class="is-size-4 has-text-centered has-text-weight-semibold pb-2"
+            >
+              Easy Ordering
+            </h3>
+            <p class="pt-3 has-text-centered pl-3 pr-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Recusandae voluptas minus nisi! Consequuntur obcaecati quam magni
+              ratione debitis. Dignissimos tenetur excepturi culpa distinctio
+              unde illum aliquam vero sequi deserunt? Molestias molestiae odit
+              fugit enim voluptate.
+            </p>
+          </div>
+          <div class="column is-one-fifth pl-2">
+            <img
+              src="images/Custom Cheesecake.jpg"
+              alt="pretzel peanut butter cake"
+            />
+            <h3
+              class="is-size-4 has-text-centered has-text-weight-semibold pb-2"
+            >
+              Baked with Care
+            </h3>
+            <p class="pt-3 has-text-centered">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut vitae
+              ipsum nihil, natus fugit beatae veniam molestiae, ducimus quos,
+              assumenda quidem itaque est reprehenderit id.
+            </p>
+          </div>
+          <div class="column is-one-fifth"></div>
+        </div>
+        <div class="has-text-centered mb-5">
+          <h2 class="is-size-2 has-text-weight-bold">Browse Our Selection</h2>
+          <!-- images from the prototype go here -->
+        </div>
+      </div>
+      <div id="productpage" class="is-hidden">
+        <header class="header">
+          <img src="images/products.png" class="image" />
+        </header>
+        <section class="section">
+          <!-- <button id='loadproductsbtn'>temp button to load producs</button> -->
+          <div class="container" id="productscontainer">
+            <!-- html for products will be added here -->
+          </div>
+        </section>
+      </div>
 
       <div id="orderpage" class="is-hidden">
         <header class="header">
@@ -391,68 +452,123 @@
         <header class="header">
           <img src="images/myorders.png" class="image" />
         </header>
-        <div class="container">
-          <div class="p-5 m-5" id="myordersplaced"></div>
+        <div class="columns">
+          <div class="column is-two-thirds">
+            <div class="p-5 m-5" id="myordersplaced"></div>
+          </div>
+          <div class="column is-one-third p-5">
+            <div class="card mt-5 has-background-grey-light p-3">
+              <div class="is-size-3 has-text-centered has-text-weight-bold">
+                Filter Your Orders
+              </div>
+              <hr />
+              <form id="filterform">
+                <div class="mt-5 is-size-5 has-text-weight-bold">
+                  <div>
+                    Order Status:
+                    <div class="select ml-5">
+                      <select id="orderstatusfilter">
+                        <option value="No Selection"></option>
+                        <option value="Pendindg">
+                          Pending acceptance/rejection
+                        </option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="mt-5">
+                    Payment Status:
+                    <div class="select ml-5">
+                      <select id="paymentstatusfilter">
+                        <option value="No Selection"></option>
+                        <option value="Not Paid">Not paid</option>
+                        <option value="Paid">Paid</option>
+                      </select>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="has-text-centered mt-3 p-5">
+                    <button
+                      class="button has-background-primary has-text-weight-bold"
+                      id="filterbutton"
+                    >
+                      Filter
+                    </button>
+                    <button
+                      class="button has-background-danger has-text-weight-bold"
+                      id="resetfilterbutton"
+                    >
+                      Reset Selections
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-      </section>
-    </div>
-    <div id="myorderspage" class="is-hidden">
-      <header class="header">
-        <img src="images/myorders.png" class="image" />
-      </header>
-      <div class="p-5 m-5" id="myordersplaced">
-        <button class="button" id="seeallorders" style="background-color: rgb(255, 203, 138)">
-          All orders
-        </button>
-        <button class="button" id="seependingordersbutton">
-          Accept/reject orders
-        </button>
-        <button class="button is-warning" id="unfinishedordersbutton">
-          Unfinished orders
-        </button>
-        <table class="table is-striped is-narrow">
-          <thead>
-            <tr id="myorderstableheaders">
-              <th><abbr title="Customer name">Customer name</abbr></th>
-              <th><abbr title="Customer Email">Customer email</abbr></th>
-              <th>Product</th>
-              <th><abbr title="Quantity">Quantity</abbr></th>
-              <th><abbr title="Delivery method">Delivery method</abbr></th>
-              <th><abbr title="Formal event">Formal event</abbr></th>
-              <th><abbr title="Date">Required completion date</abbr></th>
-              <th><abbr title="Additional Notes">Additional Notes</abbr></th>
-              <th><abbr title="Order total">Order total</abbr></th>
-              <th><abbr title="Order status">Order status</abbr></th>
-              <th><abbr title="Payment status">Payment status</abbr></th>
-            </tr>
-          </thead>
-          <tbody id="myorderstablebody">
-            <!-- rows of order data will go here -->
-          </tbody>
-        </table>
       </div>
-    </div>
-  </main>
 
-  <!-- footer -->
-  <footer class="footer mt-5">
-    <div class="content has-text-centered">
-      <p>INFO SYS 424 Project By Group 4</p>
-    </div>
-  </footer>
-</body>
-<!-- firebase app -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+      <div id="myorderspage" class="is-hidden">
+        <header class="header">
+          <img src="images/myorders.png" class="image" />
+        </header>
+        <div class="p-5 m-5" id="myordersplaced">
+          <button
+            class="button"
+            id="seeallorders"
+            style="background-color: rgb(255, 203, 138)"
+          >
+            All orders
+          </button>
+          <button class="button" id="seependingordersbutton">
+            Accept/reject orders
+          </button>
+          <button class="button is-warning" id="unfinishedordersbutton">
+            Unfinished orders
+          </button>
+          <table class="table is-striped is-narrow">
+            <thead>
+              <tr id="myorderstableheaders">
+                <th><abbr title="Customer name">Customer name</abbr></th>
+                <th><abbr title="Customer Email">Customer email</abbr></th>
+                <th>Product</th>
+                <th><abbr title="Quantity">Quantity</abbr></th>
+                <th><abbr title="Delivery method">Delivery method</abbr></th>
+                <th><abbr title="Formal event">Formal event</abbr></th>
+                <th><abbr title="Date">Required completion date</abbr></th>
+                <th><abbr title="Additional Notes">Additional Notes</abbr></th>
+                <th><abbr title="Order total">Order total</abbr></th>
+                <th><abbr title="Order status">Order status</abbr></th>
+                <th><abbr title="Payment status">Payment status</abbr></th>
+              </tr>
+            </thead>
+            <tbody id="myorderstablebody">
+              <!-- rows of order data will go here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
 
-<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+    <!-- footer -->
+    <footer class="footer mt-5">
+      <div class="content has-text-centered">
+        <p>INFO SYS 424 Project By Group 4</p>
+      </div>
+    </footer>
+  </body>
+  <!-- firebase app -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 
-<!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
 
-<!-- Connect with app.js file -->
-<script src="app.js"></script>
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
+  <!-- Connect with app.js file -->
+  <script src="app.js"></script>
 </html>

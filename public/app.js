@@ -515,6 +515,46 @@ query("products").addEventListener("click", () => {
 });
 // ------------------------------------------------------------
 
+// ------------------------------------------------------------
+
+// filtering myorders
+query("filterbutton").addEventListener("click", (e) => {
+  // alert("hello");
+  e.preventDefault();
+  let orderstatus = query("orderstatusfilter").value;
+  let paymentstatus = query("paymentstatusfilter").value;
+  if (orderstatus != "No Selection" && paymentstatus != "No Selection") {
+    db.collection("orders")
+      .where("order_status", "==", orderstatus)
+      .where("payment_status", "==", paymentstatus)
+      .get()
+      .then((data) => {
+        loadMyOrders(data);
+      });
+  }
+  if (orderstatus != "No Selection" && paymentstatus == "No Selection") {
+    db.collection("orders")
+      .where("order_status", "==", orderstatus)
+      .get()
+      .then((data) => loadMyOrders(data));
+  }
+  if (orderstatus == "No Selection" && paymentstatus != "No Selection") {
+    db.collection("orders")
+      .where("payment_status", "==", orderstatus)
+      .get()
+      .then((data) => loadMyOrders(data));
+  }
+  if (orderstatus == "No Selection" && paymentstatus == "No Selection") {
+    message_bar("Make a selection to filter!");
+  }
+});
+
+// reset filter form
+query("resetfilterbutton").addEventListener("click", (e) => {
+  e.preventDefault();
+  query("filterform").reset();
+});
+
 // showing and hiding parts of main (home, products, order now)
 query("logohome").addEventListener("click", () => {
   query("homepage").classList.remove("is-hidden");
