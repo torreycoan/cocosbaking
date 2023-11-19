@@ -17,6 +17,16 @@ let ref = firebase.storage().ref();
 
 // ------------------------------------------------------------
 
+// myorders delete doc function
+function delMyOrders(id) {
+  db.collection("orders")
+    .doc(id)
+    .delete()
+    .then(() => loadMyOrders());
+}
+
+// ------------------------------------------------------------
+
 // doucument query function
 function query(id) {
   return document.querySelector(`#${id}`);
@@ -103,79 +113,6 @@ query("signoutlink").addEventListener("click", () => {
     .catch((error) => {
       alert(error.message);
     });
-});
-
-// ------------------------------------------------------------
-
-// showing and hiding parts of main (home, products, order now)
-query("logohome").addEventListener("click", () => {
-  query("homepage").classList.remove("is-hidden");
-  query("homepage").classList.add("is-active");
-
-  query("productpage").classList.remove("is-active");
-  query("productpage").classList.add("is-hidden");
-
-  query("orderpage").classList.remove("is-active");
-  query("orderpage").classList.add("is-hidden");
-
-  query("myorderspage").classList.remove("is-active");
-  query("myorderspage").classList.add("is-hidden");
-});
-
-query("home").addEventListener("click", () => {
-  query("homepage").classList.remove("is-hidden");
-  query("homepage").classList.add("is-active");
-
-  query("productpage").classList.remove("is-active");
-  query("productpage").classList.add("is-hidden");
-
-  query("orderpage").classList.remove("is-active");
-  query("orderpage").classList.add("is-hidden");
-
-  query("myorderspage").classList.remove("is-active");
-  query("myorderspage").classList.add("is-hidden");
-});
-
-query("products").addEventListener("click", () => {
-  query("productpage").classList.remove("is-hidden");
-  query("productpage").classList.add("is-active");
-
-  query("homepage").classList.remove("is-active");
-  query("homepage").classList.add("is-hidden");
-
-  query("orderpage").classList.remove("is-active");
-  query("orderpage").classList.add("is-hidden");
-
-  query("myorderspage").classList.remove("is-active");
-  query("myorderspage").classList.add("is-hidden");
-});
-
-query("orders").addEventListener("click", () => {
-  query("orderpage").classList.remove("is-hidden");
-  query("orderpage").classList.add("is-active");
-
-  query("productpage").classList.remove("is-active");
-  query("productpage").classList.add("is-hidden");
-
-  query("homepage").classList.remove("is-active");
-  query("homepage").classList.add("is-hidden");
-
-  query("myorderspage").classList.remove("is-active");
-  query("myorderspage").classList.add("is-hidden");
-});
-
-query("myorders").addEventListener("click", () => {
-  query("myorderspage").classList.remove("is-hidden");
-  query("myorderspage").classList.add("is-active");
-
-  query("homepage").classList.remove("is-active");
-  query("homepage").classList.add("is-hidden");
-
-  query("orderpage").classList.remove("is-active");
-  query("orderpage").classList.add("is-hidden");
-
-  query("productpage").classList.remove("is-active");
-  query("productpage").classList.add("is-hidden");
 });
 
 // ------------------------------------------------------------
@@ -361,43 +298,97 @@ query("myorders").addEventListener("click", (allorders) => {
         `;
         });
       }
+    });
+});
+myorders_area = document.querySelector("#myordersplaced");
+function loadMyOrders() {
+  myorders_area.innerHTML = "";
+  db.collection("orders")
+    .get()
+    .then((data) => {
+      let orders = data.docs;
+      orders.forEach((order) => {
+        if (auth.currentUser.email == order.data().customer_email) {
+          console.log("hello");
+          const addOrder = document.createElement("div");
+          addOrder.classList.add(`order`);
+          addOrder.innerHTML = `<div class="card">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="image is-128x128">
+                      <img src="images/${order.data().product_type}.jpg" alt="${
+            order.data().name
+          }">
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="card has-background-grey-light is-shadowless"> <a id="button1" class="restaurant_active"> <span class="title is-4 has-text-white"> &nbsp ${
+                      order.data().product_type
+                    }</span></a></p>
+                    <div <button onclick="delMyOrders('${
+                      order.id
+                    }')" class="button is-pulled-right mt-5"> Cancel Order </div>
+                    <p>  <span class="title is-6">Order Status : </span> ${
+                      order.data().order_status
+                    }</p>
+                    <p>  <span class="title is-6">Payment Status : </span> ${
+                      order.data().payment_status
+                    }</p>
+                    <p>  <span class="title is-6">Quantity : </span> ${
+                      order.data().quantity
+                    }</p>
+                    <p>  <span class="title is-6">Order Total : </span> ${
+                      order.data().order_total
+                    }</p>
+                  </div>       
+                </div>
+              </div>
+            </div> 
+            <br>`;
 
-      docs.forEach((doc) => {
-        // if the current user's email is the one in the order, display it.
-        let order = doc.data();
-
-        if (auth.currentUser.email == order.customer_email) {
-          //console.log(doc.data().customer_email)
-          //row: name, email, product, Q, deliv method, form event, comp date,
-          // order total, order status, pmt status
-          tablehtml += `<tr id = ${doc.id}>
-        <td>${order.first_name} ${order.last_name} </td>
-        <td>${order.customer_email}</td>
-        <td>${order.product_type}</td>
-        <td>${order.quantity}</td>
-        <td>${order.delivery_method}</td>
-        <td>${order.formal_event}</td>
-        <td>${order.completion_date}</td>
-        <td>${order.additional_notes}</td>
-        <td>${order.order_total}</td>
-        <td>${order.order_status}</td>
-        <td>${order.payment_status}</td>
-        </tr>
-        `;
+          myorders_area.append(addOrder);
         }
       });
-      //console.log(html)
-      //add content to an existing div - use innerHTML property
-      document.querySelector("#myorderstablebody").innerHTML += tablehtml;
-      document.querySelector("#myordersplaced").innerHTML += html;
     });
+}
 
-  // todo: change it so if its joey, it brings up the other html.
+//       docs.forEach((doc) => {
+//         // if the current user's email is the one in the order, display it.
+//         let order = doc.data();
 
-  //todo: before the html addition, sort it by required completion date
-});
+//         if (auth.currentUser.email == order.customer_email) {
+//           //console.log(doc.data().customer_email)
+//           //row: name, email, product, Q, deliv method, form event, comp date,
+//           // order total, order status, pmt status
+//           tablehtml += `<tr id = ${doc.id}>
+//         <td>${order.first_name} ${order.last_name} </td>
+//         <td>${order.customer_email}</td>
+//         <td>${order.product_type}</td>
+//         <td>${order.quantity}</td>
+//         <td>${order.delivery_method}</td>
+//         <td>${order.formal_event}</td>
+//         <td>${order.completion_date}</td>
+//         <td>${order.additional_notes}</td>
+//         <td>${order.order_total}</td>
+//         <td>${order.order_status}</td>
+//         <td>${order.payment_status}</td>
+//         </tr>
+//         `;
+//         }
+//       });
+//       //console.log(html)
+//       //add content to an existing div - use innerHTML property
+//       document.querySelector("#myorderstablebody").innerHTML += tablehtml;
+//       document.querySelector("#myordersplaced").innerHTML += html;
+//     });
 
-// nav burger
+//   // todo: change it so if its joey, it brings up the other html.
+
+//   //todo: before the html addition, sort it by required completion date
+// });
+
+// // nav burger
 
 let burger_nav = document.querySelector("#burger_nav");
 let menu_nav = document.querySelector("#menu_nav");
@@ -425,3 +416,79 @@ burger_nav.addEventListener("click", function (event) {
   burger_nav.classList.toggle("is-active");
   menu_nav.classList.toggle("is-active");
 });
+
+// ------------------------------------------------------------
+
+// showing and hiding parts of main (home, products, order now)
+query("logohome").addEventListener("click", () => {
+  query("homepage").classList.remove("is-hidden");
+  query("homepage").classList.add("is-active");
+
+  query("productpage").classList.remove("is-active");
+  query("productpage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
+});
+
+query("home").addEventListener("click", () => {
+  query("homepage").classList.remove("is-hidden");
+  query("homepage").classList.add("is-active");
+
+  query("productpage").classList.remove("is-active");
+  query("productpage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
+});
+
+query("products").addEventListener("click", () => {
+  query("productpage").classList.remove("is-hidden");
+  query("productpage").classList.add("is-active");
+
+  query("homepage").classList.remove("is-active");
+  query("homepage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
+});
+
+query("orders").addEventListener("click", () => {
+  query("orderpage").classList.remove("is-hidden");
+  query("orderpage").classList.add("is-active");
+
+  query("productpage").classList.remove("is-active");
+  query("productpage").classList.add("is-hidden");
+
+  query("homepage").classList.remove("is-active");
+  query("homepage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
+});
+
+query("myorders").addEventListener("click", () => {
+  loadMyOrders();
+  query("myorderspage").classList.remove("is-hidden");
+  query("myorderspage").classList.add("is-active");
+
+  query("homepage").classList.remove("is-active");
+  query("homepage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("productpage").classList.remove("is-active");
+  query("productpage").classList.add("is-hidden");
+});
+
+// ------------------------------------------------------------
