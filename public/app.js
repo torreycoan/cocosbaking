@@ -16,7 +16,6 @@ let db = firebase.firestore();
 let ref = firebase.storage().ref();
 
 // ------------------------------------------------------------
-
 // doucument query function
 function query(id) {
   return document.querySelector(`#${id}`);
@@ -425,3 +424,25 @@ burger_nav.addEventListener("click", function (event) {
   burger_nav.classList.toggle("is-active");
   menu_nav.classList.toggle("is-active");
 });
+
+// PRODUCTS PAGE ---------------------------------
+//customer side - display all products
+//steps
+// get all docs
+// get number of docs (#prod)
+//cieling(# of docs/ppr products per r) = # of rows we need , may have to add 1. 
+// unfortunately issue with importing Math.ciel
+// ppr = products per row = 3. 
+
+//console.log("HELLO", 4 % 3)
+//console.log(4 / 3)
+//console.log(4 / 3 - (4 % 3) / 3)
+// if #prod%ppr = 0, then numrows = #prod/ppr. 
+//if !=0, then numrows = #prod/ppr - #prod%ppr/ppr + 1
+//console.log(7 / 3 - (7 % 3) / 3 + 1)
+let productsperrow = 3;
+// each row will be inside the container div with id "productscontainer"
+
+function load_products() {
+
+}

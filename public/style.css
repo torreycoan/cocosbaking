@@ -57,8 +57,10 @@ hr {
   border: none;
   height: 1px;
   /* Set the hr color */
-  color: #333; /* old IE */
-  background-color: #333; /* Modern Browsers */
+  color: #333;
+  /* old IE */
+  background-color: #333;
+  /* Modern Browsers */
 }
 
 #navbar-logo {
@@ -67,4 +69,12 @@ hr {
 
 .navbar-start {
   margin-left: auto;
+}
+
+/* product-card helps make product cards that are in the same row the same height despite difference sin text length.   */
+/* https://github.com/jgthms/bulma/issues/218 */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
