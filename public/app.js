@@ -434,6 +434,7 @@ let productsperrow = 3;
 
 // todo: added to the sign up/ sign in stuff that's executed
 // todo: have a refresh button that calls this (for joey's sake)
+//db.collection('products').doc('Oth50KDIejTlkT6gHPCv').delete()
 query("products").addEventListener('click', () => {
   query("productscontainer").innerHTML = ``; // this may be useful later
   db.collection('products').get().then((data) => {
@@ -454,8 +455,9 @@ query("products").addEventListener('click', () => {
 
     let idx = 0
     docs.forEach((doc) => {
-      //console.log(numproducts)
+      //console.log(doc.id)
       let prod = doc.data()
+      //console.log(prod, doc.id)
       let prodhtml = ``
       // if the remainder ==0 then i want to start a new columns class div (start a new row)
       if (idx % productsperrow == 0) {
@@ -496,7 +498,7 @@ query("products").addEventListener('click', () => {
     //  - close the columns class div
     if (numprod % productsperrow != 0) {
       numinvisiblecards = productsperrow - (numprod % productsperrow) // 3-4%3 = 3-1  = 2 invisible cards needed
-      let arr = Array.from(Array(numinvisiblecards - 1).keys()) // -1 to make the array the correct length
+      let arr = Array.from(Array(numinvisiblecards).keys())
       arr.forEach(() => {
         allproductshtml += `
         <div class="column is-invisible">
