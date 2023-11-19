@@ -341,6 +341,9 @@ function loadMyOrders() {
                     <p>  <span class="title is-6">Order Total : </span> ${
                       order.data().order_total
                     }</p>
+                    <p>  <span class="title is-6">Additional Notes : </span> ${
+                      order.data().additional_notes
+                    }</p>
                   </div>       
                 </div>
               </div>
