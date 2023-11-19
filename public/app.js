@@ -427,24 +427,12 @@ burger_nav.addEventListener("click", function (event) {
 
 // PRODUCTS PAGE ---------------------------------
 //customer side - display all products
-//steps
-// get all docs
-// get number of docs (#prod)
-//cieling(# of docs/ppr products per r) = # of rows we need , may have to add 1. 
-// unfortunately issue with importing Math.ciel
 // ppr = products per row = 3. 
-
-//console.log("HELLO", 4 % 3)
-//console.log(4 / 3)
-//console.log(4 / 3 - (4 % 3) / 3)
-// if #prod%ppr = 0, then numrows = #prod/ppr. 
+// if #ofproducts%ppr = 0, then numrows = #prod/ppr. 
 //if !=0, then numrows = #prod/ppr - #prod%ppr/ppr + 1
-//console.log(7 / 3 - (7 % 3) / 3 + 1)
 let productsperrow = 3;
-// each row will be inside the container div with id "productscontainer"
 
-
-// this will be added to the sign up/ sign in stuff that's executed
+// todo: added to the sign up/ sign in stuff that's executed
 // todo: have a refresh button that calls this (for joey's sake)
 query("loadproductsbtn").addEventListener('click', () => {
   db.collection('products').get().then((data) => {
@@ -486,23 +474,40 @@ query("loadproductsbtn").addEventListener('click', () => {
                   <p class="content">
                     ${prod.desc}
                   </p>
-                  <p class="content">Sizes:${prod.sizes}</p>
-                  <p class="content">Serves:${prod.serves}</p>
-                  <p class="content">Price:${prod.price}</p>
+                  <p class="content">Sizes: ${prod.sizes}</p>
+                  <p class="content">Serves: ${prod.serves}</p>
+                  <p class="content">Price: ${prod.price}</p>
                 </div>
               </div>
             </div>`
-      //if the remainder for idx+1 ==0, close the columns class div
+      //if the remainder for idx+1 ==0, close the columns class div (perfect end to row, no blank space to fill w invisible cards)
       if ((idx + 1) % productsperrow == 0) {
         prodhtml += `</div>`
       }
+      // add html to the all html
+      allproductshtml += prodhtml
       // increment idx
       idx += 1
     })
 
-
-    // TODO: if its not a perfect ending to the row, add invisible cards. 
+    // if its not a perfect ending to the row (remainder!=0), add invisible cards to keep proper spacing
     //  - # of invisible cards = ppr-remainder
     //  - close the columns class div
+    if (numprod % productsperrow != 0) {
+      numinvisiblecards = productsperrow - (numprod % productsperrow) // 3-4%3 = 3-1  = 2 invisible cards needed
+      let arr = Array.from(Array(numinvisiblecards - 1).keys()) // -1 to make the array the correct length
+      arr.forEach(() => {
+        allproductshtml += `
+        <div class="column is-invisible">
+          <div class="card product-card">
+          </div>  
+        </div>`
+
+      })
+      allproductshtml += `</div>`
+    }
+
+    //add all the html to the page 
+    query("productscontainer").innerHTML = allproductshtml;
   })
 })
