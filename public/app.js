@@ -313,7 +313,6 @@ function loadMyOrders(data) {
   let orders = data.docs;
   orders.forEach((order) => {
     if (auth.currentUser.email == order.data().customer_email) {
-      console.log("hello");
       const addOrder = document.createElement("div");
       addOrder.classList.add(`order`);
       addOrder.innerHTML = `<div class="card">
@@ -327,7 +326,7 @@ function loadMyOrders(data) {
                     </figure>
                   </div>
                   <div class="media-content">
-                    <p class="card has-background-grey-light is-shadowless"> <a id="button1" class="restaurant_active"> <span class="title is-4 has-text-white"> &nbsp ${
+                    <p class="card has-background-grey-light is-shadowless p-3 has-text-centered has-text-weight-bold"> <a id="button1" class="restaurant_active"> <span class="title is-4 has-text-white"> &nbsp ${
                       order.data().product_type
                     }</span></a></p>
                     <div <button onclick="delMyOrders('${
@@ -522,7 +521,6 @@ query("products").addEventListener("click", () => {
 
 // filtering myorders
 query("filterbutton").addEventListener("click", (e) => {
-  // alert("hello");
   e.preventDefault();
   let orderstatus = query("orderstatusfilter").value;
   let paymentstatus = query("paymentstatusfilter").value;
@@ -531,9 +529,7 @@ query("filterbutton").addEventListener("click", (e) => {
       .where("order_status", "==", orderstatus)
       .where("payment_status", "==", paymentstatus)
       .get()
-      .then((data) => {
-        loadMyOrders(data);
-      });
+      .then((data) => loadMyOrders(data));
   }
   if (orderstatus != "No Selection" && paymentstatus == "No Selection") {
     db.collection("orders")
