@@ -301,6 +301,7 @@ query("myorders").addEventListener("click", (allorders) => {
     });
 });
 myorders_area = document.querySelector("#myordersplaced");
+
 function loadMyOrders() {
   myorders_area.innerHTML = "";
   db.collection("orders")
@@ -340,6 +341,9 @@ function loadMyOrders() {
                     }</p>
                     <p>  <span class="title is-6">Order Total : </span> ${
                       order.data().order_total
+                    }</p>
+                    <p>  <span class="title is-6">Order Complete By Date : </span> ${
+                      order.data().completion_date
                     }</p>
                     <p>  <span class="title is-6">Additional Notes : </span> ${
                       order.data().additional_notes
