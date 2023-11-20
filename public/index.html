@@ -151,7 +151,7 @@
           <a
             class="navbar-item has-text-black has-text-weight-bold is-hidden"
             id="myorders"
-            >My orders</a
+            >My Orders</a
           >
         </div>
         <div class="navbar-end ml-0">
@@ -448,62 +448,62 @@
           </section>
         </div>
       </div>
+
+      <!-- My Orders Page -->
+
       <div id="myorderspage" class="is-hidden">
         <header class="header">
           <img src="images/myorders.png" class="image" />
         </header>
-        <div class="columns">
-          <div class="column is-two-thirds">
-            <div class="p-5 m-5" id="myordersplaced"></div>
-          </div>
-          <div class="column is-one-third p-5">
-            <div class="card mt-5 has-background-grey-light p-3">
-              <div class="is-size-3 has-text-centered has-text-weight-bold">
-                Filter Your Orders
-              </div>
-              <hr />
-              <form id="filterform">
-                <div class="mt-5 is-size-5 has-text-weight-bold">
-                  <div>
+        <div class="container">
+          <div class="columns">
+            <div class="column is-three-quarters">
+              <div class="p-5 m-3" id="myordersplaced"></div>
+            </div>
+            <div class="column is-one-quarter">
+              <div class="card mt-6 p-3">
+                <div class="is-size-5 has-text-centered has-text-weight-bold">
+                  Filter Your Orders
+                </div>
+                <hr />
+                <form id="filterform">
+                  <div class="mt-5 is-size-6 has-text-weight-bold">
                     Order Status:
-                    <div class="select ml-5">
-                      <select id="orderstatusfilter">
-                        <option value="No Selection"></option>
-                        <option value="Pendindg">
-                          Pending acceptance/rejection
-                        </option>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Rejected">Rejected</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="mt-5">
-                    Payment Status:
-                    <div class="select ml-5">
-                      <select id="paymentstatusfilter">
+                    <select class="select" id="orderstatusfilter">
+                      <option value="No Selection"></option>
+                      <option value="Pendindg">
+                        Pending acceptance/rejection
+                      </option>
+                      <option value="Accepted">Accepted</option>
+                      <option value="Rejected">Rejected</option>
+                    </select>
+                    <div class="mt-5">
+                      Payment Status:
+                      <br />
+                      <select class="select" id="paymentstatusfilter">
                         <option value="No Selection"></option>
                         <option value="Not Paid">Not paid</option>
                         <option value="Paid">Paid</option>
                       </select>
                     </div>
+                    <hr />
+                    <div>
+                      <button
+                        class="button mb-4 has-text-weight-bold"
+                        id="filterbutton"
+                      >
+                        Filter
+                      </button>
+                      <button
+                        class="button has-text-weight-bold"
+                        id="resetfilterbutton"
+                      >
+                        Reset Selections
+                      </button>
+                    </div>
                   </div>
-                  <hr />
-                  <div class="has-text-centered mt-3 p-5">
-                    <button
-                      class="button has-background-primary has-text-weight-bold"
-                      id="filterbutton"
-                    >
-                      Filter
-                    </button>
-                    <button
-                      class="button has-background-danger has-text-weight-bold"
-                      id="resetfilterbutton"
-                    >
-                      Reset Selections
-                    </button>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
