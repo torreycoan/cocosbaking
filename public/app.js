@@ -22,7 +22,13 @@ function delMyOrders(id) {
   db.collection("orders")
     .doc(id)
     .delete()
-    .then(() => loadMyOrders());
+    .then(() => {
+      db.collection("orders")
+        .get()
+        .then((data) => {
+          loadMyOrders(data);
+        });
+    });
 }
 
 // ------------------------------------------------------------
@@ -301,25 +307,23 @@ query("myorders").addEventListener("click", (allorders) => {
     });
 });
 myorders_area = document.querySelector("#myordersplaced");
-function loadMyOrders() {
+function loadMyOrders(data) {
   myorders_area.innerHTML = "";
-  db.collection("orders")
-    .get()
-    .then((data) => {
-      let orders = data.docs;
-      orders.forEach((order) => {
-        if (auth.currentUser.email == order.data().customer_email) {
-          console.log("hello");
-          const addOrder = document.createElement("div");
-          addOrder.classList.add(`order`);
-          addOrder.innerHTML = `<div class="card">
+
+  let orders = data.docs;
+  orders.forEach((order) => {
+    if (auth.currentUser.email == order.data().customer_email) {
+      console.log("hello");
+      const addOrder = document.createElement("div");
+      addOrder.classList.add(`order`);
+      addOrder.innerHTML = `<div class="card">
               <div class="card-content">
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-128x128">
                       <img src="images/${order.data().product_type}.jpg" alt="${
-            order.data().name
-          }">
+        order.data().name
+      }">
                     </figure>
                   </div>
                   <div class="media-content">
@@ -350,10 +354,9 @@ function loadMyOrders() {
             </div> 
             <br>`;
 
-          myorders_area.append(addOrder);
-        }
-      });
-    });
+      myorders_area.append(addOrder);
+    }
+  });
 }
 
 //       docs.forEach((doc) => {
@@ -613,7 +616,11 @@ query("orders").addEventListener("click", () => {
 });
 
 query("myorders").addEventListener("click", () => {
-  loadMyOrders();
+  db.collection("orders")
+    .get()
+    .then((data) => {
+      loadMyOrders(data);
+    });
   query("myorderspage").classList.remove("is-hidden");
   query("myorderspage").classList.add("is-active");
 
