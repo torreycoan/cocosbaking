@@ -541,15 +541,7 @@ query("filterbutton").addEventListener("click", (e) => {
     db.collection("orders")
       .where("payment_status", "==", paymentstatus)
       .get()
-      .then((data) => {
-        loadMyOrders(data);
-        let docs = data.docs;
-        let count = 0;
-        docs.forEach((doc) => {
-          count += 1;
-        });
-        console.log(count);
-      });
+      .then((data) => loadMyOrders(data));
   }
   if (orderstatus == "No Selection" && paymentstatus == "No Selection") {
     message_bar("Make a selection to filter!");
