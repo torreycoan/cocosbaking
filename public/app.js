@@ -539,9 +539,17 @@ query("filterbutton").addEventListener("click", (e) => {
   }
   if (orderstatus == "No Selection" && paymentstatus != "No Selection") {
     db.collection("orders")
-      .where("payment_status", "==", orderstatus)
+      .where("payment_status", "==", paymentstatus)
       .get()
-      .then((data) => loadMyOrders(data));
+      .then((data) => {
+        loadMyOrders(data);
+        let docs = data.docs;
+        let count = 0;
+        docs.forEach((doc) => {
+          count += 1;
+        });
+        console.log(count);
+      });
   }
   if (orderstatus == "No Selection" && paymentstatus == "No Selection") {
     message_bar("Make a selection to filter!");
@@ -551,7 +559,12 @@ query("filterbutton").addEventListener("click", (e) => {
 // reset filter form
 query("resetfilterbutton").addEventListener("click", (e) => {
   e.preventDefault();
-  query("filterform").reset();
+  db.collection("orders")
+    .get()
+    .then((data) => {
+      loadMyOrders(data);
+      query("filterform").reset();
+    });
 });
 
 // showing and hiding parts of main (home, products, order now)
