@@ -481,7 +481,7 @@ query("products").addEventListener("click", () => {
                   </p>
                   <p class="content">Sizes: ${prod.sizes}</p>
                   <p class="content">Serves: ${prod.serves}</p>
-                  <p class="content">Price: ${prod.price}</p>
+                  <p class="content">Price: $${prod.price}</p>
                 </div>
               </div>
             </div>`;
@@ -635,4 +635,37 @@ query("myorders").addEventListener("click", () => {
   query("productpage").classList.add("is-hidden");
 });
 
-// ------------------------------------------------------------
+// Function to update the subtotal price
+function updateSubtotalPrice() {
+  let productName = query("productselection").value;
+  const db = firebase.firestore();
+
+  db.collection("products")
+    .where("name", "==", productName)
+    .get()
+    .then((data) => {
+      let price = data.docs[0].data().price;
+      console.log(price);
+      let quantity = query("quantity").value;
+      if (quantity == "10+ (Contact Please)") {
+        quantity = "Contact Please";
+      } else quantity = parseInt(quantity);
+      console.log(quantity);
+      if (quantity == "Contact Please") {
+        query("subtotalprice").innerText = `${quantity}`;
+        return;
+      }
+      let subtotal = price * quantity;
+      query("subtotalprice").innerText = `$${subtotal}`;
+    });
+}
+
+updateSubtotalPrice();
+document
+  .getElementById("productselection")
+  .addEventListener("change", updateSubtotalPrice);
+document
+  .getElementById("quantity")
+  .addEventListener("change", updateSubtotalPrice);
+// You will need to call updateSubtotalPrice() when the product or quantity changes.
+// For example, you might call it in an event listener attached to your quantity dropdown.
