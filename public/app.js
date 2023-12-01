@@ -226,6 +226,7 @@ auth.onAuthStateChanged((user) => {
 query("resetorderbutton").addEventListener("click", (e) => {
   e.preventDefault();
   query("orderform").reset();
+  updateSubtotalPrice();
 });
 
 // ------------------------------------------------------------
@@ -244,8 +245,7 @@ query("orderbutton").addEventListener("click", (e) => {
     formal_event: query("formalevent").value,
     completion_date: query("completiondate").value,
     additional_notes: query("additionalnotes").value,
-    //TODO: add order total - if not here, to the webpage. "refresh subtotal" button?
-    order_total: "TODO - calculate this",
+    order_total: query("subtotalprice").innerHTML.replace("$", ""),
     order_status: "Pending acceptance/rejection",
     payment_status: "Not paid",
   };
@@ -341,9 +341,9 @@ function loadMyOrders(data) {
                     <p>  <span class="title is-6">Quantity : </span> ${
                       order.data().quantity
                     }</p>
-                    <p>  <span class="title is-6">Order Total : </span> ${
+                    <p><span class="title is-6">Order Total : </span> ${`$${
                       order.data().order_total
-                    }</p>
+                    }`}</p>
                     <p>  <span class="title is-6">Additional Notes : </span> ${
                       order.data().additional_notes
                     }</p>
@@ -636,6 +636,7 @@ query("myorders").addEventListener("click", () => {
 });
 
 // Function to update the subtotal price
+function updateordertotal() {}
 function updateSubtotalPrice() {
   let productName = query("productselection").value;
   const db = firebase.firestore();
