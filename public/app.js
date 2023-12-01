@@ -228,7 +228,10 @@ query("resetorderbutton").addEventListener("click", (e) => {
   query("orderform").reset();
   updateSubtotalPrice();
 });
-
+function resetorderbtn() {
+  query("orderform").reset();
+  updateSubtotalPrice();
+}
 // ------------------------------------------------------------
 
 // taking orders (field values) - Submit Order
@@ -257,6 +260,7 @@ query("orderbutton").addEventListener("click", (e) => {
       message_bar("Order Placed!");
       document.body.scrollTop = 0;
     });
+  resetorderbtn();
 });
 // -------------------------------------------------------
 
@@ -614,6 +618,7 @@ query("orders").addEventListener("click", () => {
 
   query("myorderspage").classList.remove("is-active");
   query("myorderspage").classList.add("is-hidden");
+  resetorderbtn();
 });
 
 query("myorders").addEventListener("click", () => {
