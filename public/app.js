@@ -645,12 +645,10 @@ function updateSubtotalPrice() {
     .get()
     .then((data) => {
       let price = data.docs[0].data().price;
-      console.log(price);
       let quantity = query("quantity").value;
       if (quantity == "10+ (Contact Please)") {
         quantity = "Contact Please";
       } else quantity = parseInt(quantity);
-      console.log(quantity);
       if (quantity == "Contact Please") {
         query("subtotalprice").innerText = `${quantity}`;
         return;
@@ -667,5 +665,3 @@ document
 document
   .getElementById("quantity")
   .addEventListener("change", updateSubtotalPrice);
-// You will need to call updateSubtotalPrice() when the product or quantity changes.
-// For example, you might call it in an event listener attached to your quantity dropdown.
