@@ -22,7 +22,13 @@ function delMyOrders(id) {
   db.collection("orders")
     .doc(id)
     .delete()
-    .then(() => loadMyOrders());
+    .then(() => {
+      db.collection("orders")
+        .get()
+        .then((data) => {
+          loadMyOrders(data);
+        });
+    });
 }
 
 // ------------------------------------------------------------
@@ -220,8 +226,12 @@ auth.onAuthStateChanged((user) => {
 query("resetorderbutton").addEventListener("click", (e) => {
   e.preventDefault();
   query("orderform").reset();
+  updateSubtotalPrice();
 });
-
+function resetorderbtn() {
+  query("orderform").reset();
+  updateSubtotalPrice();
+}
 // ------------------------------------------------------------
 
 // taking orders (field values) - Submit Order
@@ -238,8 +248,7 @@ query("orderbutton").addEventListener("click", (e) => {
     formal_event: query("formalevent").value,
     completion_date: query("completiondate").value,
     additional_notes: query("additionalnotes").value,
-    //TODO: add order total - if not here, to the webpage. "refresh subtotal" button?
-    order_total: "TODO - calculate this",
+    order_total: query("subtotalprice").innerHTML.replace("$", ""),
     order_status: "Pending acceptance/rejection",
     payment_status: "Not paid",
   };
@@ -251,6 +260,7 @@ query("orderbutton").addEventListener("click", (e) => {
       message_bar("Order Placed!");
       document.body.scrollTop = 0;
     });
+  resetorderbtn();
 });
 // -------------------------------------------------------
 
@@ -301,30 +311,26 @@ query("myorders").addEventListener("click", (allorders) => {
     });
 });
 myorders_area = document.querySelector("#myordersplaced");
-
-function loadMyOrders() {
+function loadMyOrders(data) {
   myorders_area.innerHTML = "";
-  db.collection("orders")
-    .get()
-    .then((data) => {
-      let orders = data.docs;
-      orders.forEach((order) => {
-        if (auth.currentUser.email == order.data().customer_email) {
-          console.log("hello");
-          const addOrder = document.createElement("div");
-          addOrder.classList.add(`order`);
-          addOrder.innerHTML = `<div class="card">
+
+  let orders = data.docs;
+  orders.forEach((order) => {
+    if (auth.currentUser.email == order.data().customer_email) {
+      const addOrder = document.createElement("div");
+      addOrder.classList.add(`order`);
+      addOrder.innerHTML = `<div class="card">
               <div class="card-content">
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-128x128">
                       <img src="images/${order.data().product_type}.jpg" alt="${
-            order.data().name
-          }">
+        order.data().name
+      }">
                     </figure>
                   </div>
                   <div class="media-content">
-                    <p class="card has-background-grey-light is-shadowless"> <a id="button1" class="restaurant_active"> <span class="title is-4 has-text-white"> &nbsp ${
+                    <p class="card has-background-grey-light is-shadowless p-3 has-text-centered has-text-weight-bold"> <a id="button1" class="restaurant_active"> <span class="title is-4 has-text-white"> &nbsp ${
                       order.data().product_type
                     }</span></a></p>
                     <div <button onclick="delMyOrders('${
@@ -339,7 +345,7 @@ function loadMyOrders() {
                     <p>  <span class="title is-6">Quantity : </span> ${
                       order.data().quantity
                     }</p>
-                    <p>  <span class="title is-6">Order Total : </span> ${
+                    <p><span class="title is-6">Order Total : </span> ${
                       order.data().order_total
                     }</p>
                     <p>  <span class="title is-6">Order Complete By Date : </span> ${
@@ -354,10 +360,9 @@ function loadMyOrders() {
             </div> 
             <br>`;
 
-          myorders_area.append(addOrder);
-        }
-      });
-    });
+      myorders_area.append(addOrder);
+    }
+  });
 }
 
 //       docs.forEach((doc) => {
@@ -483,7 +488,7 @@ query("products").addEventListener("click", () => {
                   </p>
                   <p class="content">Sizes: ${prod.sizes}</p>
                   <p class="content">Serves: ${prod.serves}</p>
-                  <p class="content">Price: ${prod.price}</p>
+                  <p class="content">Price: $${prod.price}</p>
                 </div>
               </div>
             </div>`;
@@ -523,7 +528,6 @@ query("products").addEventListener("click", () => {
 
 // filtering myorders
 query("filterbutton").addEventListener("click", (e) => {
-  // alert("hello");
   e.preventDefault();
   let orderstatus = query("orderstatusfilter").value;
   let paymentstatus = query("paymentstatusfilter").value;
@@ -532,9 +536,7 @@ query("filterbutton").addEventListener("click", (e) => {
       .where("order_status", "==", orderstatus)
       .where("payment_status", "==", paymentstatus)
       .get()
-      .then((data) => {
-        loadMyOrders(data);
-      });
+      .then((data) => loadMyOrders(data));
   }
   if (orderstatus != "No Selection" && paymentstatus == "No Selection") {
     db.collection("orders")
@@ -544,7 +546,7 @@ query("filterbutton").addEventListener("click", (e) => {
   }
   if (orderstatus == "No Selection" && paymentstatus != "No Selection") {
     db.collection("orders")
-      .where("payment_status", "==", orderstatus)
+      .where("payment_status", "==", paymentstatus)
       .get()
       .then((data) => loadMyOrders(data));
   }
@@ -556,7 +558,12 @@ query("filterbutton").addEventListener("click", (e) => {
 // reset filter form
 query("resetfilterbutton").addEventListener("click", (e) => {
   e.preventDefault();
-  query("filterform").reset();
+  db.collection("orders")
+    .get()
+    .then((data) => {
+      loadMyOrders(data);
+      query("filterform").reset();
+    });
 });
 
 // showing and hiding parts of main (home, products, order now)
@@ -614,10 +621,15 @@ query("orders").addEventListener("click", () => {
 
   query("myorderspage").classList.remove("is-active");
   query("myorderspage").classList.add("is-hidden");
+  resetorderbtn();
 });
 
 query("myorders").addEventListener("click", () => {
-  loadMyOrders();
+  db.collection("orders")
+    .get()
+    .then((data) => {
+      loadMyOrders(data);
+    });
   query("myorderspage").classList.remove("is-hidden");
   query("myorderspage").classList.add("is-active");
 
@@ -631,4 +643,34 @@ query("myorders").addEventListener("click", () => {
   query("productpage").classList.add("is-hidden");
 });
 
-// ------------------------------------------------------------
+// Function to update the subtotal price
+function updateordertotal() {}
+function updateSubtotalPrice() {
+  let productName = query("productselection").value;
+  const db = firebase.firestore();
+
+  db.collection("products")
+    .where("name", "==", productName)
+    .get()
+    .then((data) => {
+      let price = data.docs[0].data().price;
+      let quantity = query("quantity").value;
+      if (quantity == "10+ (Contact Please)") {
+        quantity = "Contact Please";
+      } else quantity = parseInt(quantity);
+      if (quantity == "Contact Please") {
+        query("subtotalprice").innerText = `${quantity}`;
+        return;
+      }
+      let subtotal = price * quantity;
+      query("subtotalprice").innerText = `$${subtotal}`;
+    });
+}
+
+updateSubtotalPrice();
+document
+  .getElementById("productselection")
+  .addEventListener("change", updateSubtotalPrice);
+document
+  .getElementById("quantity")
+  .addEventListener("change", updateSubtotalPrice);

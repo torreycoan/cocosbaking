@@ -326,7 +326,7 @@
                           <option>Banana Meringue Pie</option>
                           <option>Blueberry Meringue Pie</option>
                           <option>Blueberry Swirl Cheesecake</option>
-                          <option>Customer Cheesecake</option>
+                          <option>Custom Cheesecake</option>
                           <option>Mixed Fruit Cake</option>
                           <!-- Additional product options can be added here -->
                         </select>
@@ -424,9 +424,7 @@
                       <label class="label is-size-4">Subtotal</label>
                     </div>
                     <div class="control column">
-                      <p id="subtotalprice" class="is-size-5">
-                        price will go here
-                      </p>
+                      <p id="subtotalprice" class="is-size-5"></p>
                     </div>
                   </div>
 
@@ -482,7 +480,7 @@
                       <br />
                       <select class="select" id="paymentstatusfilter">
                         <option value="No Selection"></option>
-                        <option value="Not Paid">Not paid</option>
+                        <option value="Not paid">Not paid</option>
                         <option value="Paid">Paid</option>
                       </select>
                     </div>
@@ -538,7 +536,9 @@
                 <th><abbr title="Formal event">Formal event</abbr></th>
                 <th><abbr title="Date">Required completion date</abbr></th>
                 <th><abbr title="Additional Notes">Additional Notes</abbr></th>
-                <th><abbr title="Order total">Order total</abbr></th>
+                <th>
+                  <abbr title="Order total" id="ordertotal">Order total</abbr>
+                </th>
                 <th><abbr title="Order status">Order status</abbr></th>
                 <th><abbr title="Payment status">Payment status</abbr></th>
               </tr>
