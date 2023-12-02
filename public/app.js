@@ -330,7 +330,7 @@ function loadMyOrders(data) {
                     </figure>
                   </div>
                   <div class="media-content">
-                    <p class="card has-background-grey-light is-shadowless p-3 has-text-centered has-text-weight-bold"> <a id="button1" class="restaurant_active"> <span class="title is-4 has-text-white"> &nbsp ${
+                    <p class="card has-background-grey-light is-shadowless p-1 has-text-left has-text-weight-bold"> <a id="button1" class="restaurant_active"> <span class="title is-5 has-text-white"> &nbsp ${
                       order.data().product_type
                     }</span></a></p>
                     <div <button onclick="delMyOrders('${
