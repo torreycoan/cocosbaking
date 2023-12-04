@@ -115,6 +115,9 @@ query("signoutlink").addEventListener("click", () => {
       document.getElementById("signuplink").classList.remove("is-hidden");
       document.getElementById("signoutlink").classList.add("is-hidden");
       message_bar("You have successfully signed out!");
+      query("myorderspage").classList.add("is-hidden");
+      query("homepage").classList.remove("is-hidden");
+      query("homepage").classList.add("is-active");
     })
     .catch((error) => {
       alert(error.message);
