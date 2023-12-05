@@ -153,6 +153,7 @@ query("signoutlink").addEventListener("click", () => {
     .catch((error) => {
       alert(error.message);
     });
+  lotcation.reload();
 });
 
 // ------------------------------------------------------------
