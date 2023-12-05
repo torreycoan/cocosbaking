@@ -739,4 +739,81 @@ query("accountsettings").addEventListener("click", () => {
   query("acctsettingspage").classList.remove("is-hidden");
   query("homepage").classList.remove("is-active");
   query("homepage").classList.add("is-hidden");
+  settingsuserinfo(auth.currentUser.email);
+});
+
+// function to show your user info in account settings
+function settingsuserinfo(email) {
+  db.collection("users")
+    .get()
+    .then((data) => {
+      docs = data.docs;
+      docs.forEach((doc) => {
+        if (email == doc.id) {
+          query("acctsettingsname").innerHTML = doc.data().name;
+          query("acctsettingsemail").innerHTML = doc.data().email;
+          query("acctsettingsphone").innerHTML = doc.data().phone;
+        }
+      });
+    });
+}
+
+function update_doc(id) {
+  db.collection("users")
+    .doc(id)
+    .update({
+      name: query("namechange").value,
+      email: query("emailchange").value,
+      phone: query("phonechange").value,
+    });
+  settingsuserinfo(auth.currentUser.email);
+  query("settingsinputname").innerHTML = ``;
+  query("settingsinputemail").innerHTML = ``;
+  query("settingsinputphone").innerHTML = ``;
+  message_bar("Information Updated!");
+  query("updategoback").classList.add("is-hidden");
+  query("updateinfobutton").classList.remove("is-hidden");
+}
+
+// click event for when user clicks on update information
+query("updateinfobutton").addEventListener("click", () => {
+  query("updateinfobutton").classList.add("is-hidden");
+  query("updategoback").classList.remove("is-hidden");
+  db.collection("users")
+    .get()
+    .then((data) => {
+      docs = data.docs;
+      docs.forEach((doc) => {
+        if (auth.currentUser.email == doc.id) {
+          id = doc.id;
+          query(
+            "settingsinputname"
+          ).innerHTML = `<input type="text" class="input" id="namechange" value="${
+            doc.data().name
+          }"><button class="button m-3" onclick="update_doc('${id}')">Update</button>
+          `;
+
+          query(
+            "settingsinputemail"
+          ).innerHTML = `<input type="text" class="input" id="emailchange" value="${
+            doc.data().email
+          }"><button class="button m-3" onclick="update_doc('${id}')">Update</button>
+          `;
+          query(
+            "settingsinputphone"
+          ).innerHTML = `<input type="text" class="input" id="phonechange" value="${
+            doc.data().phone
+          }"><button class="button m-3" onclick="update_doc('${id}')">Update</button>
+          `;
+        }
+      });
+    });
+});
+
+query("updategoback").addEventListener("click", () => {
+  query("settingsinputname").innerHTML = ``;
+  query("settingsinputemail").innerHTML = ``;
+  query("settingsinputphone").innerHTML = ``;
+  query("updategoback").classList.add("is-hidden");
+  query("updateinfobutton").classList.remove("is-hidden");
 });

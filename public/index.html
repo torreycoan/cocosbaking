@@ -193,24 +193,30 @@
         <div class="columns">
           <div class="column is-one-quarter"></div>
           <div class="column is-one-half">
+          
             <div class="card has-background-grey-lighter m-5 p-3">
               <form action="" id="changeacctform">
-                <label class="label">Name:</label>
-                <div class='control'>
-                  <input type="text" class="input" id="namechange">
+                <label class="label">Name: <span id="acctsettingsname"></span></label>
+                <div class='control' id="namechangeinput">
+                  <div id="settingsinputname"></div>
                 </div>
-                <label class="label">Email:</label>
-                <div class='control'>
-                  <input type="text" class="input" id="emailchange">
+                <label class="label">Email: <span id="acctsettingsemail"></span></label>
+                <div class='control' id="emailchangeinput">
+                  <div id="settingsinputemail"></div>
                 </div>
-                <label class="label">Phone:</label>
-                <div class='control'>
-                  <input type="text" class="input" id="phonechange">
+                <label class="label">Phone: <span id="acctsettingsphone"></span></label>
+                <div class='control' id="phonechangeinput">
+                  <div id="settingsinputphone"></div>
                 </div>
               </form>
             </div>
+            <div class="has-text-centered">
+              <button class="button is-primary" id="updateinfobutton">Update Information</button>
+              <button class="button is-danger is-hidden" id="updategoback">Go Back</button>
+            </div>
           </div>  
-          <div class="column is-one-quarter"></div>
+          <div class="column is-one-quarter">
+          </div>
         </div>  
       </div>  
     </div>
