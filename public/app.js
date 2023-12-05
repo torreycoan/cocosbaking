@@ -148,6 +148,7 @@ query("signoutlink").addEventListener("click", () => {
       query("myorderspage").classList.add("is-hidden");
       query("homepage").classList.remove("is-hidden");
       query("homepage").classList.add("is-active");
+      query("acctsettingspage").classList.add("is-hidden");
     })
     .catch((error) => {
       alert(error.message);
