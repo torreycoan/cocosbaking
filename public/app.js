@@ -178,11 +178,13 @@ query("signupbtn").addEventListener("click", (e) => {
   // name, email and password from the form
   const name = query("signupname").value;
   const email = query("signupemail").value;
+  const phone = query("signupphone").value;
   const password = query("signuppassword").value;
 
   let data = {
     name: name,
     email: email,
+    phone: phone,
   };
 
   auth
@@ -312,7 +314,6 @@ query("orderbutton").addEventListener("click", (e) => {
 
 // My Orders - Customer side - display all of the user's orders
 query("myorders").addEventListener("click", (allorders) => {
-
   db.collection("orders")
     .get()
     .then((data) => {
@@ -335,7 +336,7 @@ query("myorders").addEventListener("click", (allorders) => {
         //see all orders - and have hidden inputs so that we can later use them to update orders
         docs.forEach((doc) => {
           let order = doc.data();
-          console.log(order)
+          console.log(order);
           tablehtml += `<tr id = ${doc.id}>
           <td>${order.first_name} ${order.last_name} <input type = "text" value = "${order.first_name} ${order.last_name}"/></td>
           <td>${order.customer_email}</td>
@@ -352,22 +353,19 @@ query("myorders").addEventListener("click", (allorders) => {
           <td><button class="button is-danger" onclick="delete_doc(this, '${doc.id}')">Delete</button></td>
           </tr>
           `;
-
         });
 
-        query('myorderstablebody').innerHTML += tablehtml
+        query("myorderstablebody").innerHTML += tablehtml;
       }
-
     });
-
 });
 myorders_area = document.querySelector("#myordersplaced");
 // ^ does not exist anymore
 function loadMyOrders(data) {
   if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
-    return
+    return;
   }
-  query('myordersplaced').innerHTML = "";
+  query("myordersplaced").innerHTML = "";
 
   let orders = data.docs;
   orders.forEach((order) => {
@@ -586,8 +584,6 @@ query("products").addEventListener("click", () => {
 });
 // ------------------------------------------------------------
 
-// ------------------------------------------------------------
-
 // filtering myorders
 query("filterbutton").addEventListener("click", (e) => {
   e.preventDefault();
@@ -737,3 +733,10 @@ document
 document
   .getElementById("quantity")
   .addEventListener("change", updateSubtotalPrice);
+
+// click event for account settings
+query("accountsettings").addEventListener("click", () => {
+  query("acctsettingspage").classList.remove("is-hidden");
+  query("homepage").classList.remove("is-active");
+  query("homepage").classList.add("is-hidden");
+});
