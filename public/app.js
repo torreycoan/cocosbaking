@@ -752,6 +752,14 @@ query("accountsettings").addEventListener("click", () => {
   query("acctsettingspage").classList.remove("is-hidden");
   query("homepage").classList.remove("is-active");
   query("homepage").classList.add("is-hidden");
+  query("productpage").classList.remove("is-active");
+  query("productpage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
   settingsuserinfo(auth.currentUser.email);
 });
 
@@ -792,6 +800,7 @@ function update_doc(id) {
 query("updateinfobutton").addEventListener("click", () => {
   query("updateinfobutton").classList.add("is-hidden");
   query("updategoback").classList.remove("is-hidden");
+  query("");
   db.collection("users")
     .get()
     .then((data) => {
