@@ -43,6 +43,14 @@
           </div>
         </div>
 
+        <!-- phone -->
+        <div class="field">
+          <label class="label">Phone</label>
+          <div class="control">
+            <input class="input" type="text" id="signupphone">
+          </div>
+        </div>
+
         <!-- password -->
         <div class="field">
           <label class="label">Password</label>
@@ -164,7 +172,7 @@
                   <a id="signoutlink" class="dropdown-item">
                     Sign Out
                   </a>
-                  <a href="#" class="dropdown-item">
+                  <a href="#" class="dropdown-item" id="accountsettings">
                     Account Settings
                   </a>
                   <hr class="dropdown-divider">
@@ -180,6 +188,32 @@
 
   <!-- main  -->
   <main>
+    <div id="acctsettingspage" class="is-hidden">
+      <div class="has-text-centered m-7 is-size-1 has-text-weight-bold">Account Settings</div>
+        <div class="columns">
+          <div class="column is-one-quarter"></div>
+          <div class="column is-one-half">
+            <div class="card has-background-grey-lighter m-5 p-3">
+              <form action="" id="changeacctform">
+                <label class="label">Name:</label>
+                <div class='control'>
+                  <input type="text" class="input" id="namechange">
+                </div>
+                <label class="label">Email:</label>
+                <div class='control'>
+                  <input type="text" class="input" id="emailchange">
+                </div>
+                <label class="label">Phone:</label>
+                <div class='control'>
+                  <input type="text" class="input" id="phonechange">
+                </div>
+              </form>
+            </div>
+          </div>  
+          <div class="column is-one-quarter"></div>
+        </div>  
+      </div>  
+    </div>
     <div id="homepage" class="is-active">
       <header class="header">
         <div class="has-text-centered">

@@ -178,11 +178,13 @@ query("signupbtn").addEventListener("click", (e) => {
   // name, email and password from the form
   const name = query("signupname").value;
   const email = query("signupemail").value;
+  const phone = query("signupphone").value;
   const password = query("signuppassword").value;
 
   let data = {
     name: name,
     email: email,
+    phone: phone,
   };
 
   auth
@@ -582,8 +584,6 @@ query("products").addEventListener("click", () => {
 });
 // ------------------------------------------------------------
 
-// ------------------------------------------------------------
-
 // filtering myorders
 query("filterbutton").addEventListener("click", (e) => {
   e.preventDefault();
@@ -733,3 +733,10 @@ document
 document
   .getElementById("quantity")
   .addEventListener("change", updateSubtotalPrice);
+
+// click event for account settings
+query("accountsettings").addEventListener("click", () => {
+  query("acctsettingspage").classList.remove("is-hidden");
+  query("homepage").classList.remove("is-active");
+  query("homepage").classList.add("is-hidden");
+});
