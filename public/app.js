@@ -637,6 +637,8 @@ query("logohome").addEventListener("click", () => {
 
   query("myorderspage").classList.remove("is-active");
   query("myorderspage").classList.add("is-hidden");
+
+  query("acctsettingspage").classList.add("is-hidden");
 });
 
 query("home").addEventListener("click", () => {
@@ -651,6 +653,8 @@ query("home").addEventListener("click", () => {
 
   query("myorderspage").classList.remove("is-active");
   query("myorderspage").classList.add("is-hidden");
+
+  query("acctsettingspage").classList.add("is-hidden");
 });
 
 query("products").addEventListener("click", () => {
@@ -665,6 +669,8 @@ query("products").addEventListener("click", () => {
 
   query("myorderspage").classList.remove("is-active");
   query("myorderspage").classList.add("is-hidden");
+
+  query("acctsettingspage").classList.add("is-hidden");
 });
 
 query("orders").addEventListener("click", () => {
@@ -679,6 +685,9 @@ query("orders").addEventListener("click", () => {
 
   query("myorderspage").classList.remove("is-active");
   query("myorderspage").classList.add("is-hidden");
+
+  query("acctsettingspage").classList.add("is-hidden");
+
   resetorderbtn();
 });
 
@@ -699,6 +708,8 @@ query("myorders").addEventListener("click", () => {
 
   query("productpage").classList.remove("is-active");
   query("productpage").classList.add("is-hidden");
+
+  query("acctsettingspage").classList.add("is-hidden");
 });
 
 // Function to update the subtotal price
