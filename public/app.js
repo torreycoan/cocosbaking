@@ -231,6 +231,7 @@ query("resetorderbutton").addEventListener("click", (e) => {
   query("orderform").reset();
   updateSubtotalPrice();
 });
+
 function resetorderbtn() {
   query("orderform").reset();
   updateSubtotalPrice();
@@ -269,6 +270,7 @@ query("orderbutton").addEventListener("click", (e) => {
 
 // My Orders - Customer side - display all of the user's orders
 query("myorders").addEventListener("click", (allorders) => {
+
   db.collection("orders")
     .get()
     .then((data) => {
@@ -293,6 +295,7 @@ query("myorders").addEventListener("click", (allorders) => {
         //see all orders - and have hidden inputs so that we can later use them to update orders
         docs.forEach((doc) => {
           let order = doc.data();
+
           tablehtml += `<tr id = ${doc.id}>
         <td>${order.first_name} ${order.last_name} <input type = "text" value = "${order.first_name} ${order.last_name}"/></td>
         <td>${order.customer_email}</td>
@@ -313,7 +316,8 @@ query("myorders").addEventListener("click", (allorders) => {
       }
     });
 });
-myorders_area = document.querySelector("#myordersplaced");
+// myorders_area = document.querySelector("#myordersplaced");
+// ^ does not exist anymore
 function loadMyOrders(data) {
   myorders_area.innerHTML = "";
 
@@ -648,6 +652,7 @@ query("myorders").addEventListener("click", () => {
 
 // Function to update the subtotal price
 function updateordertotal() {}
+
 function updateSubtotalPrice() {
   let productName = query("productselection").value;
   const db = firebase.firestore();
