@@ -160,7 +160,7 @@
           </div>
           <div class="navbar-item pr-0 pl-0">
             <button
-              class="button is-normal is-outlined has-text-weight-bold"
+              class="button is-normal is-outlined has-text-weight-bold mr-2"
               id="signinlink"
             >
               Sign In
@@ -175,12 +175,33 @@
             </button>
           </div>
           <div class="navbar-item">
-            <button
-              id="signoutlink"
-              class="is-hidden button is-normal is-outlined"
-            >
-              Sign Out
-            </button>
+
+          </div>
+          <div class="navbar-item">
+            <div id="account_dropdown" class="dropdown is-right">
+              <div id="user-trigger" class="dropdown-trigger">
+                <button id="account_button" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <i class="fa-regular fa-user"></i>
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu is-right" id="dropdown-menu" role="menu">
+                <div id="user_drop_content" class="dropdown-content is-active">
+                  <p id="user_email_drop" class="dropdown-item">
+                    
+                  </p>
+
+                  <hr class="dropdown-divider">
+                  <a id="signoutlink" class="dropdown-item">
+                    Sign Out
+                  </a>
+                  <a href="#" class="dropdown-item">
+                    Account Settings
+                  </a>
+                  <hr class="dropdown-divider">
+                </div>
           </div>
         </div>
       </div>
@@ -207,7 +228,7 @@
         <div class="columns mt-6">
           <div class="column is-one-fifth"></div>
           <div class="column is-one-fifth pr-2">
-            <img src="images/Mixed Fruit Cake.jpg" alt="fruit cake" />
+            <img src="images/capitol.jpg" alt="fruit cake" />
             <h3
               class="is-size-4 has-text-centered has-text-weight-semibold pb-2"
             >
@@ -215,13 +236,12 @@
             </h3>
             <p class="pt-3 has-text-centered">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut
-              voluptas unde doloribus, fugiat a praesentium libero accusamus
-              reprehenderit, vel ea mollitia debitis nulla eum quia!
+              voluptas unde doloribus.
             </p>
           </div>
           <div class="column is-one-fifth">
             <img
-              src="images/Blueberry Swirl Cheesecake.jpg"
+              src="images/laptop.jpg"
               alt="blueberry cheesecake"
             />
             <h3
@@ -231,15 +251,12 @@
             </h3>
             <p class="pt-3 has-text-centered pl-3 pr-3">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Recusandae voluptas minus nisi! Consequuntur obcaecati quam magni
-              ratione debitis. Dignissimos tenetur excepturi culpa distinctio
-              unde illum aliquam vero sequi deserunt? Molestias molestiae odit
-              fugit enim voluptate.
+              Recusandae voluptas minus nisi! Consequuntur.
             </p>
           </div>
           <div class="column is-one-fifth pl-2">
             <img
-              src="images/Custom Cheesecake.jpg"
+              src="images/oven.jpg"
               alt="pretzel peanut butter cake"
             />
             <h3
@@ -249,8 +266,7 @@
             </h3>
             <p class="pt-3 has-text-centered">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut vitae
-              ipsum nihil, natus fugit beatae veniam molestiae, ducimus quos,
-              assumenda quidem itaque est reprehenderit id.
+              ipsum nihil, natus fugit.
             </p>
           </div>
           <div class="column is-one-fifth"></div>

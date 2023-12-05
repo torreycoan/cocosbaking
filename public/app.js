@@ -63,13 +63,44 @@ function message_bar(msg) {
   }, 5000);
 }
 
+// Account Dropdown
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the dropdown trigger and menu elements
+  const dropdownTrigger = document.querySelector("#user-trigger");
+  const dropdownMenu = document.querySelector("#account_dropdown");
+
+  // Function to toggle the dropdown menu
+  function toggleDropdown() {
+    dropdownMenu.classList.toggle("is-active");
+  }
+
+  // Add click event listener to the dropdown trigger
+  dropdownTrigger.addEventListener("click", toggleDropdown);
+
+  // Close the dropdown when clicking outside of it
+  document.addEventListener("click", function (event) {
+    const isClickInside =
+      dropdownMenu.contains(event.target) ||
+      dropdownTrigger.contains(event.target);
+    if (!isClickInside) {
+      dropdownMenu.classList.remove("is-active");
+    }
+  });
+});
+
 // ------------------------------------------------------------
 
 // SIGNIN CHECK
 auth.onAuthStateChanged((user) => {
   if (user) {
     // User is signed in.
-    query("currentuser").innerHTML = auth.currentUser.email;
+    if (user.email == "cocosbakingowner@gmail.com") {
+      admin_status = true;
+      document.getElementById("orders").innerHTML = "Add Products";
+      document.getElementById("myorders").innerHTML = "Manage Orders";
+    }
+    document.getElementById("user_email_drop").innerHTML = "";
     document.getElementById("signinlink").classList.add("is-hidden");
     document.getElementById("signuplink").classList.add("is-hidden");
     document.getElementById("signoutlink").classList.remove("is-hidden");
@@ -110,7 +141,6 @@ query("signoutlink").addEventListener("click", () => {
   auth
     .signOut()
     .then(() => {
-      query("currentuser").innerHTML = "";
       document.getElementById("signinlink").classList.remove("is-hidden");
       document.getElementById("signuplink").classList.remove("is-hidden");
       document.getElementById("signoutlink").classList.add("is-hidden");
@@ -158,7 +188,6 @@ query("signupbtn").addEventListener("click", (e) => {
       query("signup").reset();
       query("signupmodal").classList.remove("is-active");
 
-      query("currentuser").innerHTML = name;
       document.getElementById("signinlink").classList.add("is-hidden");
       document.getElementById("signuplink").classList.add("is-hidden");
       document.getElementById("signoutlink").classList.remove("is-hidden");
@@ -212,13 +241,26 @@ auth.onAuthStateChanged((user) => {
     query("myorders").classList.remove("is-hidden");
     query("signedoutordernow").classList.add("is-hidden");
     query("signedinordernow").classList.remove("is-hidden");
+    query("signuplink").classList.add("is-hidden");
+    query("signinlink").classList.add("is-hidden");
+    query("account_dropdown").classList.remove("is-hidden");
+    query("user_email_drop").innerHTML = auth.currentUser.email;
   } else {
+    query("user_email_drop").innerHTML = "";
     query("myorders").classList.add("is-hidden");
     query("signedoutordernow").classList.remove("is-hidden");
     query("signedinordernow").classList.add("is-hidden");
     query("incorrectpassword").classList.add("is-hidden");
+    query("signuplink").classList.remove("is-hidden");
+    query("signinlink").classList.remove("is-hidden");
+    query("account_dropdown").classList.add("is-hidden");
   }
 });
+
+// ------------------------------------------------------------
+
+// admin status
+let admin_status = false;
 
 // ------------------------------------------------------------
 
@@ -408,11 +450,16 @@ let menu_nav = document.querySelector("#menu_nav");
 function burger_open() {
   burger_nav.classList.add("is-active");
   menu_nav.classList.add("is-active");
+  console.log("hello");
+  document.querySelector("#account_dropdown").classList.remove("is-right");
+  document.querySelector("#account_dropdown").classList.add("is-active");
 }
 
 function burger_close() {
   burger_nav.classList.remove("is-active");
   menu_nav.classList.remove("is-active");
+  document.querySelector("#account_dropdown").classList.add("is-right");
+  document.querySelector("#account_dropdown").classList.remove("is-active");
 }
 document.addEventListener("click", function (event) {
   if (
@@ -427,6 +474,8 @@ burger_nav.addEventListener("click", function (event) {
   event.stopPropagation();
   burger_nav.classList.toggle("is-active");
   menu_nav.classList.toggle("is-active");
+  document.querySelector("#account_dropdown").classList.remove("is-right");
+  document.querySelector("#account_dropdown").classList.add("is-active");
 });
 
 // PRODUCTS PAGE ---------------------------------
