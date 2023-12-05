@@ -145,6 +145,9 @@ query("signoutlink").addEventListener("click", () => {
       document.getElementById("signuplink").classList.remove("is-hidden");
       document.getElementById("signoutlink").classList.add("is-hidden");
       message_bar("You have successfully signed out!");
+      query("myorderspage").classList.add("is-hidden");
+      query("homepage").classList.remove("is-hidden");
+      query("homepage").classList.add("is-active");
     })
     .catch((error) => {
       alert(error.message);
@@ -270,6 +273,7 @@ query("resetorderbutton").addEventListener("click", (e) => {
   query("orderform").reset();
   updateSubtotalPrice();
 });
+
 function resetorderbtn() {
   query("orderform").reset();
   updateSubtotalPrice();
@@ -308,6 +312,7 @@ query("orderbutton").addEventListener("click", (e) => {
 
 // My Orders - Customer side - display all of the user's orders
 query("myorders").addEventListener("click", (allorders) => {
+
   db.collection("orders")
     .get()
     .then((data) => {
@@ -319,42 +324,50 @@ query("myorders").addEventListener("click", (allorders) => {
         //TODO:if owner, add additional buttons & cols to the My Orders page
         // buttons: one to see pending orders, one to see accepted orders, one to see completed orders
         // maybe limit the number of orders that can be added on a page? or have another button for archived orders that she's not interested in seeing anymore?
-
         // console.log('admin')
         // html += "Admin view"
-
         //if owner/admin,
         //TODO: add additional columns for update/delete buttons
         document.querySelector(
           "#myorderstableheaders"
         ).innerHTML += `<th>Update</th>
-      <th>Delete</th>`;
+        <th>Delete</th>`;
         //see all orders - and have hidden inputs so that we can later use them to update orders
         docs.forEach((doc) => {
           let order = doc.data();
+          console.log(order)
           tablehtml += `<tr id = ${doc.id}>
-        <td>${order.first_name} ${order.last_name} <input type = "text" value = "${order.first_name} ${order.last_name}"/></td>
-        <td>${order.customer_email}</td>
-        <td>${order.product_type}</td>
-        <td>${order.quantity}</td>
-        <td>${order.delivery_method}</td>
-        <td>${order.formal_event}</td>
-        <td>${order.completion_date}</td>
-        <td>${order.additional_notes}</td>
-        <td>${order.order_total}</td>
-        <td>${order.order_status}</td>
-        <td>${order.payment_status}</td>
-        <td><button class="button" onclick="update_doc(this, '${doc.id}')">Update</button></td>
-        <td><button class="button is-danger" onclick="delete_doc(this, '${doc.id}')">Delete</button></td>
-        </tr>
-        `;
+          <td>${order.first_name} ${order.last_name} <input type = "text" value = "${order.first_name} ${order.last_name}"/></td>
+          <td>${order.customer_email}</td>
+          <td>${order.product_type}</td>
+          <td>${order.quantity}</td>
+          <td>${order.delivery_method}</td>
+          <td>${order.formal_event}</td>
+          <td>${order.completion_date}</td>
+          <td>${order.additional_notes}</td>
+          <td>${order.order_total}</td>
+          <td>${order.order_status}</td>
+          <td>${order.payment_status}</td>
+          <td><button class="button" onclick="update_doc(this, '${doc.id}')">Update</button></td>
+          <td><button class="button is-danger" onclick="delete_doc(this, '${doc.id}')">Delete</button></td>
+          </tr>
+          `;
+
         });
+
+        query('myorderstablebody').innerHTML += tablehtml
       }
+
     });
+
 });
 myorders_area = document.querySelector("#myordersplaced");
+// ^ does not exist anymore
 function loadMyOrders(data) {
-  myorders_area.innerHTML = "";
+  if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+    return
+  }
+  query('myordersplaced').innerHTML = "";
 
   let orders = data.docs;
   orders.forEach((order) => {
@@ -694,6 +707,7 @@ query("myorders").addEventListener("click", () => {
 
 // Function to update the subtotal price
 function updateordertotal() {}
+
 function updateSubtotalPrice() {
   let productName = query("productselection").value;
   const db = firebase.firestore();

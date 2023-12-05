@@ -2,157 +2,124 @@
 <!-- Firebase connected. Make sure edited files are also deployed at firebase -->
 <!-- Firebase Hosting URL: https://cocosbaking-b6361.web.app -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coco's Baking</title>
 
-    <!-- Bulma stylesheet -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coco's Baking</title>
 
-    <!-- Font Awesome if it's needed -->
-    <script
-      src="https://kit.fontawesome.com/150c7aa5e0.js"
-      crossorigin="anonymous"
-    ></script>
+  <!-- Bulma stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+  <!-- Font Awesome if it's needed -->
+  <script src="https://kit.fontawesome.com/150c7aa5e0.js" crossorigin="anonymous"></script>
 
-  <body>
-    <!-- sign up modal  -->
-    <div class="modal" id="signupmodal">
-      <div class="modal-background" id="signupmodalbg"></div>
-      <div
-        class="modal-content has-background-grey-light p-5"
-        id="signupmodalcontent"
-      >
-        <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
-          WELCOME TO COCO'S BAKING!
-        </h2>
-        <!-- sign up form -->
-        <form id="signup">
-          <!-- Name -->
-          <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-              <input class="input" id="signupname" type="text" />
-            </div>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- sign up modal  -->
+  <div class="modal" id="signupmodal">
+    <div class="modal-background" id="signupmodalbg"></div>
+    <div class="modal-content has-background-grey-light p-5" id="signupmodalcontent">
+      <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
+        WELCOME TO COCO'S BAKING!
+      </h2>
+      <!-- sign up form -->
+      <form id="signup">
+        <!-- Name -->
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input class="input" id="signupname" type="text" />
           </div>
-          <!-- email -->
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input class="input" type="email" id="signupemail" />
-            </div>
+        </div>
+        <!-- email -->
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input class="input" type="email" id="signupemail" />
           </div>
+        </div>
 
-          <!-- password -->
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input type="password" class="input" id="signuppassword" />
-            </div>
+        <!-- password -->
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input type="password" class="input" id="signuppassword" />
           </div>
-          <div class="has-text-centered">
-            <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
-            <button class="button has-text-danger mt-5" id="resetsignupfields">
-              Reset Fields
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="has-text-centered">
+          <button class="button mt-5 mr-3" id="signupbtn">Sign Up</button>
+          <button class="button has-text-danger mt-5" id="resetsignupfields">
+            Reset Fields
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <!-- sign in modal -->
-    <div class="modal" id="signinmodal">
-      <div class="modal-background" id="signinmodalbg"></div>
-      <div class="modal-content has-background-grey-light p-5">
-        <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
-          WELCOME BACK!
-        </h2>
-        <!-- sign in form -->
-        <form action="" id="signin">
-          <!-- email -->
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input class="input" type="email" id="signinemail" />
-            </div>
+  <!-- sign in modal -->
+  <div class="modal" id="signinmodal">
+    <div class="modal-background" id="signinmodalbg"></div>
+    <div class="modal-content has-background-grey-light p-5">
+      <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
+        WELCOME BACK!
+      </h2>
+      <!-- sign in form -->
+      <form action="" id="signin">
+        <!-- email -->
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input class="input" type="email" id="signinemail" />
           </div>
+        </div>
 
-          <!-- password -->
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input type="password" class="input" id="signinpassword" />
-            </div>
+        <!-- password -->
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input type="password" class="input" id="signinpassword" />
           </div>
-          <div
-            id="incorrectpassword"
-            class="is-hidden has-text-weight-bold has-text-danger"
-          >
-            *Incorrect password or email provided, try again
-          </div>
-          <div class="has-text-centered">
-            <button class="button mt-5 mr-3" id="signinbtn">Sign In</button>
-            <button class="button has-text-danger mt-5" id="resetsigninfields">
-              Reset Fields
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div id="incorrectpassword" class="is-hidden has-text-weight-bold has-text-danger">
+          *Incorrect password or email provided, try again
+        </div>
+        <div class="has-text-centered">
+          <button class="button mt-5 mr-3" id="signinbtn">Sign In</button>
+          <button class="button has-text-danger mt-5" id="resetsigninfields">
+            Reset Fields
+          </button>
+        </div>
+      </form>
     </div>
-    <div
-      id="signinmessage"
-      class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"
-    ></div>
+  </div>
+  <div id="signinmessage" class="is-hidden subtitle is-size-3 has-text-weight-bold has-text-centered"></div>
 
-    <!-- navbar setup -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a id="logohome"
-          ><img
-            src="images/cocosbakinglogo.png"
-            alt="cocosbakinglogo"
-            class="navbar-item"
-            id="navbar-logo"
-        /></a>
-        <a
-          role="button"
-          class="navbar-burger"
-          id="burger_nav"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+  <!-- navbar setup -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a id="logohome"><img src="images/cocosbakinglogo.png" alt="cocosbakinglogo" class="navbar-item"
+          id="navbar-logo" /></a>
+      <a role="button" class="navbar-burger" id="burger_nav" aria-label="menu" aria-expanded="false"
+        data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu" id="menu_nav">
+      <div class="navbar-start" id="nav-item">
+        <a class="navbar-item has-text-black has-text-weight-bold" id="home">Home</a>
+        <a class="navbar-item has-text-black has-text-weight-bold" id="products">Products</a>
+        <a class="navbar-item has-text-black has-text-weight-bold" id="orders">Order Now</a>
+        <a class="navbar-item has-text-black has-text-weight-bold is-hidden" id="myorders">My Orders</a>
       </div>
-      <div class="navbar-menu" id="menu_nav">
-        <div class="navbar-start" id="nav-item">
-          <a class="navbar-item has-text-black has-text-weight-bold" id="home"
-            >Home</a
-          >
-          <a
-            class="navbar-item has-text-black has-text-weight-bold"
-            id="products"
-            >Products</a
-          >
-          <a class="navbar-item has-text-black has-text-weight-bold" id="orders"
-            >Order Now</a
-          >
-          <a
-            class="navbar-item has-text-black has-text-weight-bold is-hidden"
-            id="myorders"
-            >My Orders</a
-          >
+      <div class="navbar-end ml-0">
+        <div class="navbar-item">
+          <span id="currentuser"></span>
         </div>
         <div class="navbar-end ml-0">
           <div class="navbar-item">
@@ -205,23 +172,20 @@
           </div>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <!-- message bar -->
-    <div
-      class="has-background-danger has-text-centered p-2 is-hidden"
-      id="message"
-    ></div>
+  <!-- message bar -->
+  <div class="has-background-danger has-text-centered p-2 is-hidden" id="message"></div>
 
-    <!-- main  -->
-    <main>
-      <div id="homepage" class="is-active">
-        <header class="header">
-          <div class="has-text-centered">
-            <div class="card">
-              <div class="card-image">
-                <img src="images/cocosbanner.jpg" alt="banner" />
-              </div>
+  <!-- main  -->
+  <main>
+    <div id="homepage" class="is-active">
+      <header class="header">
+        <div class="has-text-centered">
+          <div class="card">
+            <div class="card-image">
+              <img src="images/cocosbanner.jpg" alt="banner" />
             </div>
           </div>
         </header>
@@ -271,320 +235,278 @@
           </div>
           <div class="column is-one-fifth"></div>
         </div>
-        <div class="has-text-centered mb-5">
-          <h2 class="is-size-2 has-text-weight-bold">Browse Our Selection</h2>
-          <!-- images from the prototype go here -->
+      </header>
+     
+    <div id="productpage" class="is-hidden">
+      <header class="header">
+        <img src="images/products.png" class="image" />
+      </header>
+      <section class="section">
+        <!-- <button id='loadproductsbtn'>temp button to load producs</button> -->
+        <div class="container" id="productscontainer">
+          <!-- html for products will be added here -->
         </div>
-      </div>
-      <div id="productpage" class="is-hidden">
-        <header class="header">
-          <img src="images/products.png" class="image" />
-        </header>
-        <section class="section">
-          <!-- <button id='loadproductsbtn'>temp button to load producs</button> -->
-          <div class="container" id="productscontainer">
-            <!-- html for products will be added here -->
+      </section>
+    </div>
+
+    <div id="orderpage" class="is-hidden">
+      <header class="header">
+        <img src="images/ordernow.png" class="image" />
+      </header>
+      <div class="container">
+        <section>
+          <div id="signedoutordernow" class="has-text-centered has-text-danger mt-5">
+            <p>Please sign in or sign up to place an order</p>
+          </div>
+          <div id="signedinordernow" class="is-hidden">
+            <div class="container">
+              <form class="mt-6" id="orderform">
+                <!-- First Name Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">First Name</label>
+                  </div>
+                  <div class="control column">
+                    <input class="input" type="text" placeholder="John" id="firstname" />
+                  </div>
+                </div>
+                <!-- Last Name Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Last Name</label>
+                  </div>
+                  <div class="control column">
+                    <input class="input" type="text" placeholder="Smith" id="lastname" />
+                  </div>
+                </div>
+                <!-- Choose Product Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Choose Product</label>
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="productselection">
+                        <option>Banana Meringue Pie</option>
+                        <option>Blueberry Meringue Pie</option>
+                        <option>Blueberry Swirl Cheesecake</option>
+                        <option>Custom Cheesecake</option>
+                        <option>Mixed Fruit Cake</option>
+                        <!-- Additional product options can be added here -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Choose Quantity Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Quantity</label>
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="quantity">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10+ (Contact Please)</option>
+                        <!-- Additional product options can be added here -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Method of Delivery Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Method of Delivery</label>
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="deliverymethod">
+                        <option>Pick Up</option>
+                        <option>Delivery</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Order is for formal event Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Order is for formal event</label>
+                  </div>
+                  <div class="control column">
+                    <div class="select">
+                      <select id="formalevent">
+                        <option>No</option>
+                        <option>Yes</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <!-- Required order completion date Field -->
+                <div class="columns">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Required order completion date</label>
+                  </div>
+                  <div class="control column">
+                    <div class="date">
+                      <input type="date" id="completiondate" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Additional Notes Field -->
+                <div class="columns mb-5">
+                  <div class="field column is-one-quarter has-text-centered">
+                    <label class="label is-size-4">Additional Notes</label>
+                  </div>
+                  <div class="control column">
+                    <input class="input" type="text" placeholder="Add Sprinkles!" id="additionalnotes" />
+                  </div>
+                </div>
+
+                <!-- horizontal line -->
+                <hr />
+
+                <!-- Subtotal -->
+                <div class="columns mb-5 mt-5">
+                  <div class="field column is-half has-text-centered">
+                    <label class="label is-size-4">Subtotal</label>
+                  </div>
+                  <div class="control column">
+                    <p id="subtotalprice" class="is-size-5"></p>
+                  </div>
+                </div>
+
+                <!-- horizontal line -->
+                <hr />
+
+                <!-- order buttons -->
+                <div class="mt-6 has-text-centered">
+                  <button class="button is-primary mr-4" id="orderbutton">
+                    Place Order
+                  </button>
+                  <button class="button is-danger" id="resetorderbutton">
+                    Reset Selections
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </section>
       </div>
+    </div>
 
-      <div id="orderpage" class="is-hidden">
-        <header class="header">
-          <img src="images/ordernow.png" class="image" />
-        </header>
-        <div class="container">
-          <section>
-            <div
-              id="signedoutordernow"
-              class="has-text-centered has-text-danger mt-5"
-            >
-              <p>Please sign in or sign up to place an order</p>
-            </div>
-            <div id="signedinordernow" class="is-hidden">
-              <div class="container">
-                <form class="mt-6" id="orderform">
-                  <!-- First Name Field -->
-                  <div class="columns">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4">First Name</label>
-                    </div>
-                    <div class="control column">
-                      <input
-                        class="input"
-                        type="text"
-                        placeholder="John"
-                        id="firstname"
-                      />
-                    </div>
-                  </div>
-                  <!-- Last Name Field -->
-                  <div class="columns">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4">Last Name</label>
-                    </div>
-                    <div class="control column">
-                      <input
-                        class="input"
-                        type="text"
-                        placeholder="Smith"
-                        id="lastname"
-                      />
-                    </div>
-                  </div>
-                  <!-- Choose Product Field -->
-                  <div class="columns">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4">Choose Product</label>
-                    </div>
-                    <div class="control column">
-                      <div class="select">
-                        <select id="productselection">
-                          <option>Banana Meringue Pie</option>
-                          <option>Blueberry Meringue Pie</option>
-                          <option>Blueberry Swirl Cheesecake</option>
-                          <option>Custom Cheesecake</option>
-                          <option>Mixed Fruit Cake</option>
-                          <!-- Additional product options can be added here -->
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Choose Quantity Field -->
-                  <div class="columns">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4">Quantity</label>
-                    </div>
-                    <div class="control column">
-                      <div class="select">
-                        <select id="quantity">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                          <option>6</option>
-                          <option>7</option>
-                          <option>8</option>
-                          <option>9</option>
-                          <option>10+ (Contact Please)</option>
-                          <!-- Additional product options can be added here -->
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Method of Delivery Field -->
-                  <div class="columns">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4">Method of Delivery</label>
-                    </div>
-                    <div class="control column">
-                      <div class="select">
-                        <select id="deliverymethod">
-                          <option>Pick Up</option>
-                          <option>Delivery</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Order is for formal event Field -->
-                  <div class="columns">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4"
-                        >Order is for formal event</label
-                      >
-                    </div>
-                    <div class="control column">
-                      <div class="select">
-                        <select id="formalevent">
-                          <option>No</option>
-                          <option>Yes</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Required order completion date Field -->
-                  <div class="columns">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4"
-                        >Required order completion date</label
-                      >
-                    </div>
-                    <div class="control column">
-                      <div class="date">
-                        <input type="date" id="completiondate" />
-                      </div>
-                    </div>
-                  </div>
+    <!-- My Orders Page -->
 
-                  <!-- Additional Notes Field -->
-                  <div class="columns mb-5">
-                    <div class="field column is-one-quarter has-text-centered">
-                      <label class="label is-size-4">Additional Notes</label>
-                    </div>
-                    <div class="control column">
-                      <input
-                        class="input"
-                        type="text"
-                        placeholder="Add Sprinkles!"
-                        id="additionalnotes"
-                      />
-                    </div>
-                  </div>
+    <div id="myorderspage" class="is-hidden">
+      <header class="header">
+        <img src="images/myorders.png" class="image" />
+      </header>
+      <div class="container">
+        <div class="columns">
 
-                  <!-- horizontal line -->
+          <div class="column is-one-quarter">
+            <div class="card mt-6 p-3">
+              <div class="is-size-5 has-text-centered has-text-weight-bold">
+                Filter Your Orders
+              </div>
+              <hr />
+              <form id="filterform">
+                <div class="mt-5 is-size-6 has-text-weight-bold">
+                  Order Status:
+                  <select class="select" id="orderstatusfilter">
+                    <option value="No Selection"></option>
+                    <option value="Pending acceptance/rejection">
+                      Pending acceptance/rejection
+                    </option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+                  <div class="mt-5">
+                    Payment Status:
+                    <br />
+                    <select class="select" id="paymentstatusfilter">
+                      <option value="No Selection"></option>
+                      <option value="Not paid">Not paid</option>
+                      <option value="Paid">Paid</option>
+                    </select>
+                  </div>
                   <hr />
-
-                  <!-- Subtotal -->
-                  <div class="columns mb-5 mt-5">
-                    <div class="field column is-half has-text-centered">
-                      <label class="label is-size-4">Subtotal</label>
-                    </div>
-                    <div class="control column">
-                      <p id="subtotalprice" class="is-size-5"></p>
-                    </div>
-                  </div>
-
-                  <!-- horizontal line -->
-                  <hr />
-
-                  <!-- order buttons -->
-                  <div class="mt-6 has-text-centered">
-                    <button class="button is-primary mr-4" id="orderbutton">
-                      Place Order
+                  <div>
+                    <button class="button mb-4 has-text-weight-bold" id="filterbutton">
+                      Filter
                     </button>
-                    <button class="button is-danger" id="resetorderbutton">
+                    <button class="button has-text-weight-bold" id="resetfilterbutton">
                       Reset Selections
                     </button>
                   </div>
-                </form>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <!-- My Orders Page -->
-
-      <div id="myorderspage" class="is-hidden">
-        <header class="header">
-          <img src="images/myorders.png" class="image" />
-        </header>
-        <div class="container">
-          <div class="columns">
-            <div class="column is-three-quarters">
-              <div class="p-5 m-3" id="myordersplaced"></div>
-            </div>
-            <div class="column is-one-quarter">
-              <div class="card mt-6 p-3">
-                <div class="is-size-5 has-text-centered has-text-weight-bold">
-                  Filter Your Orders
                 </div>
-                <hr />
-                <form id="filterform">
-                  <div class="mt-5 is-size-6 has-text-weight-bold">
-                    Order Status:
-                    <select class="select" id="orderstatusfilter">
-                      <option value="No Selection"></option>
-                      <option value="Pendindg">
-                        Pending acceptance/rejection
-                      </option>
-                      <option value="Accepted">Accepted</option>
-                      <option value="Rejected">Rejected</option>
-                    </select>
-                    <div class="mt-5">
-                      Payment Status:
-                      <br />
-                      <select class="select" id="paymentstatusfilter">
-                        <option value="No Selection"></option>
-                        <option value="Not paid">Not paid</option>
-                        <option value="Paid">Paid</option>
-                      </select>
-                    </div>
-                    <hr />
-                    <div>
-                      <button
-                        class="button mb-4 has-text-weight-bold"
-                        id="filterbutton"
-                      >
-                        Filter
-                      </button>
-                      <button
-                        class="button has-text-weight-bold"
-                        id="resetfilterbutton"
-                      >
-                        Reset Selections
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+              </form>
+            </div>
+          </div>
+          <div class="column is-three-quarters mt-6">
+
+            <div id="myordersplaced">
+              <table class="table is-striped is-narrow">
+                <thead>
+                  <tr id="myorderstableheaders">
+                    <th><abbr title="Customer name">Customer name</abbr></th>
+                    <th><abbr title="Customer Email">Customer email</abbr></th>
+                    <th>Product</th>
+                    <th><abbr title="Quantity">Quantity</abbr></th>
+                    <th><abbr title="Delivery method">Delivery method</abbr></th>
+                    <th><abbr title="Formal event">Formal event</abbr></th>
+                    <th><abbr title="Date">Required completion date</abbr></th>
+                    <th><abbr title="Additional Notes">Additional Notes</abbr></th>
+                    <th>
+                      <abbr title="Order total" id="ordertotal">Order total</abbr>
+                    </th>
+                    <th><abbr title="Order status">Order status</abbr></th>
+                    <th><abbr title="Payment status">Payment status</abbr></th>
+                  </tr>
+                </thead>
+                <tbody id="myorderstablebody">
+                  <!-- rows of order data will go here -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
+
+
       </div>
+    </div>
 
-      <div id="myorderspage" class="is-hidden">
-        <header class="header">
-          <img src="images/myorders.png" class="image" />
-        </header>
-        <div class="p-5 m-5" id="myordersplaced">
-          <button
-            class="button"
-            id="seeallorders"
-            style="background-color: rgb(255, 203, 138)"
-          >
-            All orders
-          </button>
-          <button class="button" id="seependingordersbutton">
-            Accept/reject orders
-          </button>
-          <button class="button is-warning" id="unfinishedordersbutton">
-            Unfinished orders
-          </button>
-          <table class="table is-striped is-narrow">
-            <thead>
-              <tr id="myorderstableheaders">
-                <th><abbr title="Customer name">Customer name</abbr></th>
-                <th><abbr title="Customer Email">Customer email</abbr></th>
-                <th>Product</th>
-                <th><abbr title="Quantity">Quantity</abbr></th>
-                <th><abbr title="Delivery method">Delivery method</abbr></th>
-                <th><abbr title="Formal event">Formal event</abbr></th>
-                <th><abbr title="Date">Required completion date</abbr></th>
-                <th><abbr title="Additional Notes">Additional Notes</abbr></th>
-                <th>
-                  <abbr title="Order total" id="ordertotal">Order total</abbr>
-                </th>
-                <th><abbr title="Order status">Order status</abbr></th>
-                <th><abbr title="Payment status">Payment status</abbr></th>
-              </tr>
-            </thead>
-            <tbody id="myorderstablebody">
-              <!-- rows of order data will go here -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </main>
+    <div id="myorderspage" class="is-hidden">
 
-    <!-- footer -->
-    <footer class="footer mt-5">
-      <div class="content has-text-centered">
-        <p>INFO SYS 424 Project By Group 4</p>
-      </div>
-    </footer>
-  </body>
-  <!-- firebase app -->
-  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    </div>
+  </main>
 
-  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+  <!-- footer -->
+  <footer class="footer mt-5">
+    <div class="content has-text-centered">
+      <p>INFO SYS 424 Project By Group 4</p>
+    </div>
+  </footer>
+</body>
+<!-- firebase app -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
 
-  <!-- Connect with app.js file -->
-  <script src="app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+<!-- Connect with app.js file -->
+<script src="app.js"></script>
+
 </html>
