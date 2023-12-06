@@ -313,8 +313,7 @@ query("orderbutton").addEventListener("click", (e) => {
   resetorderbtn();
 });
 // -------------------------------------------------------
-
-// My Orders - Customer side - display all of the user's orders
+// My Orders - Owner side - display all orders
 query("myorders").addEventListener("click", (allorders) => {
   db.collection("orders")
     .get()
@@ -331,10 +330,7 @@ query("myorders").addEventListener("click", (allorders) => {
         // html += "Admin view"
         //if owner/admin,
         //TODO: add additional columns for update/delete buttons
-        document.querySelector(
-          "#myorderstableheaders"
-        ).innerHTML += `<th>Update</th>
-        <th>Delete</th>`;
+
         //see all orders - and have hidden inputs so that we can later use them to update orders
         docs.forEach((doc) => {
           let order = doc.data();
@@ -348,11 +344,24 @@ query("myorders").addEventListener("click", (allorders) => {
           <td>${order.formal_event}</td>
           <td>${order.completion_date}</td>
           <td>${order.additional_notes}</td>
-          <td>${order.order_total}</td>
-          <td>${order.order_status}</td>
-          <td>${order.payment_status}</td>
-          <td><button class="button" onclick="update_doc(this, '${doc.id}')">Update</button></td>
-          <td><button class="button is-danger" onclick="delete_doc(this, '${doc.id}')">Delete</button></td>
+          <td>${order.order_total} </td>
+          <td>${order.order_status} 
+              <div class = "select"><select id = "${doc.id}neworderstatus">
+                <option>Pending acceptance/rejection</option>
+                <option>Accepted</option>
+                <option>Rejected</option>
+                <option>In progress</option>
+                <option>Completed</option>
+              </select></div>
+              </td>
+          <td>${order.payment_status}
+              <div class = "select"><select id = "${doc.id}newpaymentstatus">
+                <option>Not paid</option>
+                <option>Paid</option>
+              </select></div>
+          </td>
+          <td><button class="button" onclick="update_order('${doc.id}')">Update</button></td>
+          <td><button class="button is-danger" onclick="delete_order('${doc.id}')">Delete</button></td>
           </tr>
           `;
         });
@@ -794,6 +803,15 @@ function update_doc(id) {
   message_bar("Information Updated!");
   query("updategoback").classList.add("is-hidden");
   query("updateinfobutton").classList.remove("is-hidden");
+}
+
+// Owner's My Orders/Manage Orders page - update_order function
+function update_order(id) {
+  // get new payment/order status info
+  neworderstatus = query(`${doc.id}newpaymentstatus`)
+  newpaymentstatus = query(`${doc.id}newpaymentstatus`)
+  console.log(neworderstatus, newpaymentstatus)
+
 }
 
 // click event for when user clicks on update information
