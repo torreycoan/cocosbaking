@@ -28,7 +28,6 @@ function delMyOrders(id) {
         .then((data) => {
           loadMyOrders(data);
         });
-
     });
 }
 
@@ -179,15 +178,19 @@ query("signupbtn").addEventListener("click", (e) => {
   e.preventDefault();
 
   // name, email and password from the form
-  const name = query("signupname").value;
+  const fname = query("signupfname").value;
+  const lname = query("signuplname").value;
   const email = query("signupemail").value;
   const phone = query("signupphone").value;
+  const venmo = query("signupvenmo").value;
   const password = query("signuppassword").value;
 
   let data = {
-    name: name,
+    fname: fname,
+    lname: lname,
     email: email,
     phone: phone,
+    venmo: venmo,
   };
 
   auth
@@ -200,7 +203,7 @@ query("signupbtn").addEventListener("click", (e) => {
       document.getElementById("signuplink").classList.add("is-hidden");
       document.getElementById("signoutlink").classList.remove("is-hidden");
       db.collection("users").doc(email).set(data);
-      message_bar(`You (${name}) have succussfully signed up!`);
+      message_bar(`You (${fname}) have succussfully signed up!`);
     })
     .catch(() => {
       alert("The email address is already in use by another account.");
@@ -317,9 +320,8 @@ query("orderbutton").addEventListener("click", (e) => {
 // My Orders - Owner side - display all orders
 //query("myorders").addEventListener("click", (allorders) => {
 
-
 function ownerLoadMyOrders(data) {
-  query("myorderstablebody").innerHTML = ``
+  query("myorderstablebody").innerHTML = ``;
   let docs = data.docs; //array to loop thru
   let tablehtml = ``;
   let html = ``;
@@ -611,9 +613,9 @@ query("filterbutton").addEventListener("click", (e) => {
       .get()
       .then((data) => {
         if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
-          return ownerLoadMyOrders(data)
-        };
-        return loadMyOrders(data)
+          return ownerLoadMyOrders(data);
+        }
+        return loadMyOrders(data);
       });
   }
   if (orderstatus != "No Selection" && paymentstatus == "No Selection") {
@@ -622,9 +624,9 @@ query("filterbutton").addEventListener("click", (e) => {
       .get()
       .then((data) => {
         if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
-          return ownerLoadMyOrders(data)
-        };
-        return loadMyOrders(data)
+          return ownerLoadMyOrders(data);
+        }
+        return loadMyOrders(data);
       });
   }
   if (orderstatus == "No Selection" && paymentstatus != "No Selection") {
@@ -633,10 +635,10 @@ query("filterbutton").addEventListener("click", (e) => {
       .get()
       .then((data) => {
         if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
-          console.log('hi')
-          return ownerLoadMyOrders(data)
-        };
-        return loadMyOrders(data)
+          console.log("hi");
+          return ownerLoadMyOrders(data);
+        }
+        return loadMyOrders(data);
       });
   }
   if (orderstatus == "No Selection" && paymentstatus == "No Selection") {
@@ -727,7 +729,7 @@ query("myorders").addEventListener("click", () => {
     .get()
     .then((data) => {
       if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
-        return ownerLoadMyOrders(data)
+        return ownerLoadMyOrders(data);
       }
       loadMyOrders(data);
     });
@@ -803,8 +805,9 @@ function settingsuserinfo(email) {
       docs = data.docs;
       docs.forEach((doc) => {
         if (email == doc.id) {
-          query("acctsettingsname").innerHTML = doc.data().name;
-          query("acctsettingsemail").innerHTML = doc.data().email;
+          query("acctsettingsfname").innerHTML = doc.data().fname;
+          query("acctsettingslname").innerHTML = doc.data().lname;
+          query("acctsettingsvenmo").innerHTML = doc.data().venmo;
           query("acctsettingsphone").innerHTML = doc.data().phone;
         }
       });
@@ -815,14 +818,16 @@ function update_doc(id) {
   db.collection("users")
     .doc(id)
     .update({
-      name: query("namechange").value,
-      email: query("emailchange").value,
+      fname: query("fnamechange").value,
+      lname: query("lnamechange").value,
       phone: query("phonechange").value,
+      venmo: query("venmochange").value,
     });
   settingsuserinfo(auth.currentUser.email);
-  query("settingsinputname").innerHTML = ``;
-  query("settingsinputemail").innerHTML = ``;
+  query("settingsinputfname").innerHTML = ``;
+  query("settingsinputlname").innerHTML = ``;
   query("settingsinputphone").innerHTML = ``;
+  query("settingsinputvenmo").innerHTML = ``;
   message_bar("Information Updated!");
   query("updategoback").classList.add("is-hidden");
   query("updateinfobutton").classList.remove("is-hidden");
@@ -831,25 +836,23 @@ function update_doc(id) {
 // Owner's My Orders/Manage Orders page - update_order function
 function update_order(id) {
   // get new payment/order status info
-  neworderstatus = query(`order${id}neworderstatus`).value
-  newpaymentstatus = query(`order${id}newpaymentstatus`).value
+  neworderstatus = query(`order${id}neworderstatus`).value;
+  newpaymentstatus = query(`order${id}newpaymentstatus`).value;
   //console.log(neworderstatus, newpaymentstatus)
 
   // update orders collection
   db.collection("orders").doc(id).update({
     order_status: neworderstatus,
-    payment_status: newpaymentstatus
-  })
+    payment_status: newpaymentstatus,
+  });
 
-  message_bar(`Order has been updated!`)
-
+  message_bar(`Order has been updated!`);
 }
 
 // click event for when user clicks on update information
 query("updateinfobutton").addEventListener("click", () => {
   query("updateinfobutton").classList.add("is-hidden");
   query("updategoback").classList.remove("is-hidden");
-  query("");
   db.collection("users")
     .get()
     .then((data) => {
@@ -858,22 +861,30 @@ query("updateinfobutton").addEventListener("click", () => {
         if (auth.currentUser.email == doc.id) {
           id = doc.id;
           query(
-            "settingsinputname"
-          ).innerHTML = `<input type="text" class="input" id="namechange" value="${
-            doc.data().name
+            "settingsinputfname"
+          ).innerHTML = `<input type="text" class="input" id="fnamechange" value="${
+            doc.data().fname
           }"><button class="button m-3" onclick="update_doc('${id}')">Update</button>
           `;
 
           query(
-            "settingsinputemail"
-          ).innerHTML = `<input type="text" class="input" id="emailchange" value="${
-            doc.data().email
+            "settingsinputlname"
+          ).innerHTML = `<input type="text" class="input" id="lnamechange" value="${
+            doc.data().lname
           }"><button class="button m-3" onclick="update_doc('${id}')">Update</button>
           `;
+
           query(
             "settingsinputphone"
           ).innerHTML = `<input type="text" class="input" id="phonechange" value="${
             doc.data().phone
+          }"><button class="button m-3" onclick="update_doc('${id}')">Update</button>
+          `;
+
+          query(
+            "settingsinputvenmo"
+          ).innerHTML = `<input type="text" class="input" id="venmochange" value="${
+            doc.data().venmo
           }"><button class="button m-3" onclick="update_doc('${id}')">Update</button>
           `;
         }
@@ -882,9 +893,10 @@ query("updateinfobutton").addEventListener("click", () => {
 });
 
 query("updategoback").addEventListener("click", () => {
-  query("settingsinputname").innerHTML = ``;
-  query("settingsinputemail").innerHTML = ``;
+  query("settingsinputfname").innerHTML = ``;
+  query("settingsinputlname").innerHTML = ``;
   query("settingsinputphone").innerHTML = ``;
+  query("settingsinputvenmo").innerHTML = ``;
   query("updategoback").classList.add("is-hidden");
   query("updateinfobutton").classList.remove("is-hidden");
 });

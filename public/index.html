@@ -28,13 +28,22 @@
       </h2>
       <!-- sign up form -->
       <form id="signup">
-        <!-- Name -->
+        <!-- First Name -->
         <div class="field">
-          <label class="label">Name</label>
+          <label class="label">First Name</label>
           <div class="control">
-            <input class="input" id="signupname" type="text" />
+            <input class="input" id="signupfname" type="text" />
           </div>
         </div>
+
+         <!-- Last Name -->
+         <div class="field">
+          <label class="label">Last Name</label>
+          <div class="control">
+            <input class="input" id="signuplname" type="text" />
+          </div>
+        </div>
+
         <!-- email -->
         <div class="field">
           <label class="label">Email</label>
@@ -48,6 +57,14 @@
           <label class="label">Phone</label>
           <div class="control">
             <input class="input" type="text" id="signupphone">
+          </div>
+        </div>
+
+        <!-- venmo -->
+        <div class="field">
+          <label class="label">Venmo Account (NO "@" SIGN NEEDED)</label>
+          <div class="control">
+            <input class="input" type="text" id="signupvenmo">
           </div>
         </div>
 
@@ -190,13 +207,17 @@
 
           <div class="card has-background-grey-lighter m-5 p-3">
             <form action="" id="changeacctform">
-              <label class="label">Name: <span id="acctsettingsname"></span></label>
-              <div class='control' id="namechangeinput">
-                <div id="settingsinputname"></div>
+              <label class="label">First Name: <span id="acctsettingsfname"></span></label>
+              <div class='control' id="fnamechangeinput">
+                <div id="settingsinputfname"></div>
               </div>
-              <label class="label">Email: <span id="acctsettingsemail"></span></label>
-              <div class='control' id="emailchangeinput">
-                <div id="settingsinputemail"></div>
+              <label class="label">Last Name: <span id="acctsettingslname"></span></label>
+              <div class='control' id="lnamechangeinput">
+                <div id="settingsinputlname"></div>
+              </div>             
+              <label class="label">Venmo: <span id="acctsettingsvenmo"></span></label>
+              <div class='control' id="venmochangeinput">
+                <div id="settingsinputvenmo"></div>
               </div>
               <label class="label">Phone: <span id="acctsettingsphone"></span></label>
               <div class='control' id="phonechangeinput">
