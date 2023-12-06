@@ -315,28 +315,29 @@ query("orderbutton").addEventListener("click", (e) => {
 });
 // -------------------------------------------------------
 // My Orders - Owner side - display all orders
-query("myorders").addEventListener("click", (allorders) => {
-  db.collection("orders")
-    .get()
-    .then((data) => {
-      let docs = data.docs; //array to loop thru
-      let tablehtml = ``;
-      let html = ``;
+//query("myorders").addEventListener("click", (allorders) => {
 
-      if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
-        //TODO:if owner, add additional buttons & cols to the My Orders page
-        // buttons: one to see pending orders, one to see accepted orders, one to see completed orders
-        // maybe limit the number of orders that can be added on a page? or have another button for archived orders that she's not interested in seeing anymore?
-        // console.log('admin')
-        // html += "Admin view"
-        //if owner/admin,
-        //TODO: add additional columns for update/delete buttons
 
-        //see all orders - and have hidden inputs so that we can later use them to update orders
-        docs.forEach((doc) => {
-          let order = doc.data();
+function ownerLoadMyOrders(data) {
+  query("myorderstablebody").innerHTML = ``
+  let docs = data.docs; //array to loop thru
+  let tablehtml = ``;
+  let html = ``;
 
-          tablehtml += `<tr id = ${doc.id}>
+  if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+    //TODO:if owner, add additional buttons & cols to the My Orders page
+    // buttons: one to see pending orders, one to see accepted orders, one to see completed orders
+    // maybe limit the number of orders that can be added on a page? or have another button for archived orders that she's not interested in seeing anymore?
+    // console.log('admin')
+    // html += "Admin view"
+    //if owner/admin,
+    //TODO: add additional columns for update/delete buttons
+
+    //see all orders - and have hidden inputs so that we can later use them to update orders
+    docs.forEach((doc) => {
+      let order = doc.data();
+
+      tablehtml += `<tr id = ${doc.id}>
           <td>${order.first_name} ${order.last_name}</td>
           <td>${order.customer_email}</td>
           <td>${order.product_type}</td>
@@ -367,12 +368,12 @@ query("myorders").addEventListener("click", (allorders) => {
           <td><button class="button is-danger" onclick="delMyOrders('${doc.id}')">Delete</button></td>
           </tr>
           `;
-        });
-
-        query("myorderstablebody").innerHTML += tablehtml;
-      }
     });
-});
+
+    query("myorderstablebody").innerHTML += tablehtml;
+  }
+}
+//});
 myorders_area = document.querySelector("#myordersplaced");
 // ^ does not exist anymore
 function loadMyOrders(data) {
@@ -608,19 +609,35 @@ query("filterbutton").addEventListener("click", (e) => {
       .where("order_status", "==", orderstatus)
       .where("payment_status", "==", paymentstatus)
       .get()
-      .then((data) => loadMyOrders(data));
+      .then((data) => {
+        if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+          return ownerLoadMyOrders(data)
+        };
+        return loadMyOrders(data)
+      });
   }
   if (orderstatus != "No Selection" && paymentstatus == "No Selection") {
     db.collection("orders")
       .where("order_status", "==", orderstatus)
       .get()
-      .then((data) => loadMyOrders(data));
+      .then((data) => {
+        if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+          return ownerLoadMyOrders(data)
+        };
+        return loadMyOrders(data)
+      });
   }
   if (orderstatus == "No Selection" && paymentstatus != "No Selection") {
     db.collection("orders")
       .where("payment_status", "==", paymentstatus)
       .get()
-      .then((data) => loadMyOrders(data));
+      .then((data) => {
+        if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+          console.log('hi')
+          return ownerLoadMyOrders(data)
+        };
+        return loadMyOrders(data)
+      });
   }
   if (orderstatus == "No Selection" && paymentstatus == "No Selection") {
     message_bar("Make a selection to filter!");
@@ -709,6 +726,9 @@ query("myorders").addEventListener("click", () => {
   db.collection("orders")
     .get()
     .then((data) => {
+      if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+        return ownerLoadMyOrders(data)
+      }
       loadMyOrders(data);
     });
   query("myorderspage").classList.remove("is-hidden");
