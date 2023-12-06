@@ -334,7 +334,7 @@ query("myorders").addEventListener("click", (allorders) => {
         //see all orders - and have hidden inputs so that we can later use them to update orders
         docs.forEach((doc) => {
           let order = doc.data();
-          console.log(order);
+
           tablehtml += `<tr id = ${doc.id}>
           <td>${order.first_name} ${order.last_name} <input type = "text" value = "${order.first_name} ${order.last_name}"/></td>
           <td>${order.customer_email}</td>
@@ -345,17 +345,19 @@ query("myorders").addEventListener("click", (allorders) => {
           <td>${order.completion_date}</td>
           <td>${order.additional_notes}</td>
           <td>${order.order_total} </td>
-          <td>${order.order_status} 
-              <div class = "select"><select id = "${doc.id}neworderstatus">
-                <option>Pending acceptance/rejection</option>
+          <td>
+              <div class = "select"><select id = "order${doc.id}neworderstatus">
+              <option selected disabled hidden>${order.order_status}</option>
+              <option>Pending acceptance/rejection</option>
                 <option>Accepted</option>
                 <option>Rejected</option>
                 <option>In progress</option>
                 <option>Completed</option>
               </select></div>
               </td>
-          <td>${order.payment_status}
-              <div class = "select"><select id = "${doc.id}newpaymentstatus">
+          <td>
+              <div class = "select"><select id = "order${doc.id}newpaymentstatus">
+                <option selected disabled hidden>${order.payment_status}</option>
                 <option>Not paid</option>
                 <option>Paid</option>
               </select></div>
@@ -808,9 +810,17 @@ function update_doc(id) {
 // Owner's My Orders/Manage Orders page - update_order function
 function update_order(id) {
   // get new payment/order status info
-  neworderstatus = query(`${doc.id}newpaymentstatus`)
-  newpaymentstatus = query(`${doc.id}newpaymentstatus`)
-  console.log(neworderstatus, newpaymentstatus)
+  neworderstatus = query(`order${id}neworderstatus`).value
+  newpaymentstatus = query(`order${id}newpaymentstatus`).value
+  //console.log(neworderstatus, newpaymentstatus)
+
+  // update orders collection
+  db.collection("orders").doc(id).update({
+    order_status: neworderstatus,
+    payment_status: newpaymentstatus
+  })
+
+  message_bar(`Order has been updated!`)
 
 }
 
