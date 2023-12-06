@@ -78,3 +78,11 @@ hr {
   flex-direction: column;
   height: 100%;
 }
+
+.scroll {
+  /* background-color: #fccb8a; */
+  width: 120%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}

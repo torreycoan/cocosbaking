@@ -337,7 +337,7 @@ query("myorders").addEventListener("click", (allorders) => {
           let order = doc.data();
 
           tablehtml += `<tr id = ${doc.id}>
-          <td>${order.first_name} ${order.last_name} <input type = "text" value = "${order.first_name} ${order.last_name}"/></td>
+          <td>${order.first_name} ${order.last_name}</td>
           <td>${order.customer_email}</td>
           <td>${order.product_type}</td>
           <td>${order.quantity}</td>
