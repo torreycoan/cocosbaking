@@ -28,6 +28,7 @@ function delMyOrders(id) {
         .then((data) => {
           loadMyOrders(data);
         });
+
     });
 }
 
@@ -363,7 +364,7 @@ query("myorders").addEventListener("click", (allorders) => {
               </select></div>
           </td>
           <td><button class="button" onclick="update_order('${doc.id}')">Update</button></td>
-          <td><button class="button is-danger" onclick="delete_order('${doc.id}')">Delete</button></td>
+          <td><button class="button is-danger" onclick="delMyOrders('${doc.id}')">Delete</button></td>
           </tr>
           `;
         });
