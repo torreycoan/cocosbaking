@@ -648,7 +648,7 @@ query("filterbutton").addEventListener("click", (e) => {
 });
 
 // reset filter form
-query("button").addEventListener("click", (e) => {
+query("resetfilterbutton").addEventListener("click", (e) => {
   e.preventDefault();
   db.collection("orders")
     .get()
