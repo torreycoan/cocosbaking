@@ -727,15 +727,15 @@ query("orders").addEventListener("click", () => {
 
   query("acctsettingspage").classList.add("is-hidden");
 
-  resetorderbtn();
-
   db.collection("products")
     .get()
     .then((data) => {
       let docs = data.docs;
       let html = ``;
       docs.forEach((doc) => {
-        html += `<option>${doc.data().name}</option>`;
+        html += `<option value="${doc.data().name}">${
+          doc.data().name
+        }</option>`;
       });
       query("productselection").innerHTML = html;
     });
@@ -792,7 +792,6 @@ function updateSubtotalPrice() {
     });
 }
 
-updateSubtotalPrice();
 document
   .getElementById("productselection")
   .addEventListener("change", updateSubtotalPrice);
