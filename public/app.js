@@ -26,7 +26,7 @@ function delMyOrders(id) {
       db.collection("orders")
         .get()
         .then((data) => {
-          loadMyOrders(data);
+          ownerLoadMyOrders(data);
         });
     });
   message_bar(`Order has been deleted!`);
