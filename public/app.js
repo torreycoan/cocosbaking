@@ -29,6 +29,7 @@ function delMyOrders(id) {
           loadMyOrders(data);
         });
     });
+  message_bar(`Order has been deleted!`);
 }
 
 // ------------------------------------------------------------
@@ -616,7 +617,7 @@ query("filterbutton").addEventListener("click", (e) => {
         if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
           return ownerLoadMyOrders(data);
         }
-        return loadMyOrders(data);
+        // return loadMyOrders(data);
       });
   }
   if (orderstatus != "No Selection" && paymentstatus == "No Selection") {
@@ -636,7 +637,6 @@ query("filterbutton").addEventListener("click", (e) => {
       .get()
       .then((data) => {
         if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
-          console.log("hi");
           return ownerLoadMyOrders(data);
         }
         return loadMyOrders(data);
@@ -654,8 +654,13 @@ query("resetfilterbutton").addEventListener("click", (e) => {
     .get()
     .then((data) => {
       query("filterform").reset();
-      loadMyOrders(data);
+      if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+        ownerLoadMyOrders(data);
+      } else {
+        loadMyOrders(data);
+      }
     });
+  message_bar("Filter reset!");
 });
 
 // customer side showing and hiding parts of main (home, products, order now, my orders)
