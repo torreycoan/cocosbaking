@@ -309,9 +309,9 @@ query("orderbutton").addEventListener("click", (e) => {
     order_status: "Pending acceptance/rejection",
     payment_status: "Not paid",
   };
-  // Check if one of the data fields is empty
+  // Check if one of the data fields is empty except additional notes
   for (let key in neworder) {
-    if (neworder[key] === "") {
+    if (neworder[key] === "" && key !== "additional_notes") {
       message_bar("Please fill out all fields.");
       return;
     }
