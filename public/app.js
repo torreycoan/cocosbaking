@@ -652,7 +652,7 @@ query("resetfilterbutton").addEventListener("click", (e) => {
   db.collection("orders")
     .get()
     .then((data) => {
-      loadMyOrders(data);
+      ownerLoadMyOrders(data);
       query("filterform").reset();
     });
 });
