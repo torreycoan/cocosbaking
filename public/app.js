@@ -118,7 +118,8 @@ query("signuplink").addEventListener("click", () => {
 
 query("signupmodalbg").addEventListener("click", () => {
   hidemodal(query("signupmodal"));
-  document.getElementById("signupname").value = "";
+  document.getElementById("signupfname").value = "";
+  document.getElementById("signuplname").value = "";
   document.getElementById("signupemail").value = "";
   document.getElementById("signuppassword").value = "";
 });
