@@ -648,7 +648,7 @@ query("filterbutton").addEventListener("click", (e) => {
 });
 
 // reset filter form
-query("resetfilterbutton").addEventListener("click", (e) => {
+query("button").addEventListener("click", (e) => {
   e.preventDefault();
   db.collection("orders")
     .get()
@@ -728,6 +728,17 @@ query("orders").addEventListener("click", () => {
   query("acctsettingspage").classList.add("is-hidden");
 
   resetorderbtn();
+
+  db.collection("products")
+    .get()
+    .then((data) => {
+      let docs = data.docs;
+      let html = ``;
+      docs.forEach((doc) => {
+        html += `<option>${doc.data().name}</option>`;
+      });
+      query("productselection").innerHTML = html;
+    });
 });
 
 query("myorders").addEventListener("click", () => {
