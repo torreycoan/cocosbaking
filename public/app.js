@@ -731,7 +731,7 @@ query("orders").addEventListener("click", () => {
     .get()
     .then((data) => {
       let docs = data.docs;
-      let html = ``;
+      let html = `<option value = ''> </option>`;
       docs.forEach((doc) => {
         html += `<option value="${doc.data().name}">${
           doc.data().name
