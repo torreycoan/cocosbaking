@@ -283,6 +283,7 @@ query("resetorderbutton").addEventListener("click", (e) => {
   query("orderform").reset();
   updateSubtotalPrice();
 });
+updateSubtotalPrice();
 
 function resetorderbtn() {
   query("orderform").reset();
@@ -308,7 +309,13 @@ query("orderbutton").addEventListener("click", (e) => {
     order_status: "Pending acceptance/rejection",
     payment_status: "Not paid",
   };
-
+  // Check if one of the data fields is empty
+  for (let key in neworder) {
+    if (neworder[key] === "") {
+      message_bar("Please fill out all fields.");
+      return;
+    }
+  }
   db.collection("orders")
     .add(neworder)
     .then(() => {
@@ -773,7 +780,10 @@ function updateordertotal() {}
 function updateSubtotalPrice() {
   let productName = query("productselection").value;
   const db = firebase.firestore();
-
+  if (productName == "") {
+    query("subtotalprice").innerText = `$0`;
+    return;
+  }
   db.collection("products")
     .where("name", "==", productName)
     .get()
