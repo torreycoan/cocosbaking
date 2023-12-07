@@ -657,7 +657,7 @@ query("resetfilterbutton").addEventListener("click", (e) => {
     });
 });
 
-// showing and hiding parts of main (home, products, order now)
+// customer side showing and hiding parts of main (home, products, order now, my orders)
 query("logohome").addEventListener("click", () => {
   query("homepage").classList.remove("is-hidden");
   query("homepage").classList.add("is-active");
@@ -747,6 +747,8 @@ query("myorders").addEventListener("click", () => {
 
   query("acctsettingspage").classList.add("is-hidden");
 });
+
+query("Add");
 
 // Function to update the subtotal price
 function updateordertotal() {}
