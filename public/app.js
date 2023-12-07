@@ -654,6 +654,7 @@ query("resetfilterbutton").addEventListener("click", (e) => {
     .get()
     .then((data) => {
       query("filterform").reset();
+      loadMyOrders(data);
     });
 });
 
