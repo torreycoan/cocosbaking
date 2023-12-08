@@ -22,7 +22,7 @@
   <!-- sign up modal  -->
   <div class="modal" id="signupmodal">
     <div class="modal-background" id="signupmodalbg"></div>
-    <div class="modal-content has-background-grey-light p-5" id="signupmodalcontent">
+    <div class="modal-content has-background-white p-5" id="signupmodalcontent">
       <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
         WELCOME TO COCO'S BAKING!
       </h2>
@@ -88,7 +88,7 @@
   <!-- sign in modal -->
   <div class="modal" id="signinmodal">
     <div class="modal-background" id="signinmodalbg"></div>
-    <div class="modal-content has-background-grey-light p-5">
+    <div class="modal-content p-5 has-background-white">
       <h2 class="subtitle is-size-3 has-text-weight-bold has-text-centered">
         WELCOME BACK!
       </h2>
@@ -289,6 +289,7 @@
         <div class="container" id="productscontainer">
           <!-- html for products will be added here -->
         </div>
+        <div class="container mt-5">
         <div class='card is-hidden' id='addproductscontainer'>
           <div class='card-content'>
             <form action="" class="mt-6" id="productform">
@@ -312,10 +313,11 @@
               <p class="content">Price:
                 <input type="float" name="" id="newproductprice"><br>
               </p>
-              <button class="button is-success" onclick="add_product()">Add product</button>
+              <button id="addproductbutton" class="button is-success">Add product</button>
             </form>
           </div>
         </div>
+      </div>
     </div>
     </section>
     </div>
