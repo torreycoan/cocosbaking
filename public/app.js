@@ -234,7 +234,6 @@ signInForm.addEventListener("submit", (event) => {
       query("signinmodal").classList.remove("is-active");
       // Show the user profile removing sign in and sign up buttons
       // After firestore is set up, we will show the user's name here
-      query("currentuser").innerHTML = auth.currentUser.email;
       document.getElementById("signinlink").classList.add("is-hidden");
       document.getElementById("signuplink").classList.add("is-hidden");
       document.getElementById("signoutlink").classList.remove("is-hidden");
@@ -612,16 +611,14 @@ query("products").addEventListener("click", () => {
 
 // products page - owner's side - add new product
 
-
-
-
-function add_product() {
+function add_product(event) {
+  event.preventDefault();
   if (auth.currentUser.email != "cocosbakingowner@gmail.com") {
-    return
+    return;
   }
   // 3. getting the image ready
   let file = document.querySelector("#newproductimage").files[0];
-  let image = new Date() + "_" + query("newproductname").value // Date prevents duplicate file names
+  let image = new Date() + "_" + query("newproductname").value; // Date prevents duplicate file names
 
   const task = ref.child(image).put(file);
 
@@ -651,6 +648,8 @@ function add_product() {
         });
     });
 }
+
+document.getElementById("productform").addEventListener("submit", add_product);
 
 // ------------------------------------------------------------
 
@@ -765,7 +764,7 @@ query("products").addEventListener("click", () => {
   if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
     query("addproductscontainer").classList.remove("is-hidden");
     query("addproductscontainer").classList.add("is-active");
-  };
+  }
 });
 
 query("orders").addEventListener("click", () => {
