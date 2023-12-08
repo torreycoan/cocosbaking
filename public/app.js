@@ -525,6 +525,28 @@ let productsperrow = 3;
 // todo: have a refresh button that calls this (for joey's sake)
 //db.collection('products').doc('Oth50KDIejTlkT6gHPCv').delete()
 query("products").addEventListener("click", () => {
+  loadProducts();
+});
+
+function product_delete_btn(doc_id) {
+  if (admin_status == true) {
+    return `<p onclick="delete_product('${doc_id}')" class="title is-4 has-text-right has-text-weight-bold has-text-danger"> X </p>`;
+  } else {
+    return ``;
+  }
+}
+
+function delete_product(doc_id) {
+  db.collection("products")
+    .doc(doc_id)
+    .delete()
+    .then(message_bar("Product Succesfully Deleted"))
+    .then((document.body.scrollTop = 0).then(loadProducts()));
+}
+
+let current_delete_product = "";
+
+function loadProducts() {
   query("productscontainer").innerHTML = ``; // this may be useful later
   db.collection("products")
     .get()
@@ -559,6 +581,7 @@ query("products").addEventListener("click", () => {
         }
         //then, for all, i want to add a column class div
         //<img src="images/${prod.name}.jpg" alt=${prod.name} />
+        let product_delete_html = product_delete_btn(doc.id);
         prodhtml += `
             <div class="column">
               <div class="card product-card is-one-third">
@@ -574,7 +597,8 @@ query("products").addEventListener("click", () => {
                   </p>
                   <p class="content">Sizes: ${prod.sizes}</p>
                   <p class="content">Serves: ${prod.serves}</p>
-                  <p class="content">Price: $${prod.price}</p>
+                  <p class="content">Price: $${prod.price} </p>
+                  ${product_delete_html}
                 </div>
               </div>
             </div>`;
@@ -607,7 +631,7 @@ query("products").addEventListener("click", () => {
       //add all the html to the page
       query("productscontainer").innerHTML = allproductshtml;
     });
-});
+}
 
 // products page - owner's side - add new product
 
@@ -645,6 +669,7 @@ function add_product(event) {
           query("productform").reset();
           message_bar("Product added!");
           document.body.scrollTop = 0;
+          loadProducts();
         });
     });
 }
