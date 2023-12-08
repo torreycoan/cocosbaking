@@ -559,12 +559,13 @@ query("products").addEventListener("click", () => {
           prodhtml += `<div class="columns">`;
         }
         //then, for all, i want to add a column class div
+        //<img src="images/${prod.name}.jpg" alt=${prod.name} />
         prodhtml += `
             <div class="column">
               <div class="card product-card is-one-third">
                 <div class="card-image">
                   <figure class="image is-1by1">
-                    <img src="images/${prod.name}.jpg" alt=${prod.name} />
+                    <img src= ${prod.image} alt=${prod.name}>
                   </figure>
                 </div>
                 <div class="card-content">
@@ -615,6 +616,9 @@ query("products").addEventListener("click", () => {
 
 
 function add_product() {
+  if (auth.currentUser.email != "cocosbakingowner@gmail.com") {
+    return
+  }
   // 3. getting the image ready
   let file = document.querySelector("#newproductimage").files[0];
   let image = new Date() + "_" + query("newproductname").value // Date prevents duplicate file names
@@ -757,6 +761,11 @@ query("products").addEventListener("click", () => {
   query("myorderspage").classList.add("is-hidden");
 
   query("acctsettingspage").classList.add("is-hidden");
+
+  if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+    query("addproductscontainer").classList.remove("is-hidden");
+    query("addproductscontainer").classList.add("is-active");
+  };
 });
 
 query("orders").addEventListener("click", () => {
