@@ -36,8 +36,8 @@
           </div>
         </div>
 
-         <!-- Last Name -->
-         <div class="field">
+        <!-- Last Name -->
+        <div class="field">
           <label class="label">Last Name</label>
           <div class="control">
             <input class="input" id="signuplname" type="text" />
@@ -214,7 +214,7 @@
               <label class="label">Last Name: <span id="acctsettingslname"></span></label>
               <div class='control' id="lnamechangeinput">
                 <div id="settingsinputlname"></div>
-              </div>             
+              </div>
               <label class="label">Venmo: <span id="acctsettingsvenmo"></span></label>
               <div class='control' id="venmochangeinput">
                 <div id="settingsinputvenmo"></div>
@@ -252,7 +252,8 @@
             Made in Madison
           </h3>
           <p class="pt-3 has-text-centered">
-            We make everything fresh right here in your city, Madison! Our bakery loves this city just as much as you and that's why we are 'Made in Madison'.
+            We make everything fresh right here in your city, Madison! Our bakery loves this city just as much as you
+            and that's why we are 'Made in Madison'.
           </p>
         </div>
         <div class="column is-one-fifth">
@@ -261,7 +262,8 @@
             Easy Ordering
           </h3>
           <p class="pt-3 has-text-centered pl-3 pr-3">
-            With the introduction of our new ordering platform, we want to make ordering as stress-free and hassle-free as possible. In a pinch, we got you! Just place an order and we'll take it from there!
+            With the introduction of our new ordering platform, we want to make ordering as stress-free and hassle-free
+            as possible. In a pinch, we got you! Just place an order and we'll take it from there!
           </p>
         </div>
         <div class="column is-one-fifth pl-2">
@@ -270,7 +272,8 @@
             Baked with Care
           </h3>
           <p class="pt-3 has-text-centered">
-            Each item we bake is baked with amazing, fresh ingredients. However, the most important ingredients are not the physical ones but the care we put into each sweet treat!
+            Each item we bake is baked with amazing, fresh ingredients. However, the most important ingredients are not
+            the physical ones but the care we put into each sweet treat!
           </p>
         </div>
         <div class="column is-one-fifth"></div>
@@ -286,7 +289,35 @@
         <div class="container" id="productscontainer">
           <!-- html for products will be added here -->
         </div>
-      </section>
+        <div class='card' id='addproductscontainer'>
+          <div class='card-content'>
+            <form action="" class="mt-6" id="productform">
+              <h2 class='title'> Add a product</h2>
+              <p class="content">Image file:
+                <input type="file" class="input" id="newproductimage">
+              </p>
+              <p class="content">Product name:
+                <input type="text" name="" id="newproductname"><br>
+              </p>
+              <p class="content">Description:
+                <input type="text" name="" id="newproductdesc"><br>
+              </p>
+
+              <p class="content">Sizes:
+                <input type="text" name="" id="newproductsizes"><br>
+              </p>
+              <p class="content">Serves:
+                <input type="text" name="" id="newproductserves"><br>
+              </p>
+              <p class="content">Price:
+                <input type="float" name="" id="newproductprice"><br>
+              </p>
+              <button class="button is-success" onclick="add_product()">Add product</button>
+            </form>
+          </div>
+        </div>
+    </div>
+    </section>
     </div>
 
     <div id="orderpage" class="is-hidden">
@@ -327,7 +358,7 @@
                   <div class="control column">
                     <div class="select">
                       <select id="productselection">
- 
+
                       </select>
                     </div>
                   </div>
@@ -438,23 +469,7 @@
     </div>
 
 
-<!-- Add Products Page for Owner -->
-<div id="addproductspage" class="is-hidden">
-  <div class="container">
-    <form class="mt-6">
-      <!-- First Name Field -->
-      <div class="columns">
-        <div class="field column is-one-quarter has-text-centered">
-          <label class="label is-size-4">First Name</label>
-        </div>
-        <div class="control column">
-          <!-- Due to the duplicated id name, it should be changed. I temporaliy change the id name to firstname1 -->
-          <input class="input" type="text" placeholder="John" id="firstname1" />
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+
 
     <!-- My Orders Page -->
 
@@ -544,7 +559,8 @@
   <!-- footer -->
   <footer class="footer mt-5">
     <div class="content has-text-centered">
-      <p>Website carefully crafted by UW-Madison Business School students Torrey Coan, Eric Eoh, Wyatt Federman, and Trent Jarvi</p>
+      <p>Website carefully crafted by UW-Madison Business School students Torrey Coan, Eric Eoh, Wyatt Federman, and
+        Trent Jarvi</p>
       <p class="mt-4">Owner Contact Email: </p>
     </div>
   </footer>
@@ -561,6 +577,9 @@
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
 <!-- Connect with app.js file -->
-<script src="app.js"></script>
+<script src="app.js">
+  let ref = firebase.storage().ref();
+  // idk if this will work. for adding products' images. 
+</script>
 
 </html>

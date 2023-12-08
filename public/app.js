@@ -98,7 +98,7 @@ auth.onAuthStateChanged((user) => {
     // User is signed in.
     if (user.email == "cocosbakingowner@gmail.com") {
       admin_status = true;
-      document.getElementById("orders").innerHTML = "Add Products";
+      //document.getElementById("orders").innerHTML = "Add Products";
       document.getElementById("myorders").innerHTML = "Manage Orders";
     }
     document.getElementById("user_email_drop").innerHTML = "";
@@ -608,6 +608,46 @@ query("products").addEventListener("click", () => {
       query("productscontainer").innerHTML = allproductshtml;
     });
 });
+
+// products page - owner's side - add new product
+
+
+
+
+function add_product() {
+  // 3. getting the image ready
+  let file = document.querySelector("#newproductimage").files[0];
+  let image = new Date() + "_" + query("newproductname").value // Date prevents duplicate file names
+
+  const task = ref.child(image).put(file);
+
+  task
+    .then((snapshot) => snapshot.ref.getDownloadURL())
+    .then((url) => {
+      // the url of the image is ready now. It is variable “url”
+
+      // 4. wrap those in an object
+
+      let product = {
+        name: query("newproductname").value,
+        desc: query("newproductdesc").value,
+        price: query("newproductprice").value,
+        sizes: query("newproductsizes").value,
+        serves: query("newproductserves").value,
+        created_date: new Date(), // in case we want to sort products by date when we load them so additions are added to the end
+        image: url,
+      };
+      // 4. send the object to firebase (add to products collection)
+      db.collection("products")
+        .add(product)
+        .then(() => {
+          query("productform").reset();
+          message_bar("Product added!");
+          document.body.scrollTop = 0;
+        });
+    });
+}
+
 // ------------------------------------------------------------
 
 // filtering myorders
