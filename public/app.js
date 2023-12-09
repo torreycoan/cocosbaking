@@ -293,36 +293,55 @@ function resetorderbtn() {
 // taking orders (field values) - Submit Order
 query("orderbutton").addEventListener("click", (e) => {
   e.preventDefault();
-  let neworder = {
-    first_name: query("firstname").value,
-    last_name: query("lastname").value,
-    //TODO: remove fname and lname OR get it from their signup/profile
-    customer_email: auth.currentUser.email, // TODO: check if this works
-    product_type: query("productselection").value,
-    quantity: query("quantity").value,
-    delivery_method: query("deliverymethod").value,
-    formal_event: query("formalevent").value,
-    completion_date: query("completiondate").value,
-    additional_notes: query("additionalnotes").value,
-    order_total: query("subtotalprice").innerHTML.replace("$", ""),
-    order_status: "Pending acceptance/rejection",
-    payment_status: "Not paid",
-  };
-  // Check if one of the data fields is empty except additional notes
-  for (let key in neworder) {
-    if (neworder[key] === "" && key !== "additional_notes") {
-      message_bar("Please fill out all fields.");
-      return;
-    }
-  }
-  db.collection("orders")
-    .add(neworder)
-    .then(() => {
-      query("orderform").reset();
-      message_bar("Order Placed!");
-      document.body.scrollTop = 0;
+  db.collection("users") // get user info. tried to use settingsuserinfo(), didnt work
+    .get()
+    .then((data) => {
+      docs = data.docs;
+      docs.forEach((doc) => {
+        if (auth.currentUser.email == doc.id) {
+          let fname = doc.data().fname;
+          let lname = doc.data().lname;
+          let venmo = doc.data().venmo;
+          let phone = doc.data().phone;
+          console.log(fname, lname, phone)
+
+          console.log(fname)
+          console.log(phone)
+          let neworder = {
+            first_name: fname,
+            last_name: lname,
+            customer_email: auth.currentUser.email,
+            customer_venmo: venmo,
+            customer_phone: phone,
+            product_type: query("productselection").value,
+            quantity: query("quantity").value,
+            delivery_method: query("deliverymethod").value,
+            formal_event: query("formalevent").value,
+            completion_date: query("completiondate").value,
+            additional_notes: query("additionalnotes").value,
+            order_total: query("subtotalprice").innerHTML.replace("$", ""),
+            order_status: "Pending acceptance/rejection",
+            payment_status: "Not paid",
+          };
+          // Check if one of the data fields is empty except additional notes
+          for (let key in neworder) {
+            if (neworder[key] === "" && key !== "additional_notes") {
+              message_bar("Please fill out all fields.");
+              return;
+            }
+          }
+          db.collection("orders")
+            .add(neworder)
+            .then(() => {
+              query("orderform").reset();
+              message_bar("Order Placed!");
+              document.body.scrollTop = 0;
+            });
+          resetorderbtn();
+        }
+      });
     });
-  resetorderbtn();
+
 });
 // -------------------------------------------------------
 // My Orders - Owner side - display all orders
@@ -530,7 +549,7 @@ query("products").addEventListener("click", () => {
 
 function product_delete_btn(doc_id) {
   if (admin_status == true) {
-    return `<p onclick="delete_product('${doc_id}')" class="title is-4 has-text-right has-text-weight-bold has-text-danger"> X </p>`;
+    return `<p onclick="delete_product('${doc_id}')" class="title is-4 has-text-right has-text-weight-bold has-text-danger"> Delete </p>`;
   } else {
     return ``;
   }
