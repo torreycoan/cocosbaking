@@ -757,6 +757,8 @@ query("resetfilterbutton").addEventListener("click", (e) => {
         loadMyOrders(data);
       }
     });
+  // scroll to the top of the page
+  document.body.scrollTop = 0;
   message_bar("Filter reset!");
 });
 
@@ -808,7 +810,10 @@ query("products").addEventListener("click", () => {
 
   query("acctsettingspage").classList.add("is-hidden");
 
-  if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+  if (
+    auth.currentUser &&
+    auth.currentUser.email == "cocosbakingowner@gmail.com"
+  ) {
     query("addproductscontainer").classList.remove("is-hidden");
     query("addproductscontainer").classList.add("is-active");
   }
