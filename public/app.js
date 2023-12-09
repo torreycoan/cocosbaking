@@ -303,10 +303,10 @@ query("orderbutton").addEventListener("click", (e) => {
           let lname = doc.data().lname;
           let venmo = doc.data().venmo;
           let phone = doc.data().phone;
-          console.log(fname, lname, phone)
+          console.log(fname, lname, phone);
 
-          console.log(fname)
-          console.log(phone)
+          console.log(fname);
+          console.log(phone);
           let neworder = {
             first_name: fname,
             last_name: lname,
@@ -341,7 +341,6 @@ query("orderbutton").addEventListener("click", (e) => {
         }
       });
     });
-
 });
 // -------------------------------------------------------
 // My Orders- manage orders - Owner side - display all orders
@@ -562,7 +561,9 @@ function delete_product(doc_id) {
     .doc(doc_id)
     .delete()
     .then(message_bar("Product Succesfully Deleted"))
-    .then((document.body.scrollTop = 0).then(loadProducts()));
+    .then(loadProducts());
+  // scroll to the top of the page
+  window.scrollTo(0, 0);
 }
 
 let current_delete_product = "";
