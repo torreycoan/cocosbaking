@@ -19,22 +19,29 @@ let ref = firebase.storage().ref();
 
 // myorders delete doc function
 function delMyOrders(id) {
-  db.collection("orders")
-    .doc(id)
-    .delete()
-    .then(() => {
-      db.collection("orders")
-        .get()
-        .then((data) => {
-          // if the current user is an admin use ownerLoadMyOrders
-          if (admin_status) {
-            ownerLoadMyOrders(data);
-          } else {
-            loadMyOrders(data);
-          }
-        });
-    });
-  message_bar(`Order has been deleted!`);
+  showmodal(query("confirmordermodal"));
+  query("cancelorderbtn").addEventListener("click", () => {
+    db.collection("orders")
+      .doc(id)
+      .delete()
+      .then(() => {
+        db.collection("orders")
+          .get()
+          .then((data) => {
+            // if the current user is an admin use ownerLoadMyOrders
+            if (admin_status) {
+              ownerLoadMyOrders(data);
+            } else {
+              loadMyOrders(data);
+            }
+          });
+      });
+    hidemodal(query("confirmordermodal"));
+    message_bar(`Order has been deleted!`);
+  });
+  query("nocancelorderbtn").addEventListener("click", () => {
+    hidemodal(query("confirmordermodal"));
+  });
 }
 
 // ------------------------------------------------------------
@@ -556,7 +563,7 @@ query("products").addEventListener("click", () => {
 
 function product_delete_btn(doc_id) {
   if (admin_status == true) {
-    return `<p onclick="delete_product('${doc_id}')" class="title is-4 has-text-right has-text-weight-bold has-text-danger"> Delete </p>`;
+    return `<button onclick="delete_product('${doc_id}')" class="button title is-4 has-text-right has-text-weight-bold has-text-danger"> Delete </button>`;
   } else {
     return ``;
   }
