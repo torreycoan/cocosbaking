@@ -26,7 +26,12 @@ function delMyOrders(id) {
       db.collection("orders")
         .get()
         .then((data) => {
-          ownerLoadMyOrders(data);
+          // if the current user is an admin use ownerLoadMyOrders
+          if (admin_status) {
+            ownerLoadMyOrders(data);
+          } else {
+            loadMyOrders(data);
+          }
         });
     });
   message_bar(`Order has been deleted!`);
@@ -299,14 +304,12 @@ query("orderbutton").addEventListener("click", (e) => {
       docs = data.docs;
       docs.forEach((doc) => {
         if (auth.currentUser.email == doc.id) {
+          // get user info from the firebase
           let fname = doc.data().fname;
           let lname = doc.data().lname;
           let venmo = doc.data().venmo;
           let phone = doc.data().phone;
-          console.log(fname, lname, phone);
 
-          console.log(fname);
-          console.log(phone);
           let neworder = {
             first_name: fname,
             last_name: lname,
@@ -352,7 +355,10 @@ function ownerLoadMyOrders(data) {
   let tablehtml = ``;
   let html = ``;
 
-  if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
+  if (
+    auth.currentUser &&
+    auth.currentUser.email == "cocosbakingowner@gmail.com"
+  ) {
     //TODO:if owner, add additional buttons & cols to the My Orders page
     // buttons: one to see pending orders, one to see accepted orders, one to see completed orders
     // maybe limit the number of orders that can be added on a page? or have another button for archived orders that she's not interested in seeing anymore?
