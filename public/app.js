@@ -344,7 +344,7 @@ query("orderbutton").addEventListener("click", (e) => {
 
 });
 // -------------------------------------------------------
-// My Orders - Owner side - display all orders
+// My Orders- manage orders - Owner side - display all orders
 //query("myorders").addEventListener("click", (allorders) => {
 
 function ownerLoadMyOrders(data) {
@@ -369,6 +369,8 @@ function ownerLoadMyOrders(data) {
       tablehtml += `<tr id = ${doc.id}>
           <td>${order.first_name} ${order.last_name}</td>
           <td>${order.customer_email}</td>
+          <td>${order.customer_venmo}</td>
+          <td>${order.customer_phone}</td>
           <td>${order.product_type}</td>
           <td>${order.quantity}</td>
           <td>${order.delivery_method}</td>
