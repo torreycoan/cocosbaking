@@ -19,7 +19,7 @@ let ref = firebase.storage().ref();
 
 // myorders delete doc function
 function delMyOrders(id) {
-  showmodal(query("confirmordermodal"));
+  showmodal(query("confirmcancelmodal"));
   query("cancelorderbtn").addEventListener("click", () => {
     db.collection("orders")
       .doc(id)
@@ -36,11 +36,11 @@ function delMyOrders(id) {
             }
           });
       });
-    hidemodal(query("confirmordermodal"));
+    hidemodal(query("confirmcancelmodal"));
     message_bar(`Order has been deleted!`);
   });
   query("nocancelorderbtn").addEventListener("click", () => {
-    hidemodal(query("confirmordermodal"));
+    hidemodal(query("confirmcancelmodal"));
   });
 }
 
