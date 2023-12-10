@@ -633,7 +633,7 @@ function loadProducts() {
                   <p class="content">
                     ${prod.desc}
                   </p>
-                  <p class="content">Sizes: ${prod.sizes}</p>
+                  <p class="content">Size: ${prod.sizes}</p>
                   <p class="content">Serves: ${prod.serves}</p>
                   <p class="content">Price: $${prod.price} </p>
                   ${product_delete_html}
