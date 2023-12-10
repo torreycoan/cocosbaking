@@ -1046,3 +1046,22 @@ query("updategoback").addEventListener("click", () => {
   query("updategoback").classList.add("is-hidden");
   query("updateinfobutton").classList.remove("is-hidden");
 });
+
+query("copmletiondatefilter").addEventListener("click", () => {
+  db.collection("orders")
+    .get()
+    .then((data) => {
+      let docs = data.docs;
+      let arr = [];
+      docs.forEach((doc) => {
+        arr.push(doc);
+      });
+      arr.sort(function (a, b) {
+        var keyA = new Date(a.data().completion_date),
+          keyB = new Date(b.data().completion_date);
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+    });
+});
