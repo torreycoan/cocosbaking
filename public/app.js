@@ -324,7 +324,7 @@ query("orderbutton").addEventListener("click", (e) => {
             customer_venmo: venmo,
             customer_phone: phone,
             product_type: query("productselection").value,
-            //ADDED 
+            //ADDED
             product_image: query("orderintakeimagesrc").innerText,
             quantity: query("quantity").value,
             delivery_method: query("deliverymethod").value,
@@ -359,6 +359,7 @@ query("orderbutton").addEventListener("click", (e) => {
 //query("myorders").addEventListener("click", (allorders) => {
 
 function ownerLoadMyOrders(data) {
+  query("completiondate").classList.remove("is-hidden");
   query("myorderstablebody").innerHTML = ``;
   let docs = data.docs; //array to loop thru
   let tablehtml = ``;
@@ -914,8 +915,8 @@ function updateSubtotalPrice() {
       }
       let subtotal = price * quantity;
       query("subtotalprice").innerText = `$${subtotal}`;
-      // ADDED          
-      query('orderintakeimagesrc').innerText = data.docs[0].data().image
+      // ADDED
+      query("orderintakeimagesrc").innerText = data.docs[0].data().image;
     });
 }
 
