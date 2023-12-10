@@ -293,40 +293,42 @@
       <header class="header">
         <img src="images/products.png" class="image" />
       </header>
+      <div class="container mt-5">
+        <div class='card is-hidden' id='addproductscontainer'>
+          <div class='card-content'>
+            <form action="" class="mt-6" id="productform">
+              <h2 class='title'> Add a product</h2>
+              <p class="content">Image file:
+                <input type="file" class="input" id="newproductimage">
+              </p>
+              <p class="content">Product name:
+                <input type="text" name="" id="newproductname"><br>
+              </p>
+              <p class="content">Description:
+                <!-- <input type="text" name="" id="newproductdesc"> -->
+                <textarea name="" id="newproductdesc" cols="20" rows="1"></textarea><br>
+              </p>
+
+              <p class="content">Size:
+                <input type="text" name="" id="newproductsizes"><br>
+              </p>
+              <p class="content">Serves:
+                <input type="text" name="" id="newproductserves"><br>
+              </p>
+              <p class="content">Price:
+                <input type="float" name="" id="newproductprice"><br>
+              </p>
+              <button id="addproductbutton" class="button is-success">Add product</button>
+            </form>
+          </div>
+        </div>
+      </div>
       <section class="section">
         <!-- <button id='loadproductsbtn'>temp button to load producs</button> -->
         <div class="container" id="productscontainer">
           <!-- html for products will be added here -->
         </div>
-        <div class="container mt-5">
-          <div class='card is-hidden' id='addproductscontainer'>
-            <div class='card-content'>
-              <form action="" class="mt-6" id="productform">
-                <h2 class='title'> Add a product</h2>
-                <p class="content">Image file:
-                  <input type="file" class="input" id="newproductimage">
-                </p>
-                <p class="content">Product name:
-                  <input type="text" name="" id="newproductname"><br>
-                </p>
-                <p class="content">Description:
-                  <input type="text" name="" id="newproductdesc"><br>
-                </p>
 
-                <p class="content">Sizes:
-                  <input type="text" name="" id="newproductsizes"><br>
-                </p>
-                <p class="content">Serves:
-                  <input type="text" name="" id="newproductserves"><br>
-                </p>
-                <p class="content">Price:
-                  <input type="float" name="" id="newproductprice"><br>
-                </p>
-                <button id="addproductbutton" class="button is-success">Add product</button>
-              </form>
-            </div>
-          </div>
-        </div>
     </div>
     </section>
     </div>
@@ -504,7 +506,7 @@
                 </div>
               </div>
               <div class="mt-3 is-size-3 has-text-centered has-text-weight-bold">--- OR ---</div>
-            </div>  
+            </div>
             <div class="card mt-3 p-3">
               <div class="is-size-5 has-text-centered has-text-weight-bold">
                 Filter by Order/Payment Status
