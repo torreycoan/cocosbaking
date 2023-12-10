@@ -324,6 +324,8 @@ query("orderbutton").addEventListener("click", (e) => {
             customer_venmo: venmo,
             customer_phone: phone,
             product_type: query("productselection").value,
+            //ADDED 
+            product_image: query("orderintakeimagesrc").innerText,
             quantity: query("quantity").value,
             delivery_method: query("deliverymethod").value,
             formal_event: query("formalevent").value,
@@ -435,7 +437,7 @@ function loadMyOrders(data) {
                 <div class="media">
                   <div class="media-left">
                     <figure class="image is-128x128">
-                      <img src="images/${order.data().product_type}.jpg" alt="${
+                      <img src="${order.data().product_image}" alt="${
         order.data().name
       }">
                     </figure>
@@ -912,6 +914,8 @@ function updateSubtotalPrice() {
       }
       let subtotal = price * quantity;
       query("subtotalprice").innerText = `$${subtotal}`;
+      // ADDED          
+      query('orderintakeimagesrc').innerText = data.docs[0].data().image
     });
 }
 
