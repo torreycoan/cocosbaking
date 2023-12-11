@@ -394,7 +394,7 @@ function ownerLoadMyOrders(data) {
           <td>${order.formal_event}</td>
           <td>${order.completion_date}</td>
           <td>${order.additional_notes}</td>
-          <td>${order.order_total} </td>
+          <td>$${order.order_total} </td>
           <td>
               <div class = "select"><select id = "order${doc.id}neworderstatus">
               <option selected disabled hidden>${order.order_status}</option>
