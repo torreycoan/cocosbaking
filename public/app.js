@@ -734,7 +734,7 @@ query("filterbutton").addEventListener("click", (e) => {
         if (auth.currentUser.email == "cocosbakingowner@gmail.com") {
           return ownerLoadMyOrders(data);
         }
-        // return loadMyOrders(data);
+        return loadMyOrders(data);
       });
   }
   if (orderstatus != "No Selection" && paymentstatus == "No Selection") {
