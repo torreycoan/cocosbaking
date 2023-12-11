@@ -564,6 +564,10 @@ query("products").addEventListener("click", () => {
   loadProducts();
 });
 
+query("browseselection").addEventListener("click", () => {
+  loadProducts();
+});
+
 function product_delete_btn(doc_id) {
   if (admin_status == true) {
     return `<button onclick="delete_product('${doc_id}')" class="button title is-4 has-text-right has-text-weight-bold has-text-danger"> Delete </button>`;
@@ -633,7 +637,7 @@ function loadProducts() {
                   <p class="content">
                     ${prod.desc}
                   </p>
-                  <p class="content">Sizes: ${prod.sizes}</p>
+                  <p class="content">Size: ${prod.sizes}</p>
                   <p class="content">Serves: ${prod.serves}</p>
                   <p class="content">Price: $${prod.price} </p>
                   ${product_delete_html}
@@ -812,6 +816,30 @@ query("home").addEventListener("click", () => {
 });
 
 query("products").addEventListener("click", () => {
+  query("productpage").classList.remove("is-hidden");
+  query("productpage").classList.add("is-active");
+
+  query("homepage").classList.remove("is-active");
+  query("homepage").classList.add("is-hidden");
+
+  query("orderpage").classList.remove("is-active");
+  query("orderpage").classList.add("is-hidden");
+
+  query("myorderspage").classList.remove("is-active");
+  query("myorderspage").classList.add("is-hidden");
+
+  query("acctsettingspage").classList.add("is-hidden");
+
+  if (
+    auth.currentUser &&
+    auth.currentUser.email == "cocosbakingowner@gmail.com"
+  ) {
+    query("addproductscontainer").classList.remove("is-hidden");
+    query("addproductscontainer").classList.add("is-active");
+  }
+});
+
+query("browseselection").addEventListener("click", () => {
   query("productpage").classList.remove("is-hidden");
   query("productpage").classList.add("is-active");
 
