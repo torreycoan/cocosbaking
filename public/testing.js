@@ -55,39 +55,41 @@ async function go() {
   await new Promise((r) => setTimeout(r, 2000));
   await page.click("#signinlink");
   await page.type("#signinemail", "cocosbakingowner@gmail.com");
-  // show what happens with wrong password
-  await page.type("#signinpassword", "wrongpassword");
-  //correct password
   await page.type("#signinpassword", "adminCoconutBaker424");
-
   await page.click("#signinbtn");
 
   // testing functionalities in manage orders for owner
+  await page.click("#burger_nav");
   await page.click("#myorders");
 
   // first, filtering (will show no orders)
-  await page.click("orderstatusfilter");
-  await page.press("A");
-  await page.click("filterbutton");
+  await page.click("#orderstatusfilter");
+  await page.keyboard.press("A");
+  await page.keyboard.press("Enter");
+  await page.click("#filterbutton");
   await new Promise((r) => setTimeout(r, 2000));
-  await page.click("resetfilterbutton");
+  await page.click("#resetfilterbutton");
 
   // then, updating a payment status to paid
   await page.click("#orderu1h3EHkYyKH2UpIGRh6Lnewpaymentstatus");
-  await page.press("P");
+  await page.keyboard.press("P");
+  await page.keyboard.press("Enter");
   await page.click("#u1h3EHkYyKH2UpIGRh6L > td:nth-child(14) > button");
 
   // now filter to see if the update went correctly (should only show a one or two orders)
-  await page.click("orderstatusfilter");
-  await page.press("P");
-  await page.click("paymentstatusfilter");
-  await page.press("P");
-  await page.click("filterbutton");
+  await page.click("#orderstatusfilter");
+  await page.keyboard.press("P");
+  await page.keyboard.press("Enter");
+  await page.click("#paymentstatusfilter");
+  await page.keyboard.press("P");
+  await page.keyboard.press("Enter");
+  await page.click("#filterbutton");
   await new Promise((r) => setTimeout(r, 2000));
-  await page.click("resetfilterbutton");
+  await page.click("#resetfilterbutton");
 
   // finally, deleting an order
   await page.click("#oQGnMdlnJBqflE8UvjTw > td:nth-child(15) > button");
+  await page.click("#cancelorderbtn");
   await new Promise((r) => setTimeout(r, 2000));
 
   // owner now signs out
