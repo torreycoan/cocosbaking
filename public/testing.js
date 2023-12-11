@@ -53,6 +53,7 @@ async function go() {
   await page.click("#signoutlink");
 
   // now testing owner log in
+  await page.click("#burger_nav");
   await new Promise((r) => setTimeout(r, 2000));
   await page.click("#signinlink");
   await page.type("#signinemail", "cocosbakingowner@gmail.com");
