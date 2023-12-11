@@ -64,8 +64,10 @@ async function go() {
 
   // first, filtering (will show no orders)
   await page.click("#orderstatusfilter");
+  // gets it to accepted orders
   await page.keyboard.press("A");
   await page.keyboard.press("Enter");
+  await new Promise((r) => setTimeout(r, 2000));
   await page.click("#filterbutton");
   await new Promise((r) => setTimeout(r, 2000));
   await page.click("#resetfilterbutton");
