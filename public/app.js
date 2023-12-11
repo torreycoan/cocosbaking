@@ -465,7 +465,7 @@ function loadMyOrders(data) {
                     <p>  <span class="title is-6">Quantity : </span> ${
                       order.data().quantity
                     }</p>
-                    <p><span class="title is-6">Order Total : </span> ${
+                    <p><span class="title is-6">Order Total : </span> $${
                       order.data().order_total
                     }</p>
                     <p>  <span class="title is-6">Order Complete By Date : </span> ${
