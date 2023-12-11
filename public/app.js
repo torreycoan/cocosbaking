@@ -380,7 +380,9 @@ function ownerLoadMyOrders(data) {
     //see all orders - and have hidden inputs so that we can later use them to update orders
     docs.forEach((doc) => {
       let order = doc.data();
-
+      query(
+        "myordersheader"
+      ).innerHTML = `<img src="images/manageorders.png" class="image" />`;
       tablehtml += `<tr id = ${doc.id}>
           <td>${order.first_name} ${order.last_name}</td>
           <td>${order.customer_email}</td>
@@ -417,6 +419,10 @@ function ownerLoadMyOrders(data) {
     });
 
     query("myorderstablebody").innerHTML += tablehtml;
+  } else {
+    query(
+      "myordersheader"
+    ).innerHTML = `<img src="images/myorders.png" class="image" />`;
   }
 }
 //});
