@@ -14,41 +14,41 @@ async function go() {
 
   await page.goto("https://cocobaking-88eae.web.app/");
 
-  // await page.click("#burger_nav");
-  // //   user click the sign-in button
-  // await new Promise((r) => setTimeout(r, 2000));
-  // await page.click("#signinlink");
+  await page.click("#burger_nav");
+  //   user click the sign-in button
+  await new Promise((r) => setTimeout(r, 2000));
+  await page.click("#signinlink");
 
-  // // user will provide email, password, and interests information
+  // user will provide email, password, and interests information
 
-  // await page.type("#signinemail", "twaste210@gmail.com");
-  // await page.type("#signinpassword", "easypassword");
+  await page.type("#signinemail", "twaste210@gmail.com");
+  await page.type("#signinpassword", "easypassword");
 
-  // await page.click("#signinbtn");
+  await page.click("#signinbtn");
 
-  // //   test the search functionality
+  //   test the search functionality
 
-  // //   set 2 second delay
+  //   set 2 second delay
 
-  // await new Promise((r) => setTimeout(r, 2000));
-  // await page.click("#burger_nav");
-  // await page.click("#orders");
+  await new Promise((r) => setTimeout(r, 2000));
+  await page.click("#burger_nav");
+  await page.click("#orders");
 
-  // await page.click("#productselection");
-  // await page.keyboard.press("B"); // select blueberry
-  // await page.keyboard.press("Enter");
+  await page.click("#productselection");
+  await page.keyboard.press("B"); // select blueberry
+  await page.keyboard.press("Enter");
 
-  // await page.keyboard.press("Tab");
-  // await page.keyboard.press("Tab");
-  // await page.keyboard.press("Tab");
-  // await page.keyboard.press("Tab");
-  // //await page.keyboard.press('Tab')
-  // await page.type("#completiondate", "11112024");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  //await page.keyboard.press('Tab')
+  await page.type("#completiondate", "11112024");
 
-  // await page.click("#orderbutton");
+  await page.click("#orderbutton");
 
-  // await page.click("#burger_nav");
-  // await page.click("#signoutlink");
+  await page.click("#burger_nav");
+  await page.click("#signoutlink");
 
   // now testing owner log in
   await page.click("#burger_nav");
