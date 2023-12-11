@@ -63,7 +63,39 @@ async function go() {
 
   await page.click("#signinbtn");
 
+  // testing functionalities in manage orders for owner
   await page.click("#myorders");
+
+  // first, filtering (will show no orders)
+  await page.click("orderstatusfilter");
+  await page.press("A");
+  await page.click("filterbutton");
+  await new Promise((r) => setTimeout(r, 2000));
+  await page.click("resetfilterbutton");
+
+  // then, updating a payment status to paid
+  await page.click("#orderu1h3EHkYyKH2UpIGRh6Lnewpaymentstatus");
+  await page.press("P");
+  await page.click("#u1h3EHkYyKH2UpIGRh6L > td:nth-child(14) > button");
+
+  // now filter to see if the update went correctly (should only show a one or two orders)
+  await page.click("orderstatusfilter");
+  await page.press("P");
+  await page.click("paymentstatusfilter");
+  await page.press("P");
+  await page.click("filterbutton");
+  await new Promise((r) => setTimeout(r, 2000));
+  await page.click("resetfilterbutton");
+
+  // finally, deleting an order
+  await page.click("#oQGnMdlnJBqflE8UvjTw > td:nth-child(15) > button");
+  await new Promise((r) => setTimeout(r, 2000));
+
+  // owner now signs out
+  await page.click("#burger_nav");
+  await page.click("#signoutlink");
+
+  browser.close();
 }
 
 // call the go()
