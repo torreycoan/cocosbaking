@@ -33,8 +33,6 @@ async function go() {
   await new Promise((r) => setTimeout(r, 2000));
   await page.click("#burger_nav");
   await page.click("#orders");
-  await page.type("#firstname", "Testing");
-  await page.type("#lastname", "File");
 
   await page.click("#productselection");
   await page.keyboard.press("B"); // select blueberry
