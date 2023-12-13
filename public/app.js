@@ -361,6 +361,7 @@ query("orderbutton").addEventListener("click", (e) => {
 function ownerLoadMyOrders(data) {
   query("completiondate").classList.remove("is-hidden");
   query("myorderstablebody").innerHTML = ``;
+
   let docs = data.docs; //array to loop thru
   let tablehtml = ``;
   let html = ``;
@@ -376,14 +377,35 @@ function ownerLoadMyOrders(data) {
     // html += "Admin view"
     //if owner/admin,
     //TODO: add additional columns for update/delete buttons
+    query(
+      "myordersheader"
+    ).innerHTML = `<img src="images/manageorders.png" class="image" />`;
+
+    // sorting by completion date
+
+    let arr = [] // array to sort by completion date
+    let indx = 0
+    docs.forEach((doc) => {
+      let compdate = doc.data().completion_date
+      arr.push({
+        ordercompletiondate: compdate,
+        idx: indx
+      })
+      indx += 1
+
+    })
+    arr.sort(function (left, right) {
+      return left['ordercompletiondate'] < right['ordercompletiondate'] ? -1 : 1;
+    });
+
 
     //see all orders - and have hidden inputs so that we can later use them to update orders
+    let unsortedhtml = []
     docs.forEach((doc) => {
       let order = doc.data();
-      query(
-        "myordersheader"
-      ).innerHTML = `<img src="images/manageorders.png" class="image" />`;
-      tablehtml += `<tr id = ${doc.id}>
+
+      //tablehtml +=
+      unsortedhtml.push(`<tr id = ${doc.id}>
           <td>${order.first_name} ${order.last_name}</td>
           <td>${order.customer_email}</td>
           <td>${order.customer_venmo}</td>
@@ -415,8 +437,16 @@ function ownerLoadMyOrders(data) {
           <td><button class="button" onclick="update_order('${doc.id}')">Update</button></td>
           <td><button class="button is-danger" onclick="delMyOrders('${doc.id}')">Delete</button></td>
           </tr>
-          `;
+          `)
     });
+
+    let sortedHTML = [];
+    let counter = 0
+    arr.forEach((entry) => {
+      sortedHTML[counter] = unsortedhtml[entry.idx]
+      counter += 1
+    })
+    tablehtml = sortedHTML.join()
 
     query("myorderstablebody").innerHTML += tablehtml;
   } else {
